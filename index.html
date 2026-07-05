@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Embodied HQ — A podcast on robot learning</title>
+<meta name="description" content="A podcast about the race to bring generalist robots into the real world, hosted by a tech investor and non-technical robotics fan. Launching soon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;--bg-dark:#000000;--text:#101921;--muted:#545860;
+    --hairline:rgba(84,88,96,0.30);--accent:#3C3EBC;--highlight:#F4D659;
+    --blue:#428FEC;--cyan:#00BCE5;--panel:#EFEFEE;
+    --container:1366px;--radius-pill:20px;
+    --font:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;--ease:0.6s ease-in-out;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);font-weight:400;color:var(--text);background:var(--bg);font-size:16px;line-height:1.41;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 32px}
+  a{color:inherit;text-decoration:none}
+  .eyebrow{font-size:14px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:var(--muted)}
+  h1,h2,h3{font-weight:500;letter-spacing:normal}
+
+  .btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:var(--radius-pill);padding:11px 30px;font-family:var(--font);font-size:16px;font-weight:400;cursor:pointer;transition:var(--ease)}
+  .btn:hover{background:#2c2e9c;transform:translateY(-1px)}
+  .btn--ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.4)}
+  .btn--ghost:hover{background:rgba(255,255,255,0.08);border-color:#fff}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;transition:var(--ease)}
+  header.scrolled{background:rgba(255,255,255,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:500;font-size:18px;color:#fff;transition:var(--ease)}
+  header.scrolled .brand{color:var(--text)}
+  .brand .dots{display:inline-block;width:22px;height:22px;position:relative}
+  .brand .dots span{position:absolute;width:5px;height:5px;border-radius:50%}
+  .brand .dots span:nth-child(1){top:0;left:0;background:var(--highlight)}
+  .brand .dots span:nth-child(2){top:0;right:0;background:var(--cyan)}
+  .brand .dots span:nth-child(3){bottom:0;left:0;background:var(--blue)}
+  .brand .dots span:nth-child(4){bottom:0;right:0;background:var(--accent)}
+  .navlinks{display:flex;align-items:center;gap:34px}
+  .navlinks a{font-size:16px;color:rgba(255,255,255,0.85);transition:var(--ease)}
+  .navlinks a:hover{color:#fff}
+  header.scrolled .navlinks a{color:var(--muted)}
+  header.scrolled .navlinks a:hover{color:var(--text)}
+  .navlinks .btn{color:#fff}
+  @media(max-width:820px){.navlinks a:not(.btn){display:none}}
+
+  .hero{position:relative;background:var(--bg-dark);color:#fff;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+  #cloud{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .hero-inner{position:relative;z-index:2;padding:130px 0 90px}
+  .hero .eyebrow{color:rgba(255,255,255,0.6)}
+  .badge{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:var(--highlight);border:1px solid rgba(244,214,89,0.4);border-radius:var(--radius-pill);padding:6px 16px;margin-bottom:26px}
+  .badge .pulse{width:7px;height:7px;border-radius:50%;background:var(--highlight);box-shadow:0 0 0 0 rgba(244,214,89,0.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(244,214,89,0.5)}70%{box-shadow:0 0 0 8px rgba(244,214,89,0)}100%{box-shadow:0 0 0 0 rgba(244,214,89,0)}}
+  .hero h1{font-size:clamp(38px,6vw,64px);line-height:1.18;font-weight:500;max-width:940px;margin:0 0 26px}
+  .hero h1 .rot{color:var(--highlight)}
+  .hero h1 .cursor{color:var(--highlight);font-weight:400;animation:blink 1s step-end infinite}
+  @keyframes blink{50%{opacity:0}}
+  .hero p.lede{font-size:19px;line-height:1.55;color:rgba(255,255,255,0.80);max-width:660px;margin-bottom:34px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .form-inline{display:flex;gap:12px;flex-wrap:wrap}
+  .form-inline input{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.22);color:#fff;border-radius:var(--radius-pill);padding:11px 22px;font-family:var(--font);font-size:16px;min-width:250px;outline:none;transition:var(--ease)}
+  .form-inline input::placeholder{color:rgba(255,255,255,0.5)}
+  .form-inline input:focus{border-color:var(--highlight)}
+
+  /* Host block in hero */
+  .host{display:flex;align-items:center;gap:16px;margin-top:52px;padding-top:30px;border-top:1px solid rgba(255,255,255,0.16);max-width:520px}
+  .host .pic{width:60px;height:60px;border-radius:50%;flex:0 0 60px;background:var(--accent) center/cover no-repeat;background-image:url('assets/host.jpg');display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:500;color:#fff;overflow:hidden}
+  .host .who .lbl{font-size:13px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:rgba(255,255,255,0.55)}
+  .host .who .nm{font-size:17px;font-weight:500;color:#fff;margin:2px 0 1px}
+  .host .who .desc{font-size:15px;color:rgba(255,255,255,0.72)}
+
+  section{padding:110px 0}
+  .section-head{max-width:780px;margin-bottom:60px}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px);line-height:1.18;margin:14px 0 18px}
+  .section-head p{font-size:18px;color:var(--muted);max-width:660px}
+
+  /* Fundraising headlines */
+  .moment{background:var(--bg-dark);color:#fff}
+  .moment .section-head p{color:rgba(255,255,255,0.72)}
+  .heads{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.14)}
+  @media(max-width:960px){.heads{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.heads{grid-template-columns:1fr}}
+  .head{background:#000;padding:34px 30px;transition:var(--ease);display:block}
+  .head:hover{background:#0b0b0b}
+  .head .amt{font-size:30px;font-weight:500;color:var(--highlight)}
+  .head .co{font-size:15px;font-weight:500;margin:4px 0 14px;color:#fff}
+  .head .ln{font-size:15px;color:rgba(255,255,255,0.72);line-height:1.5}
+  .head .src{display:inline-block;margin-top:16px;font-size:13px;letter-spacing:0.28px;text-transform:uppercase;color:var(--blue)}
+  .head:hover .src{color:var(--cyan)}
+  .stat{margin-top:34px;font-size:17px;color:rgba(255,255,255,0.72)}
+  .stat b{color:#fff;font-weight:500}
+  .stat a{color:var(--blue)}
+
+  /* Thesis */
+  .themes{background:var(--panel)}
+  .theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+  @media(max-width:820px){.theme-grid{grid-template-columns:1fr;gap:40px}}
+  .theme .ic{width:46px;height:46px;margin-bottom:18px}
+  .theme h3{font-size:20px;font-weight:500;margin-bottom:10px}
+  .theme p{color:var(--muted)}
+
+  /* About */
+  .about h2{font-size:clamp(26px,3.2vw,38px);line-height:1.25;font-weight:500;max-width:900px}
+  .about .grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;margin-top:40px}
+  @media(max-width:820px){.about .grid{grid-template-columns:1fr;gap:24px}}
+  .about .grid p{font-size:17px;color:var(--muted);margin-bottom:18px}
+
+  /* Signup */
+  .signup{background:var(--bg-dark);color:#fff}
+  .signup .inner{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+  .signup h2{font-size:clamp(26px,3.2vw,38px);font-weight:500;max-width:560px;line-height:1.2}
+  .signup p{color:rgba(255,255,255,0.7);margin-top:14px;max-width:520px}
+
+  footer{padding:56px 0;border-top:1px solid var(--hairline)}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .foot .brand{color:var(--text)}
+  .foot .links{display:flex;gap:26px;font-size:14px;color:var(--muted)}
+  .foot .links a:hover{color:var(--text)}
+  .foot .cr{font-size:14px;color:var(--muted)}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <span class="dots"><span></span><span></span><span></span><span></span></span>
+      Embodied HQ
+    </a>
+    <nav class="navlinks">
+      <a href="#moment">The moment</a>
+      <a href="#themes">The show</a>
+      <a href="#about">About</a>
+      <a class="btn" href="#subscribe">Get notified</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <canvas id="cloud"></canvas>
+    <div class="wrap hero-inner">
+      <span class="badge"><span class="pulse"></span>Launching soon</span>
+      <h1>A podcast about bringing generalist robots into the <span class="rot" id="rot">real</span><span class="cursor">|</span> world.</h1>
+      <p class="lede">I sit down with the researchers and operators building robots that can learn in context, self-calibrate, and adapt to the physical world, and I ask them to explain it plainly. Great data and powerful scaling are going to get us there, and I want to understand how.</p>
+      <form class="form-inline" onsubmit="return false;">
+        <input type="email" placeholder="you@email.com" aria-label="Email address" required>
+        <button class="btn" type="submit">Notify me at launch</button>
+      </form>
+
+      <div class="host">
+        <div class="pic" id="hostpic">JL</div>
+        <div class="who">
+          <div class="lbl">Your host</div>
+          <div class="nm">Jack</div>
+          <div class="desc">Tech investor, non-technical robotics fan</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE MOMENT / FUNDRAISING -->
+  <section class="moment" id="moment">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow" style="color:rgba(255,255,255,0.55)">Why now</span>
+        <h2>The money has already decided this matters.</h2>
+        <p>Robotics is having its capital moment. Some of the largest rounds in tech right now are going into machines that learn in the real world. Embodied HQ exists to make sense of it while it is happening.</p>
+      </div>
+      <div class="heads">
+        <a class="head reveal" href="https://www.therobotreport.com/physical-intelligence-raises-600m-advance-robot-foundation-models/" target="_blank" rel="noopener">
+          <div class="amt">$600M</div>
+          <div class="co">Physical Intelligence</div>
+          <div class="ln">Raised to advance robot foundation models, then reportedly back in talks to raise $1B at an $11B+ valuation.</div>
+          <span class="src">The Robot Report ↗</span>
+        </a>
+        <a class="head reveal" href="https://www.cnbc.com/2026/02/11/apptronik-raises-520-million-at-5-billion-valuation-for-apollo-robot.html" target="_blank" rel="noopener">
+          <div class="amt">$520M</div>
+          <div class="co">Apptronik</div>
+          <div class="ln">Raised at a $5B valuation for its Apollo humanoid, co-led by B Capital and Google.</div>
+          <span class="src">CNBC ↗</span>
+        </a>
+        <a class="head reveal" href="https://www.cnbc.com/2026/06/10/neura-robotics-funding-ai-humanoid-robots.html" target="_blank" rel="noopener">
+          <div class="amt">$1.4B</div>
+          <div class="co">Neura Robotics</div>
+          <div class="ln">Series C backed by Amazon, Nvidia, Qualcomm and Bosch, valuing the German humanoid maker near $7B.</div>
+          <span class="src">CNBC ↗</span>
+        </a>
+        <a class="head reveal" href="https://forgeglobal.com/insights/figure-ai-robotics-growth-2026/" target="_blank" rel="noopener">
+          <div class="amt">$1B+</div>
+          <div class="co">Figure AI</div>
+          <div class="ln">Reported Series C at a valuation approaching $39B, nearly 15x the year prior.</div>
+          <span class="src">Forge Global ↗</span>
+        </a>
+        <a class="head reveal" href="https://theaiinsider.tech/2026/05/08/chinas-humanoid-robot-maker-robotera-raises-over-usd-200m-in-new-funding-round/" target="_blank" rel="noopener">
+          <div class="amt">$200M+</div>
+          <div class="co">Robotera</div>
+          <div class="ln">China's humanoid maker raised to expand deployments across logistics and industrial automation.</div>
+          <span class="src">The AI Insider ↗</span>
+        </a>
+        <a class="head reveal" href="https://news.crunchbase.com/robotics/startup-venture-funding-surges-2026-data/" target="_blank" rel="noopener">
+          <div class="amt">Record</div>
+          <div class="co">The whole sector</div>
+          <div class="ln">Robotics venture funding surged to record numbers in 2026 as physical AI became the hottest category in tech.</div>
+          <span class="src">Crunchbase News ↗</span>
+        </a>
+      </div>
+      <p class="stat reveal"><b>Robotics startups raised roughly $18.8B in 2026</b>, already past the $15B raised across all of 2025. <a href="https://www.pymnts.com/news/artificial-intelligence/2026/physical-intelligence-seeks-1-billion-as-robotics-interest-grows/" target="_blank" rel="noopener">Source ↗</a></p>
+    </div>
+  </section>
+
+  <!-- THE SHOW / THESIS -->
+  <section class="themes" id="themes">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The show</span>
+        <h2>What we get into</h2>
+        <p>Every conversation comes back to the same question: what will it actually take to build robots that are useful in the real world? Three ideas run through all of it.</p>
+      </div>
+      <div class="theme-grid">
+        <div class="theme reveal">
+          <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#428FEC" stroke-width="2"><circle cx="24" cy="24" r="4"/><circle cx="10" cy="12" r="3"/><circle cx="38" cy="12" r="3"/><circle cx="10" cy="36" r="3"/><circle cx="38" cy="36" r="3"/><path d="M13 14l8 8M35 14l-8 8M13 34l8-8M35 34l-8-8"/></svg>
+          <h3>Learning in context</h3>
+          <p>The real world is never fully specified in advance, so a useful robot has to read the situation in front of it and adjust.</p>
+        </div>
+        <div class="theme reveal">
+          <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#3C3EBC" stroke-width="2"><path d="M8 34c0-10 8-18 16-18s16 8 16 18"/><path d="M24 16v-6M24 34v6"/><circle cx="24" cy="38" r="2" fill="#3C3EBC"/></svg>
+          <h3>Self-calibration</h3>
+          <p>Hardware drifts and environments shift. The systems that win are the ones that tune themselves without a human stepping in.</p>
+        </div>
+        <div class="theme reveal">
+          <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="#00BCE5" stroke-width="2"><path d="M8 40V22M18 40V14M28 40V26M38 40V8"/></svg>
+          <h3>Data and scale</h3>
+          <p>The breakthrough will not be one clever idea. It will be enormous amounts of real interaction data, scaled hard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <span class="eyebrow reveal">About</span>
+      <h2 class="reveal">I'm a tech investor and a non-technical robotics fan, and I started this show because the biggest engineering story of the decade is being told in a language most people can't follow.</h2>
+      <div class="grid">
+        <div class="reveal">
+          <p>Embodied HQ is for people who are smart but not specialists. Founders, operators, investors, engineers from other fields, and anyone who can feel that robotics is about to matter and wants to actually understand it.</p>
+        </div>
+        <div class="reveal">
+          <p>I bring on the people building these systems and ask them to explain their work plainly. No hype, no doom, and no pretending the robots that don't work aren't just as interesting as the ones that do.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNUP -->
+  <section class="signup" id="subscribe">
+    <div class="wrap inner">
+      <div class="reveal">
+        <span class="eyebrow" style="color:rgba(255,255,255,0.6)">Be there for episode one</span>
+        <h2 style="margin-top:14px">The first conversations are coming soon.</h2>
+        <p>Leave your email and I'll let you know the moment the show goes live, plus a short note on what actually moved in robotics that week.</p>
+      </div>
+      <form class="form-inline reveal" onsubmit="return false;">
+        <input type="email" placeholder="you@email.com" aria-label="Email address" required>
+        <button class="btn" type="submit">Notify me</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="brand" href="#top">
+      <span class="dots"><span></span><span></span><span></span><span></span></span>
+      Embodied HQ
+    </a>
+    <div class="links">
+      <a href="#moment">The moment</a>
+      <a href="#themes">The show</a>
+      <a href="#about">About</a>
+      <a href="#subscribe">Get notified</a>
+    </div>
+    <div class="cr">© 2026 Embodied HQ</div>
+  </div>
+</footer>
+
+<script>
+const hdr=document.getElementById('hdr');
+addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>40);});
+
+// swap monogram for real photo if it loads
+(function(){
+  const el=document.getElementById('hostpic');
+  const img=new Image();
+  img.onload=()=>{el.textContent='';};
+  img.onerror=()=>{el.style.backgroundImage='none';};
+  img.src='assets/host.jpg';
+})();
+
+// rotating hero word
+(function(){
+  const words=['real','physical','messy','human','unstructured'];
+  const el=document.getElementById('rot');let w=0,c=0,del=false;
+  function tick(){const word=words[w];el.textContent=del?word.slice(0,c--):word.slice(0,c++);
+    let t=del?55:110;if(!del&&c===word.length+1){del=true;t=1400;}
+    else if(del&&c<0){del=false;c=0;w=(w+1)%words.length;t=180;}setTimeout(tick,t);}
+  tick();
+})();
+
+// LiDAR-style point cloud
+(function(){
+  const cv=document.getElementById('cloud');const ctx=cv.getContext('2d');
+  let W,H,pts=[],DPR=Math.min(devicePixelRatio||1,2);
+  const COLORS=['#00BCE5','#428FEC','#3C3EBC','#F4D659'];
+  function resize(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);build();}
+  function build(){pts=[];const n=Math.min(240,Math.floor(W*H/6500));
+    for(let i=0;i<n;i++){pts.push({x:Math.random()*W,y:Math.random()*H,z:Math.random()*1+0.3,vx:(Math.random()-0.5)*0.18,vy:(Math.random()-0.5)*0.18,c:COLORS[Math.floor(Math.random()*COLORS.length)]});}}
+  function frame(){ctx.clearRect(0,0,W,H);
+    for(let i=0;i<pts.length;i++){const p=pts[i];p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+      for(let j=i+1;j<pts.length;j++){const q=pts[j];const dx=p.x-q.x,dy=p.y-q.y;const d=dx*dx+dy*dy;
+        if(d<12000){ctx.globalAlpha=(1-d/12000)*0.16;ctx.strokeStyle='#428FEC';ctx.lineWidth=0.6;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}}}
+    for(const p of pts){ctx.globalAlpha=0.55*p.z;ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(p.x,p.y,1.6*p.z,0,6.28);ctx.fill();}
+    ctx.globalAlpha=1;requestAnimationFrame(frame);}
+  addEventListener('resize',resize);resize();frame();
+})();
+
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

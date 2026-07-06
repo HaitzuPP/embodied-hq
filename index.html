@@ -58,9 +58,11 @@
   .form-inline input::placeholder{color:rgba(255,255,255,0.5)}
   .form-inline input:focus{border-color:var(--highlight)}
 
-  .host{display:flex;align-items:center;gap:15px;margin-top:48px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.16);max-width:480px}
+  .host{display:flex;align-items:center;gap:15px;margin-top:48px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.16);max-width:480px;width:fit-content;transition:var(--ease)}
+  .host:hover{opacity:0.82}
   .host .pic{width:56px;height:56px;border-radius:50%;flex:0 0 56px;background:var(--accent) center/cover no-repeat;background-image:url('host.jpg');display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:500;color:#fff;overflow:hidden}
   .host .who .nm{font-size:16px;font-weight:500;color:#fff}
+  .host .who .nm .in{font-size:12px;letter-spacing:0.4px;color:var(--cyan);margin-left:6px}
   .host .who .desc{font-size:14px;color:rgba(255,255,255,0.72);margin-top:2px}
 
   .moment{background:var(--bg-dark);color:#fff;padding:100px 0}
@@ -116,13 +118,13 @@
         <input type="email" placeholder="you@email.com" aria-label="Email address" required>
         <button class="btn" type="submit">Notify me at launch</button>
       </form>
-      <div class="host">
+      <a class="host" href="https://www.linkedin.com/in/jackpylon/" target="_blank" rel="noopener">
         <div class="pic" id="hostpic">JA</div>
         <div class="who">
-          <div class="nm">Jack Ai-Leung</div>
-          <div class="desc">Tech investor, non-technical robotics fan</div>
+          <div class="nm">Jack Ai-Leung <span class="in">in ↗</span></div>
+          <div class="desc">Tech investor</div>
         </div>
-      </div>
+      </a>
     </div>
   </section>
 

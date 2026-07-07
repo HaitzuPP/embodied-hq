@@ -40,6 +40,7 @@
 
   .btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:var(--radius-pill);padding:11px 30px;font-family:var(--font);font-size:16px;font-weight:400;cursor:pointer;transition:var(--ease)}
   .btn:hover{background:#2c2e9c;transform:translateY(-1px)}
+  .btn-lg{padding:14px 34px;font-size:17px}
 
   header{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;transition:var(--ease)}
   header.scrolled{background:rgba(255,255,255,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline)}
@@ -122,7 +123,7 @@
       <span class="dots"><span></span><span></span><span></span><span></span></span>
       Embodied HQ
     </a>
-    <a class="btn" href="#top">Notify me</a>
+    <a class="btn" href="https://embodiedhq.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
   </div>
 </header>
 
@@ -135,11 +136,10 @@
       <span class="badge"><span class="pulse"></span>Launching soon</span>
       <h1>A podcast about bringing generalist robots into the <span class="rot" id="rot">real</span><span class="cursor">|</span> world.</h1>
       <p class="lede">Conversations with the researchers and operators on the front lines, taking you behind the scenes of the most important investment trend in history. Explained plainly, no PhD required.</p>
-      <form class="form-inline" id="subform">
-        <input type="email" id="subemail" placeholder="you@email.com" aria-label="Email address" required>
-        <button class="btn" type="submit">Subscribe for launch</button>
-      </form>
-      <p class="fineprint">Free. No spam, unsubscribe anytime.</p>
+      <div class="hero-cta">
+        <a class="btn btn-lg" href="https://embodiedhq.substack.com/subscribe" target="_blank" rel="noopener">Subscribe on Substack →</a>
+      </div>
+      <p class="fineprint">Free. New episodes and a weekly note on what actually moved in robotics.</p>
       <a class="host" href="https://www.linkedin.com/in/jackpylon/" target="_blank" rel="noopener">
         <div class="pic" id="hostpic">JA</div>
         <div class="who">
@@ -221,26 +221,6 @@
 <script>
 const hdr=document.getElementById('hdr');
 addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>40);});
-
-// Subscribe to Substack in the background, no redirect
-(function(){
-  const f=document.getElementById('subform');
-  if(!f) return;
-  const fine=document.querySelector('.fineprint');
-  f.addEventListener('submit',function(e){
-    e.preventDefault();
-    const email=((document.getElementById('subemail')||{}).value||'').trim();
-    if(!email) return;
-    try{
-      fetch('https://embodiedhq.substack.com/api/v1/free',{
-        method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({email:email,first_url:'https://embodiedhq.substack.com/',current_url:'https://embodiedhq.substack.com/',source:'embed',referral_code:''})
-      }).catch(function(){});
-    }catch(_){}
-    f.innerHTML='<div class="subok">You’re in. Check your inbox to confirm.</div>';
-    if(fine) fine.style.display='none';
-  });
-})();
 
 // swap monogram for real photo if it loads
 (function(){

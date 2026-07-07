@@ -300,40 +300,7 @@ addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>40);});
       ctx.globalAlpha=0.92;ctx.fillStyle=b.col;ctx.fillRect(minX,minY-17,tw+12,14);
       ctx.globalAlpha=1;ctx.fillStyle='#000';ctx.fillText(txt,minX+6,minY-6.5);
     }
-    drawHumanoid(ts);
     ctx.globalAlpha=1;requestAnimationFrame(frame);
-  }
-  function drawHumanoid(ts){
-    const fh=Math.max(220,Math.min(H*0.5,420));
-    const hx=W<720?W*0.74:W*0.68, top=H*0.26+Math.sin(ts*0.0016)*4, C='#00BCE5';
-    const headR=fh*0.085, headY=top+headR, neckY=top+fh*0.20, shY=top+fh*0.25;
-    const hipY=top+fh*0.56, kneeY=top+fh*0.78, footY=top+fh;
-    const shW=fh*0.15, hipW=fh*0.09, sw=Math.sin(ts*0.0016)*fh*0.03;
-    const P=(x,y)=>[x,y], seg=(a,b)=>{ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();};
-    ctx.strokeStyle=C;ctx.lineWidth=Math.max(2,fh*0.012);ctx.lineCap='round';ctx.globalAlpha=0.8;
-    ctx.beginPath();ctx.arc(hx,headY,headR,0,6.28);ctx.stroke();
-    const neck=P(hx,neckY),scen=P(hx,shY),hip=P(hx,hipY);
-    const lsh=P(hx-shW,shY),rsh=P(hx+shW,shY);
-    const lel=P(hx-shW-fh*0.02+sw,shY+fh*0.16),rel=P(hx+shW+fh*0.02-sw,shY+fh*0.16);
-    const lha=P(hx-shW+sw,shY+fh*0.32),rha=P(hx+shW-sw,shY+fh*0.32);
-    const lhip=P(hx-hipW,hipY),rhip=P(hx+hipW,hipY);
-    const lkn=P(hx-hipW-sw*0.6,kneeY),rkn=P(hx+hipW+sw*0.6,kneeY);
-    const lft=P(hx-hipW,footY),rft=P(hx+hipW,footY);
-    seg([hx,headY+headR],neck);seg(neck,scen);seg(lsh,rsh);seg(scen,hip);
-    seg(lsh,lel);seg(lel,lha);seg(rsh,rel);seg(rel,rha);
-    seg(lhip,rhip);seg(hip,lhip);seg(hip,rhip);
-    seg(lhip,lkn);seg(lkn,lft);seg(rhip,rkn);seg(rkn,rft);
-    ctx.fillStyle=C;ctx.globalAlpha=0.9;
-    for(const p of [neck,lsh,rsh,lel,rel,lhip,rhip,lkn,rkn]){ctx.beginPath();ctx.arc(p[0],p[1],fh*0.011,0,6.28);ctx.fill();}
-    const bx0=hx-shW-fh*0.09,bx1=hx+shW+fh*0.09,by0=top-fh*0.03,by1=footY+fh*0.03,L=fh*0.06;
-    ctx.strokeStyle=C;ctx.lineWidth=2;ctx.globalAlpha=0.7;ctx.beginPath();
-    ctx.moveTo(bx0,by0+L);ctx.lineTo(bx0,by0);ctx.lineTo(bx0+L,by0);
-    ctx.moveTo(bx1-L,by0);ctx.lineTo(bx1,by0);ctx.lineTo(bx1,by0+L);
-    ctx.moveTo(bx1,by1-L);ctx.lineTo(bx1,by1);ctx.lineTo(bx1-L,by1);
-    ctx.moveTo(bx0+L,by1);ctx.lineTo(bx0,by1);ctx.lineTo(bx0,by1-L);ctx.stroke();
-    const txt='HUMANOID · 0.99';ctx.font='500 11px Inter, sans-serif';const tw=ctx.measureText(txt).width;
-    ctx.globalAlpha=0.92;ctx.fillStyle=C;ctx.fillRect(bx0,by0-18,tw+12,15);
-    ctx.globalAlpha=1;ctx.fillStyle='#000';ctx.fillText(txt,bx0+6,by0-7);
   }
   function resize(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);build();}
   addEventListener('resize',resize);resize();requestAnimationFrame(frame);

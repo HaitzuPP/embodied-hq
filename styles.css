@@ -34,8 +34,8 @@ mark{background:linear-gradient(transparent 62%, rgba(244,214,89,0.55) 62%);colo
 .mlogo:hover img{opacity:0.92}
 @keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 /* guest company logos on episode pages and cards */
-.guest-logos{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:16px}
-.guest-logos img{height:26px;width:auto;filter:brightness(0) invert(1);opacity:0.72}
+.guest-logos{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px}
+.guest-logos img{height:22px;width:auto;padding:9px 12px;background:#fff;border-radius:9px;box-shadow:0 1px 3px rgba(0,0,0,0.25)}
 .ecard-logos{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:2px 0 4px}
 .ecard-logos img{height:22px;width:auto;filter:grayscale(1);opacity:0.55;transition:opacity .25s ease}
 .ecard:hover .ecard-logos img{opacity:0.85}

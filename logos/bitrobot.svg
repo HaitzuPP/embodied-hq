@@ -1,5 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 40" role="img" aria-label="BitRobot">
-<rect x="8" y="10" width="20" height="20" rx="4" fill="none" stroke="#10171f" stroke-width="2.6"/>
-<circle cx="15" cy="20" r="2.4" fill="#10171f"/><circle cx="21" cy="20" r="2.4" fill="#10171f"/><line x1="18" y1="4" x2="18" y2="10" stroke="#10171f" stroke-width="2.2"/><circle cx="18" cy="4" r="2" fill="#10171f"/>
-<text x="40" y="27.5" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700" letter-spacing="-0.5" fill="#10171f">BitRobot</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 56" role="img" aria-label="BitRobot">
+<g fill="#10171f">
+<path d="M10 20 a10 10 0 0 0 -10 10 v0 a10 10 0 0 0 10 10 h6 v-8 h-6 a2 2 0 0 1 -2 -2 a2 2 0 0 1 2 -2 h6 v-8 z"/>
+<rect x="20" y="14" width="16" height="12" rx="4"/>
+<rect x="20" y="30" width="16" height="12" rx="4"/>
+</g>
+<text x="52" y="42" font-family="Georgia,'Times New Roman',serif" font-size="40" font-weight="400" fill="#10171f">BitRobot</text>
 </svg>

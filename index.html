@@ -25,7 +25,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"PodcastSeries","name":"Embodied HQ","url":"https://embodiedhq.io/","description":"A podcast on robot learning. Long-form conversations with the researchers and engineers building generalist robots.","webFeed":"https://embodiedhq.substack.com/feed","inLanguage":"en"}
+{"@context":"https://schema.org","@type":"PodcastSeries","name":"Embodied HQ","url":"https://embodiedhq.io/","description":"A podcast on robot learning. Long-form conversations with the researchers and engineers building generalist robots.","inLanguage":"en"}
 </script>
 <script>
 // funding-logo fallback: duckduckgo, then google favicons, then a styled monogram (defined early so it exists when an <img> load fails during parse)
@@ -44,9 +44,8 @@ function lf(img){
       Embodied HQ
     </a>
     <nav class="nav-links">
-      <a href="research.html">Research</a>
       <a href="about.html">About</a>
-      <a class="btn" href="https://embodiedhq.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+      <a class="btn" href="research.html">Read the research</a>
     </nav>
   </div>
 </header>
@@ -61,9 +60,9 @@ function lf(img){
       <h1>A podcast about bringing generalist robots into the <span class="rot" id="rot">real</span><span class="cursor">|</span> world.</h1>
       <p class="lede">Long-form conversations with the researchers and engineers teaching machines to act in the physical world. We get into the methods, the open problems, and the results that hold up.</p>
       <div class="hero-cta">
-        <a class="btn btn-lg" href="https://embodiedhq.substack.com/subscribe" target="_blank" rel="noopener">Subscribe on Substack →</a>
+        <a class="btn btn-lg" href="research.html">Read the research →</a>
       </div>
-      <p class="fineprint">Free. New episodes, plus a weekly note on the papers, releases, and results that moved robot learning.</p>
+      <p class="fineprint">Field notes from every episode. Free to read, no signup.</p>
       <a class="host" href="https://www.linkedin.com/in/jackpylon/" target="_blank" rel="noopener">
         <div class="pic" id="hostpic">JA</div>
         <div class="who">
@@ -74,64 +73,41 @@ function lf(img){
     </div>
   </section>
 
-  <!-- THEMES -->
-  <section class="themes" id="themes">
-    <div class="wrap">
-      <div class="head-row reveal">
-        <span class="eyebrow dim">What we get into</span>
-        <h2>The questions the show chases</h2>
-        <p>Each episode goes deep on one part of how machines learn to act, with the people doing the work.</p>
-      </div>
-      <div class="tgrid">
-        <div class="tcard reveal">
-          <span class="tn">Perception</span>
-          <div class="tt">Vision's missing &ldquo;GPT moment&rdquo;</div>
-          <div class="td">Language had transformers. Vision still has no consensus training recipe, and that gap is the whole game.</div>
-        </div>
-        <div class="tcard reveal">
-          <span class="tn">World models</span>
-          <div class="tt">Predict vs. generate</div>
-          <div class="td">The two camps are JEPA-style prediction in latent space, or generating the future frame by frame.</div>
-        </div>
-        <div class="tcard reveal">
-          <span class="tn">Data</span>
-          <div class="tt">The bottleneck that dictates architecture</div>
-          <div class="td">Real-world video is scarce, so models get pushed onto the edge. They run tiny, on-device, and curate at the source.</div>
-        </div>
-        <div class="tcard reveal">
-          <span class="tn">Training</span>
-          <div class="tt">The VLA playbook</div>
-          <div class="td">Distillation, reasoning-first models, and the &ldquo;Frankenstein&rdquo; stacks small teams ship.</div>
-        </div>
-        <div class="tcard reveal">
-          <span class="tn">Evaluation</span>
-          <div class="tt">You can't speed up reality</div>
-          <div class="td">Physical AI's rate limiter is evaluation and long-horizon reliability, not model capacity. The subtask math is brutal: 0.99¹⁰⁰ ≈ 37%.</div>
-        </div>
-        <div class="tcard reveal">
-          <span class="tn">Reality</span>
-          <div class="tt">The messy cases</div>
-          <div class="td">Occlusion, rain, and 22 agents in chaos. These are the cases generalisation has to survive.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LATEST EPISODE TEASER -->
+  <!-- RECENT EPISODES -->
   <section class="ep-teaser" id="episode">
     <div class="wrap">
       <div class="kicker reveal">
-        <span class="eyebrow accent">The show</span>
-        <h2>Every episode becomes a set of field notes</h2>
-        <p>We turn each conversation into durable notes: the arguments, the open problems, and the claims worth keeping.</p>
+        <span class="eyebrow accent">Field notes</span>
+        <h2>Recent episodes</h2>
+        <p>Every conversation becomes a set of durable notes: the arguments, the open problems, and the claims worth keeping.</p>
       </div>
-      <a class="teaser-card reveal" href="episode-02.html">
-        <span class="eyebrow">Episode 02 · Preview · Latest</span>
+      <a class="ecard reveal" href="episode-02.html">
+        <div class="top">
+          <span class="num">Episode 02</span>
+          <span class="status"><span class="dot"></span>Preview</span>
+          <span class="tag">Evaluation</span>
+          <span class="tag">Reliability</span>
+          <span class="tag">Data vs. architecture</span>
+        </div>
         <h3>Is robot learning a data problem, or an architecture problem?</h3>
-        <div class="guest"><span class="g-pic">NP</span><span class="g-pic g-pic2">MC</span><span>With Nils Pihl (Auki Labs) &amp; Michael Cho (BitRobot)</span></div>
-        <p>Two credible operators take opposite sides of the field's central question. They get into why evaluation is the real bottleneck, the brutal math of long-horizon reliability, and whether scaling is even the right tool.</p>
-        <span class="rlink">Read the episode notes →</span>
+        <div class="meta">Nils Pihl<span>, Auki Labs</span> · Michael Cho<span>, BitRobot</span></div>
+        <p>Two credible operators take opposite sides of the field's central question. On why evaluation is the real bottleneck, the brutal math of long-horizon reliability, and whether scaling is even the right tool.</p>
+        <span class="rlink">Read the notes →</span>
       </a>
+      <a class="ecard reveal" href="episode-01.html">
+        <div class="top">
+          <span class="num">Episode 01</span>
+          <span class="status"><span class="dot"></span>Preview</span>
+          <span class="tag">Perception</span>
+          <span class="tag">World models</span>
+          <span class="tag">Data</span>
+        </div>
+        <h3>Why vision is still waiting for its GPT moment</h3>
+        <div class="meta">Max Sebti<span>, CEO, Manako Labs</span></div>
+        <p>Computer vision has no consensus training recipe yet, and that gap defines the field. The two camps on world models, why data dictates architecture, and where the durable position sits.</p>
+        <span class="rlink">Read the notes →</span>
+      </a>
+      <a class="rlink reveal" href="research.html" style="display:inline-block;margin-top:10px;font-size:16px">View all research →</a>
     </div>
   </section>
 
@@ -199,7 +175,6 @@ function lf(img){
     <div class="foot-links">
       <a href="research.html">Research</a>
       <a href="about.html">About</a>
-      <a href="https://embodiedhq.substack.com/" target="_blank" rel="noopener">Newsletter ↗</a>
     </div>
     <div class="cr">© 2026 Embodied HQ</div>
   </div>

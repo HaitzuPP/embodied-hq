@@ -86,6 +86,29 @@
       <div class="notes-h reveal">Visual summary</div>
 
       <div class="viz reveal">
+        <span class="vlabel">Visualization · The reliability cliff</span>
+        <h3>What each level of per-subtask reliability actually buys you</h3>
+        <div class="scenario c3">
+          <div class="scol bad">
+            <div class="shead"><div class="st">99% per subtask</div><div class="ss">two nines</div></div>
+            <div class="srow hl r"><div class="big">37%</div><div class="sub">end-to-end over 100 subtasks</div></div>
+            <div class="scallout r"><div class="ct">Unusable</div><div class="cd">Fails roughly 2 of every 3 attempts. The robot rarely finishes the task.</div></div>
+          </div>
+          <div class="scol mid">
+            <div class="shead"><div class="st">99.9% per subtask</div><div class="ss">three nines</div></div>
+            <div class="srow hl a"><div class="big">90%</div><div class="sub">end-to-end over 100 subtasks</div></div>
+            <div class="scallout a"><div class="ct">Still fragile</div><div class="cd">About 1 in 10 runs fails somewhere in the chain. Not yet dependable.</div></div>
+          </div>
+          <div class="scol good">
+            <div class="shead"><div class="st">99.99% per subtask</div><div class="ss">four nines</div></div>
+            <div class="srow hl g"><div class="big">99%</div><div class="sub">end-to-end over 100 subtasks</div></div>
+            <div class="scallout g"><div class="ct">Reliable</div><div class="cd">Clears the task. The frontier is here: long-horizon reliability plus recovery.</div></div>
+          </div>
+        </div>
+        <div class="vcap">Per-task accuracy that looks strong collapses over a long task. <b>Each extra nine is the difference between a demo and a product.</b></div>
+      </div>
+
+      <div class="viz reveal">
         <span class="vlabel">Visualization · Reliability</span>
         <h3>Why long-horizon reliability, not per-task success, is the frontier</h3>
         <svg viewBox="0 0 720 344" role="img" aria-label="Line chart of end-to-end success rate versus number of chained subtasks, for 99 percent, 99.9 percent, and 99.99 percent per-subtask reliability. At 100 subtasks, 99 percent per-subtask yields 37 percent end-to-end.">

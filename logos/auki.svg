@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 138 40" role="img" aria-label="Auki Labs">
+<circle cx="10" cy="12" r="3" fill="#10171f"/><circle cx="24" cy="12" r="3" fill="#10171f"/><circle cx="17" cy="26" r="3" fill="#10171f"/>
+<line x1="10" y1="12" x2="24" y2="12" stroke="#10171f" stroke-width="1.6"/><line x1="10" y1="12" x2="17" y2="26" stroke="#10171f" stroke-width="1.6"/><line x1="24" y1="12" x2="17" y2="26" stroke="#10171f" stroke-width="1.6"/>
+<text x="40" y="27.5" font-family="Arial,Helvetica,sans-serif" font-size="23" font-weight="700" letter-spacing="-0.3" fill="#10171f">auki</text>
+</svg>

@@ -33,7 +33,7 @@ header.scrolled .brand{color:var(--text)}
 .brand .dots span:nth-child(4){bottom:0;right:0;background:var(--accent)}
 .nav .btn{color:#fff}
 .nav-links{display:flex;align-items:center;gap:26px}
-.nav-links>a:not(.btn){font-size:15px;font-weight:500;color:rgba(255,255,255,0.85);transition:var(--ease)}
+.nav-links>a:not(.btn){font-size:15px;font-weight:500;color:rgba(255,255,255,0.85);transition:var(--ease);padding:9px 2px}
 header.scrolled .nav-links>a:not(.btn){color:var(--text)}
 .nav-links>a:not(.btn):hover{color:#fff}
 header.scrolled .nav-links>a:not(.btn):hover{color:var(--accent)}
@@ -286,7 +286,7 @@ footer{padding:40px 0;border-top:1px solid var(--hairline)}
 .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .foot .brand{color:var(--text)}
 .foot-links{display:flex;gap:22px;font-size:14px;color:var(--muted);flex-wrap:wrap}
-.foot-links a{transition:var(--ease)}
+.foot-links a{display:inline-block;padding:8px 2px;transition:var(--ease)}
 .foot-links a:hover{color:var(--text)}
 .foot .cr{font-size:14px;color:var(--muted)}
 
@@ -295,7 +295,13 @@ footer{padding:40px 0;border-top:1px solid var(--hairline)}
 
 @media(min-width:900px){#cloud{left:auto;right:0;width:58%}}
 @media(max-width:900px){#cloud{opacity:0.45}}
-@media(max-width:560px){.wrap{padding:0 20px}.nav-links{gap:12px}.brand{font-size:15px}.nav .btn{padding:8px 15px;font-size:14px;white-space:nowrap}.viz{padding:22px 18px}}
+@media(max-width:640px){
+  .hero .veil{background:linear-gradient(180deg,rgba(0,0,0,0.5),rgba(0,0,0,0.8) 55%,rgba(0,0,0,0.92))}
+  #cloud{opacity:0.5}
+  .viz .mermaid-wide{overflow-x:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start}
+  .viz .mermaid-wide svg{max-width:none;width:520px;height:auto;flex:0 0 auto}
+}
+@media(max-width:560px){.wrap{padding:0 20px}.nav-links{gap:12px}.brand{font-size:15px}.viz{padding:22px 18px}.hero .hero-inner{padding:92px 20px 48px}}
 @media(max-width:520px){.statstrip{grid-template-columns:1fr}.statcell{border-right:0;border-bottom:1px solid var(--hairline)}.statcell:last-child{border-bottom:0}}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}

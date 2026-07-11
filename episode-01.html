@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Episode 01: Why Vision Is Still Waiting for Its GPT Moment | Embodied HQ</title>
+<meta name="description" content="Max Sebti of Manako Labs on the missing training recipe for computer vision, the two camps on world models, and why the data layer is the durable place to stand while the field is unsettled.">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://embodiedhq.io/episode-01.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Embodied HQ">
+<meta property="og:url" content="https://embodiedhq.io/episode-01.html">
+<meta property="og:title" content="Episode 01: Why Vision Is Still Waiting for Its GPT Moment">
+<meta property="og:description" content="Max Sebti of Manako Labs on the missing training recipe for computer vision, world models, and the data layer as the durable position.">
+<meta property="og:image" content="https://embodiedhq.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Episode 01: Why Vision Is Still Waiting for Its GPT Moment">
+<meta name="twitter:description" content="Max Sebti of Manako Labs on the missing training recipe for computer vision, world models, and the data layer as the durable position.">
+<meta name="twitter:image" content="https://embodiedhq.io/og-image.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"PodcastEpisode","episodeNumber":1,"name":"Why vision is still waiting for its GPT moment","url":"https://embodiedhq.io/episode-01.html","description":"Max Sebti of Manako Labs on the missing training recipe for computer vision, the two camps on world models, and why the data layer is the durable place to stand.","partOfSeries":{"@type":"PodcastSeries","name":"Embodied HQ","url":"https://embodiedhq.io/"},"inLanguage":"en"}
+</script>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <span class="dots"><span></span><span></span><span></span><span></span></span>
+      Embodied HQ
+    </a>
+    <nav class="nav-links">
+      <a href="research.html">Research</a>
+      <a href="about.html">About</a>
+      <a class="btn" href="https://embodiedhq.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="ephead">
+    <div class="wrap">
+      <div class="crumb"><a href="research.html">Research</a> / Episode 01</div>
+      <span class="ep-num">Episode 01 · Preview</span>
+      <h1>Why vision is still waiting for its GPT moment</h1>
+      <div class="guest">
+        <span class="g-pic">MS</span>
+        <span>With <a href="https://www.linkedin.com/in/maxime-sebti/" target="_blank" rel="noopener">Max Sebti ↗</a>, CEO of Manako Labs</span>
+      </div>
+      <p class="lede">Manako builds vision agents that run entirely on-device, in 19MB models that turn existing camera networks into real-time understanding. Max argues computer vision has no consensus training recipe yet, unpacks why that gap defines the field, and makes the case that the data layer, not the learning paradigm, is the durable place to stand while everything is still unsettled.</p>
+    </div>
+  </section>
+
+  <section class="epbody">
+    <div class="wrap">
+      <div class="ideas">
+        <div class="idea reveal">
+          <div class="q">&ldquo;Vision is solved&rdquo; is a category error.</div>
+          <div class="a">Generative image quality and VLM captioning aren't physical understanding. Say vision is solved and you erase robotics from the picture, because robotics runs on vision.</div>
+        </div>
+        <div class="idea reveal">
+          <div class="q">There is no playbook. More than ten live approaches.</div>
+          <div class="a">Imitation learning, RL, sim-to-real, VLAs, diffusion policies, learning from video. No consensus, because nobody has cracked zero-shot competence in a situation the robot has never seen.</div>
+        </div>
+        <div class="idea reveal">
+          <div class="q">Data doesn't just train the model. It dictates the architecture.</div>
+          <div class="a">You can't stream video 24/7 to the cloud; there aren't enough data centers. So models go tiny and on-device, and curation moves into the model itself.</div>
+        </div>
+        <div class="idea reveal">
+          <div class="q">&ldquo;Being intelligent isn't what you know. It's what you do when you don't know.&rdquo;</div>
+          <div class="a">Max's working definition of a world model: intelligence that adapts without being trained for the situation in front of it.</div>
+        </div>
+      </div>
+
+      <div class="notes-h reveal">Full episode notes</div>
+
+      <details class="note reveal" open>
+        <summary>The state of the field</summary>
+        <div class="body"><ul>
+          <li>Vision is still waiting for its <b>&ldquo;GPT moment.&rdquo;</b> Transformers unlocked language. Nothing equivalent has landed for vision, so there's no consensus training recipe.</li>
+          <li>The <b>&ldquo;vision is solved&rdquo; claim is a category error.</b> It conflates generative image quality and captioning with physical understanding, and it implicitly erases robotics.</li>
+          <li><b>No playbook exists.</b> More than ten live approaches are in play (imitation learning, RL, sim-to-real, offline RL, learning from video, VLAs, model-based RL, self-supervised exploration, diffusion policies), because nobody has cracked zero-shot competence in an unseen situation.</li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>The two camps on world models</summary>
+        <div class="body"><ul>
+          <li><b>Predictive (LeCun and JEPA):</b> don't rely on seeing. Predict embeddings or latent states. Max leans this way.</li>
+          <li><b>Generative:</b> the best way to predict what's next is to generate the future as you move.</li>
+          <li>NVIDIA straddles both. It sells GPUs either way.</li>
+          <li>Working definition of a world model: <b>intelligence that adapts without being trained for the situation.</b></li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>Data is the bottleneck, and it dictates architecture</summary>
+        <div class="body"><ul>
+          <li>Most training techniques bottom out in collecting visual data. That is why capital is flooding into training facilities and camera-headset recording rigs.</li>
+          <li>You physically can't stream video 24/7 to the cloud, so models must run <b>on-device: tiny (~19MB, CPU-runnable) and low-energy.</b></li>
+          <li>Edge models filter at the source, capturing true positives only. <b>Data curation becomes part of the model,</b> not a post-processing step.</li>
+          <li>Expect a <b>data wall,</b> and labs starting to share datasets as scarcity bites.</li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>A training approach for small teams</summary>
+        <div class="body"><ul>
+          <li><b>Distillation is the on-ramp.</b> The &ldquo;Qwen playbook&rdquo; is to start from a large teacher (~72B) and distill down. Cheaper and faster than building from scratch.</li>
+          <li><b>Reasoning matters more than assumed:</b> start from a reasoning model and teach it to see, rather than bolting reasoning onto a vision model.</li>
+          <li>Their VLA is a deliberate &ldquo;Frankenstein&rdquo;: a distilled reasoning model, a traditional VLM, and a pure detection model, running roughly ten bespoke primitives.</li>
+          <li>Their most advanced VLM was distilled from NVIDIA Cosmos (the reasoning model). Synthetic and sim data is still on the exploration list.</li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>Real-world constraints researchers underrate</summary>
+        <div class="body"><ul>
+          <li><b>Low-res is fine.</b> Benchmarks run at 640 to 1088px, so 15-year-old cameras still work at the pixel level. Don't let sensor quality gate data collection. Start now.</li>
+          <li><b>The hard cases are the point:</b> occlusion, rain, snow, garbage footage. Football was the proving ground (22 agents in continuous chaos), and structure that survives that generalises to stores and stations.</li>
+          <li><b>Data access is a commercial problem, not a technical one.</b> Enterprises won't hand over sensors until you solve a real problem first. The flywheel is to deploy, gain camera access, then keep updating weights from real operations.</li>
+          <li>Enterprise self-serve is economically impossible. On-site reasoning plus vision needs A100s (H100s for real time) across tens of thousands of sites. That is the structural case for tiny on-device models.</li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>The strategic read for researchers</summary>
+        <div class="body"><ul>
+          <li>Max is explicit that he is <b>&ldquo;upstream.&rdquo;</b> He is deliberately on the sidelines of the methodology race, collecting data and building models that reason over it while waiting to see which camp cracks it.</li>
+          <li>The takeaway: <b>the data layer is the durable position</b> while the learning paradigm is still unsettled.</li>
+        </ul></div>
+      </details>
+
+      <div class="backlink reveal"><a href="research.html">← All episodes</a></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="brand" href="index.html">
+      <span class="dots"><span></span><span></span><span></span><span></span></span>
+      Embodied HQ
+    </a>
+    <div class="foot-links">
+      <a href="research.html">Research</a>
+      <a href="about.html">About</a>
+      <a href="https://embodiedhq.substack.com/" target="_blank" rel="noopener">Newsletter ↗</a>
+    </div>
+    <div class="cr">© 2026 Embodied HQ</div>
+  </div>
+</footer>
+
+<script>
+const hdr=document.getElementById('hdr');
+addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>40);});
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

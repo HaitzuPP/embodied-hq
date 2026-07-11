@@ -1,4 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232 40" role="img" aria-label="Generative Ventures">
-<path d="M8 20 L18 6 L28 20 L18 34 Z" fill="none" stroke="#10171f" stroke-width="2.4"/><path d="M13 20 L18 13 L23 20 L18 27 Z" fill="#10171f"/>
-<text x="40" y="27.5" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="700" letter-spacing="-0.5" fill="#10171f">Generative<tspan font-weight="400" fill="#545860"> Ventures</tspan></text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 92" role="img" aria-label="Generative Ventures">
+<g fill="#10171f">
+<polygon points="48.0,6.0 43.0,16.0 53.0,16.0"/>
+<polygon points="43.0,16.0 38.0,26.0 48.0,26.0"/>
+<polygon points="53.0,16.0 48.0,26.0 58.0,26.0"/>
+<polygon points="38.0,26.0 33.0,36.0 43.0,36.0"/>
+<polygon points="33.0,36.0 28.0,46.0 38.0,46.0"/>
+<polygon points="43.0,36.0 38.0,46.0 48.0,46.0"/>
+<polygon points="58.0,26.0 53.0,36.0 63.0,36.0"/>
+<polygon points="53.0,36.0 48.0,46.0 58.0,46.0"/>
+<polygon points="63.0,36.0 58.0,46.0 68.0,46.0"/>
+<polygon points="28.0,46.0 23.0,56.0 33.0,56.0"/>
+<polygon points="23.0,56.0 18.0,66.0 28.0,66.0"/>
+<polygon points="33.0,56.0 28.0,66.0 38.0,66.0"/>
+<polygon points="18.0,66.0 13.0,76.0 23.0,76.0"/>
+<polygon points="13.0,76.0 8.0,86.0 18.0,86.0"/>
+<polygon points="23.0,76.0 18.0,86.0 28.0,86.0"/>
+<polygon points="38.0,66.0 33.0,76.0 43.0,76.0"/>
+<polygon points="33.0,76.0 28.0,86.0 38.0,86.0"/>
+<polygon points="43.0,76.0 38.0,86.0 48.0,86.0"/>
+<polygon points="68.0,46.0 63.0,56.0 73.0,56.0"/>
+<polygon points="63.0,56.0 58.0,66.0 68.0,66.0"/>
+<polygon points="73.0,56.0 68.0,66.0 78.0,66.0"/>
+<polygon points="58.0,66.0 53.0,76.0 63.0,76.0"/>
+<polygon points="53.0,76.0 48.0,86.0 58.0,86.0"/>
+<polygon points="63.0,76.0 58.0,86.0 68.0,86.0"/>
+<polygon points="78.0,66.0 73.0,76.0 83.0,76.0"/>
+<polygon points="73.0,76.0 68.0,86.0 78.0,86.0"/>
+<polygon points="83.0,76.0 78.0,86.0 88.0,86.0"/>
+</g>
+<text x="110" y="42" font-family="Arial,Helvetica,sans-serif" font-size="38" font-weight="600" letter-spacing="-1.5" fill="#10171f">Generative</text>
+<text x="110" y="82" font-family="Arial,Helvetica,sans-serif" font-size="38" font-weight="600" letter-spacing="-1.5" fill="#10171f">Ventures</text>
 </svg>

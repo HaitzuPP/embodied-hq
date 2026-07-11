@@ -24,6 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"PodcastEpisode","episodeNumber":2,"name":"Is robot learning a data problem, or an architecture problem?","url":"https://embodiedhq.io/episode-02.html","description":"Nils Pihl of Auki Labs and Michael Cho of BitRobot on evaluation as the real bottleneck, long-horizon reliability, and the open question in robot learning.","partOfSeries":{"@type":"PodcastSeries","name":"Embodied HQ","url":"https://embodiedhq.io/"},"inLanguage":"en"}
 </script>
@@ -55,38 +56,22 @@
         <span>With <a href="https://www.linkedin.com/in/nilspihl/" target="_blank" rel="noopener">Nils Pihl ↗</a>, Founder and CEO of Auki Labs, and <a href="https://www.linkedin.com/in/michael-chung-yeung-cho/" target="_blank" rel="noopener">Michael Cho ↗</a>, Co-founder of BitRobot (FrodoBots Lab)</span>
       </div>
       <p class="lede">BitRobot's Michael Cho is building global infrastructure to collect in-the-wild robot data at scale. Auki's Nils Pihl thinks the data-collection gold rush is a mistake. Two credible operators with real deployments disagree on the central question, whether embodied intelligence is bottlenecked by data or by architecture, and the disagreement is the signal.</p>
-      <p class="epnote">These are the written field notes from the conversation, free to read.</p>
+      <p class="epnote">These are the written field notes from the conversation.</p>
     </div>
   </section>
 
   <section class="epbody">
     <div class="wrap">
-      <div class="notes-h reveal">Key takeaways</div>
+      <article class="memo">
+      <p class="dek">Two operators who have both shipped real systems took opposite sides of the field's central question. The disagreement, not either answer, is the useful part.</p>
 
-      <div class="ideas">
-        <div class="idea reveal">
-          <div class="q">Evaluation is the real bottleneck: you can't speed up reality.</div>
-          <div class="a">Digital models iterate fast because benchmarks are near-instant. Physical AI is the opposite: a million zero-disengagement FSD (full self-driving) miles still wouldn't prove L4 versus L5 autonomy, because the next mile might crash. Edge cases get rarer at the tail, so confidence gets harder to earn the closer you get.</div>
-        </div>
-        <div class="idea reveal">
-          <div class="q">The subtask math is brutal: 0.99¹⁰⁰ ≈ 37%.</div>
-          <div class="a">Frying an egg is roughly 100 sequential subtasks. Even at a generous 99% each, end-to-end success collapses to about 37%. The frontier is long-horizon reliability and recovery, roughly four to six nines per subtask depending on the horizon, not marginal per-task gains.</div>
-        </div>
-        <div class="idea reveal">
-          <div class="q">Mosquito intelligence: 0.1 W, no pretraining.</div>
-          <div class="a">A mosquito navigates the physical world data-efficiently on a fraction of a watt, never pretrained on millions of hours. Biology is proof a radically more efficient approach exists, a real argument that scaling is not the answer here.</div>
-        </div>
-        <div class="idea reveal">
-          <div class="q">Data problem, or architecture problem?</div>
-          <div class="a">Michael bets on in-the-wild data at massive scale and is building for it. Nils calls the data-collection boom &ldquo;one of the dumbest moments of VC groupthink ever.&rdquo; The unresolved tension is arguably the open question in robot learning.</div>
-        </div>
-      </div>
+      <h2>Evaluation is the real bottleneck</h2>
+      <p>Digital models iterate fast because the feedback loop is instant: run the benchmark, read the score, try again. Physical AI breaks that loop, because <mark>you cannot speed up reality</mark>. A million zero-disengagement miles of full self-driving would still not settle L4 versus L5 autonomy, since the next mile might be the one that crashes. Edge cases get rarer exactly as you approach the tail, so confidence gets harder to earn the closer you get. The rate limiter for the field is evaluation infrastructure, not model capacity.</p>
 
-      <div class="notes-h reveal">Visual summary</div>
+      <h2>The brutal math of long-horizon reliability</h2>
+      <p>Here is the number that reframes everything. Frying an egg decomposes into roughly a hundred sequential subtasks, and even at a generous ninety-nine percent on each one, end-to-end success is <mark>0.99 to the hundredth power, about thirty-seven percent</mark>. A robot that looks strong on any single step still fails two attempts in three across a real task. Getting to something usable means pushing each subtask toward four, five, even six nines, plus real recovery when a step fails.</p>
 
       <div class="viz reveal">
-        <span class="vlabel">Visualization · The reliability cliff</span>
-        <h3>What each level of per-subtask reliability actually buys you</h3>
         <div class="scenario c3">
           <div class="scol bad">
             <div class="shead"><div class="st">99% per subtask</div><div class="ss">two nines</div></div>
@@ -108,8 +93,6 @@
       </div>
 
       <div class="viz reveal">
-        <span class="vlabel">Visualization · Reliability</span>
-        <h3>Why long-horizon reliability, not per-task success, is the frontier</h3>
         <svg viewBox="0 0 720 344" role="img" aria-label="Line chart of end-to-end success rate versus number of chained subtasks, for 99 percent, 99.9 percent, and 99.99 percent per-subtask reliability. At 100 subtasks, 99 percent per-subtask yields 37 percent end-to-end.">
           <line class="vgrid-line" x1="64" y1="24" x2="684" y2="24"/>
           <line class="vgrid-line" x1="64" y1="93" x2="684" y2="93"/>
@@ -143,9 +126,10 @@
         <div class="vcap">Frying an egg is roughly 100 sequential subtasks. At a strong-looking <b>99% per subtask, end-to-end success is only 37%.</b> Push each subtask to four nines and 100 steps still clear 99%; longer or safety-critical tasks demand more, plus recovery when a step fails. That is why the frontier is long-horizon reliability, not marginal gains in per-task success.</div>
       </div>
 
+      <h2>Data problem, or architecture problem?</h2>
+      <p>This is where the two guests split. Michael is building global infrastructure to collect in-the-wild robot data at scale, and bets that data is the unlock. Nils calls the data-collection boom <mark>&ldquo;one of the dumbest moments of VC groupthink ever&rdquo;</mark>, and argues the bottleneck is architecture. Both are credible, both have real deployments, and the episode does not resolve it.</p>
+
       <div class="viz reveal">
-        <span class="vlabel">Visualization · The debate</span>
-        <h3>Data problem, or architecture problem?</h3>
         <div class="spectrum">
           <div class="pole left">
             <div class="who">Michael Cho · BitRobot</div>
@@ -162,9 +146,10 @@
         <div class="vcap">Two credible operators with real deployments, opposite conclusions. <b>The unresolved tension is arguably the open question in robot learning.</b></div>
       </div>
 
+      <h2>A radically more efficient path may exist</h2>
+      <p>A mosquito navigates the physical world on roughly a tenth of a watt, with almost no pretraining and extraordinary data efficiency. <mark>Biology is proof that a fundamentally more efficient approach to physical intelligence exists</mark>, a real argument that scaling, the strategy that worked for language, is not the answer here. Michael puts robotics at its GPT-2 moment: new versus a year ago, but a long way from the wake-up.</p>
+
       <div class="viz reveal">
-        <span class="vlabel">Visualization · Efficiency</span>
-        <h3>The mosquito benchmark, and where we sit today</h3>
         <div class="statstrip">
           <div class="statcell"><div class="v">~0.1 W</div><div class="l">Mosquito power budget</div><div class="n">Navigates the real world in real time</div></div>
           <div class="statcell"><div class="v">0</div><div class="l">Pretraining hours</div><div class="n">No million-hour corpus, extraordinarily data-efficient</div></div>
@@ -173,9 +158,10 @@
         <div class="vcap">Biology is proof that a fundamentally more efficient path to physical intelligence exists, <b>a real argument that scaling is not the answer here.</b></div>
       </div>
 
+      <h2>How the market actually works</h2>
+      <p>Underneath the debate, BitRobot runs as a two-sided market: a global fleet of cheap teleoperated robots supplies the data, labs consume it, and real-world evaluation on distributed robots is the benchmark. The moat is not the model. <mark>Data access is a commercial and relationship problem, not a technical one</mark>, a theme that runs through all three episodes.</p>
+
       <div class="viz reveal">
-        <span class="vlabel">Visualization · Market structure</span>
-        <h3>BitRobot's two-sided data market</h3>
         <div class="mermaid mermaid-wide">
 flowchart LR
   S1["FrodoBots fleet, ~$500 robots"]:::sell
@@ -195,6 +181,8 @@ flowchart LR
         </div>
         <div class="vcap">Supply is a global fleet of cheap robots; demand is the labs training on the data; the network coordinates both, with real-world evaluation as the benchmark. <b>Data access is the moat, and it is commercial, not technical.</b></div>
       </div>
+
+      </article>
 
       <div class="backlink reveal"><a href="research.html">← All episodes</a></div>
     </div>
@@ -218,7 +206,7 @@ flowchart LR
 <script>
 const hdr=document.getElementById('hdr');
 addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>40);});
-const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12});
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 <script src="mermaid.min.js"></script>

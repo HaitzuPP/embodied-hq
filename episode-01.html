@@ -24,6 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"PodcastEpisode","episodeNumber":1,"name":"Why vision is still waiting for its GPT moment","url":"https://embodiedhq.io/episode-01.html","description":"Max Sebti of Manako Labs on the missing training recipe for computer vision, the two camps on world models, and why the data layer is the durable place to stand.","partOfSeries":{"@type":"PodcastSeries","name":"Embodied HQ","url":"https://embodiedhq.io/"},"inLanguage":"en"}
 </script>
@@ -54,38 +55,19 @@
         <span>With <a href="https://www.linkedin.com/in/maxime-sebti/" target="_blank" rel="noopener">Max Sebti ↗</a>, CEO of Manako Labs</span>
       </div>
       <p class="lede">Manako builds vision agents that run entirely on-device, in 19MB models that turn existing camera networks into real-time understanding. Max argues computer vision has no consensus training recipe yet, unpacks why that gap defines the field, and makes the case that the data layer, not the learning paradigm, is the durable place to stand while everything is still unsettled.</p>
-      <p class="epnote">These are the written field notes from the conversation, free to read.</p>
+      <p class="epnote">These are the written field notes from the conversation.</p>
     </div>
   </section>
 
   <section class="epbody">
     <div class="wrap">
-      <div class="notes-h reveal">Key takeaways</div>
+      <article class="memo">
+      <p class="dek">Manako runs vision agents entirely on-device, in models small enough to fit on a CPU. The throughline of the conversation is simple: computer vision still has no consensus recipe, and that absence shapes everything downstream.</p>
 
-      <div class="ideas">
-        <div class="idea reveal">
-          <div class="q">&ldquo;Vision is solved&rdquo; is a category error.</div>
-          <div class="a">Generative image quality and VLM captioning aren't physical understanding. Say vision is solved and you erase robotics from the picture, because robotics runs on vision.</div>
-        </div>
-        <div class="idea reveal">
-          <div class="q">There is no playbook: roughly ten live approaches.</div>
-          <div class="a">Imitation learning, RL, sim-to-real, VLAs (vision-language-action models), diffusion policies, learning from video. No consensus, because nobody has cracked zero-shot competence in a situation the robot has never seen.</div>
-        </div>
-        <div class="idea reveal">
-          <div class="q">Data doesn't just train the model: it dictates the architecture.</div>
-          <div class="a">You can't stream video 24/7 to the cloud; there aren't enough data centers. So models go tiny and on-device, and curation moves into the model itself.</div>
-        </div>
-        <div class="idea reveal">
-          <div class="q">&ldquo;Being intelligent isn't what you know. It's what you do when you don't know.&rdquo;</div>
-          <div class="a">Max's working definition of a world model: intelligence that adapts without being trained for the situation in front of it.</div>
-        </div>
-      </div>
-
-      <div class="notes-h reveal">Visual summary</div>
+      <h2>The data problem forces the architecture</h2>
+      <p>Start with a constraint that sounds like plumbing and turns out to be strategy. You cannot stream every camera's video to the cloud around the clock, because there are not enough data centers on Earth. So the model has to run where the camera is: tiny, on-device, curating true positives at the source. <mark>Data does not just train the model, it dictates the architecture.</mark> Manako's detection models are about 19MB and run on a CPU, not as a flourish but because the physics of data leave no other option.</p>
 
       <div class="viz reveal">
-        <span class="vlabel">Visualization · Two paths</span>
-        <h3>Why the data problem forces the architecture</h3>
         <div class="scenario c2">
           <div class="scol bad">
             <div class="shead"><div class="st">Send it to the cloud</div><div class="ss">the intuitive path</div></div>
@@ -103,9 +85,10 @@
         <div class="vcap">You physically can't stream 24/7 video to the cloud, so <b>the data problem, not a design preference, pushes models onto tiny on-device form factors.</b></div>
       </div>
 
+      <h2>Vision is still waiting for its GPT moment</h2>
+      <p>The deeper reason there is no settled architecture is that vision never got language's breakthrough. Transformers gave language one recipe everyone could build on. Vision has <mark>roughly ten live approaches and no consensus</mark>, from imitation learning to diffusion policies, because none has cracked zero-shot competence in a situation the robot has never seen. And the common claim that vision is solved is a category error: generative image quality is not physical understanding, and <mark>saying vision is solved quietly erases robotics, because robotics runs on vision.</mark></p>
+
       <div class="viz reveal">
-        <span class="vlabel">Visualization · The gap</span>
-        <h3>Language converged on a single recipe, while vision still has not.</h3>
         <div class="compare">
           <div class="cside one">
             <div class="ct">Language</div>
@@ -125,9 +108,10 @@
         <div class="vcap">Vision is <b>still waiting for its GPT moment.</b> The absence of a consensus recipe is the whole game.</div>
       </div>
 
+      <h2>The two camps on world models</h2>
+      <p>Underneath the method zoo sits one real disagreement, about whether you need to see at all. The predictive camp, associated with JEPA, predicts latent states rather than pixels. The generative camp renders the future frame by frame. Max's own definition cuts through it: <mark>a world model is intelligence that adapts without being trained for the situation in front of it.</mark> NVIDIA, characteristically, straddles both, since it sells the GPUs either way.</p>
+
       <div class="viz reveal">
-        <span class="vlabel">Visualization · World models</span>
-        <h3>The two camps: predict vs. generate</h3>
         <div class="camps">
           <div class="camp a">
             <div class="t">Predictive</div>
@@ -143,9 +127,10 @@
         <div class="vcap">A world model, in Max's definition, is <b>intelligence that adapts without being trained for the situation.</b> NVIDIA straddles both camps; it sells the GPUs either way.</div>
       </div>
 
+      <h2>The enterprise flywheel</h2>
+      <p>None of this reaches the world without data, and data access is a commercial problem, not a technical one. The loop Manako runs is concrete: deploy on-device, solve a real problem, earn camera access, then update the weights from real operations. <mark>Access is won in the field, and then it compounds.</mark></p>
+
       <div class="viz reveal">
-        <span class="vlabel">Visualization · Go-to-market</span>
-        <h3>Why data forces the architecture: the on-device flywheel</h3>
         <div class="flow">
           <div class="fstep"><div class="n">Step 1</div><div class="s">Deploy on-device</div><div class="d">Tiny 19MB models run on existing cameras, with no cloud firehose.</div></div>
           <div class="fstep"><div class="n">Step 2</div><div class="s">Solve a real problem</div><div class="d">Earn a place in the enterprise by fixing something concrete.</div></div>
@@ -156,10 +141,11 @@
         <div class="vcap">You physically can't stream video 24/7 to the cloud, so <b>the data problem dictates the architecture:</b> tiny, on-device, and curating at the source.</div>
       </div>
 
+      <h2>What a small team actually ships</h2>
+      <p>The system that results is a deliberate Frankenstein: a large teacher distilled into a reasoning model, stitched to a traditional VLM and a pure detection model, running about ten bespoke primitives. <mark>Reasoning first, sight second.</mark> The durable work is the system around the model, not any single model.</p>
+
       <div class="viz reveal">
-        <span class="vlabel">Visualization · Architecture</span>
-        <h3>The &ldquo;Frankenstein&rdquo; VLA that a small team actually ships</h3>
-        <div class="mermaid mermaid-wide">
+        <div class="mermaid">
 flowchart TB
   T["Large teacher model, ~72B"]:::src
   R["Reasoning model, taught to see"]:::part
@@ -179,6 +165,8 @@ flowchart TB
         </div>
         <div class="vcap">Distill a big teacher into a reasoning model, then stitch it to a VLM and a detection model. <b>Reasoning first, sight second.</b> The durable work is the system, not any single model.</div>
       </div>
+
+      </article>
 
       <div class="backlink reveal"><a href="research.html">← All episodes</a></div>
     </div>
@@ -202,7 +190,7 @@ flowchart TB
 <script>
 const hdr=document.getElementById('hdr');
 addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>40);});
-const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12});
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 <script src="mermaid.min.js"></script>

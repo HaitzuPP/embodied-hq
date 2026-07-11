@@ -1,11 +1,38 @@
-/* Embodied HQ — shared stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+/* Embodied HQ: shared stylesheet */
 :root{
   --bg:#FFFFFF;--bg-dark:#000000;--text:#101921;--muted:#545860;
   --hairline:rgba(84,88,96,0.30);--line-dk:rgba(255,255,255,0.14);
   --accent:#3C3EBC;--highlight:#F4D659;--blue:#428FEC;--cyan:#00BCE5;--panel:#EFEFEE;
   --container:1200px;--radius-pill:20px;
-  --font:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;--ease:0.6s ease-in-out;
+  --font:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;--ease:0.6s ease-in-out;
 }
+/* technical mono labels (character) */
+.eyebrow,.vlabel,.ep-num,.crumb,.tag,.notes-h,.lbl,.ecard .num,.head .src,.statcell .l,.shead .ss,.tri .tcell .w,.fstep .n,.tcard .tn,.badge,.logo-lbl{font-family:var(--mono)}
+.eyebrow{letter-spacing:0.1px;text-transform:none}
+/* memo (reading article) */
+.memo{max-width:940px}
+.memo>p,.memo>.pullquote,.memo h2{max-width:700px}
+.memo>p{font-size:17.5px;line-height:1.72;color:var(--text);margin-bottom:22px}
+.memo>p.dek{font-size:21px;line-height:1.5;color:var(--muted);margin-bottom:36px}
+.memo h2{font-family:var(--font);font-size:clamp(23px,3vw,30px);font-weight:500;line-height:1.2;margin:52px 0 16px}
+.memo h2:first-of-type{margin-top:8px}
+mark{background:linear-gradient(transparent 62%, rgba(244,214,89,0.55) 62%);color:inherit;padding:0 1px;font-weight:500}
+.pullquote{font-size:clamp(22px,3vw,28px);line-height:1.34;font-weight:500;color:var(--text);border-left:3px solid var(--accent);padding:2px 0 2px 22px;margin:40px 0}
+.figure{margin:32px 0 40px}
+.figure figcaption,.fcap{font-family:var(--font);font-size:13.5px;line-height:1.55;color:var(--muted);margin-top:14px;max-width:720px}
+.figure figcaption b,.fcap b{color:var(--text);font-weight:500}
+/* guest + investor logo strip */
+.logos{background:var(--bg);padding:44px 0 8px}
+.logo-row{display:flex;align-items:center;gap:26px;flex-wrap:wrap;padding:16px 0;border-top:1px solid var(--hairline)}
+.logo-lbl{font-size:12px;letter-spacing:0.4px;text-transform:uppercase;color:var(--muted);flex:0 0 96px}
+.logo-set{display:flex;align-items:center;gap:34px;flex-wrap:wrap}
+.logo-item{display:inline-flex;align-items:center;height:30px}
+.logo-item img{height:26px;width:auto;max-width:150px;object-fit:contain;filter:grayscale(1) opacity(0.55);transition:var(--ease)}
+.logo-item:hover img{filter:grayscale(1) opacity(0.9)}
+.logo-txt{font-family:var(--mono);font-size:15px;font-weight:500;color:var(--muted);opacity:0.75}
+@media(max-width:560px){.logo-lbl{flex-basis:100%}.logo-set{gap:22px}}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:var(--font);font-weight:400;color:var(--text);background:var(--bg);font-size:16px;line-height:1.41;-webkit-font-smoothing:antialiased}
@@ -47,7 +74,7 @@ header.scrolled .nav-links>a:not(.btn):hover{color:var(--accent)}
 .badge .pulse{width:7px;height:7px;border-radius:50%;background:var(--highlight);animation:pulse 2s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(244,214,89,0.5)}70%{box-shadow:0 0 0 8px rgba(244,214,89,0)}100%{box-shadow:0 0 0 0 rgba(244,214,89,0)}}
 .hero h1{font-size:clamp(38px,6vw,62px);line-height:1.18;font-weight:500;max-width:900px;margin:0 0 24px}
-.hero h1 .rot{color:var(--highlight);display:inline-block;min-width:1.6ch}
+.hero h1 .rot{color:var(--highlight);display:inline-block;min-width:8.5ch;text-align:left}
 .hero h1 .cursor{color:var(--highlight);font-weight:400;animation:blink 1s step-end infinite}
 @keyframes blink{50%{opacity:0}}
 .hero p.lede{font-size:19px;line-height:1.5;color:rgba(255,255,255,0.82);max-width:600px;margin-bottom:32px}
@@ -170,10 +197,10 @@ header.scrolled .nav-links>a:not(.btn):hover{color:var(--accent)}
 .backlink a:hover{color:var(--accent)}
 
 /* VISUALIZATIONS (episode pages) */
-.viz{background:#fff;border:1px solid var(--hairline);border-radius:16px;padding:28px 30px;margin:0 0 18px}
+.viz{background:transparent;border:0;padding:0;margin:32px 0 40px}
 .viz .vlabel{font-size:12px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:7px}
 .viz h3{font-size:19px;font-weight:500;line-height:1.25;margin-bottom:18px;max-width:680px}
-.viz .vcap{font-size:13.5px;line-height:1.55;color:var(--muted);margin-top:16px;max-width:700px}
+.viz .vcap{font-size:13.5px;line-height:1.55;color:var(--muted);margin-top:14px;max-width:720px}
 .viz .vcap b{color:var(--text);font-weight:500}
 .viz svg{max-width:100%;height:auto;display:block}
 .viz .mermaid{display:flex;justify-content:center;overflow-x:auto;margin:2px 0}
@@ -222,7 +249,8 @@ header.scrolled .nav-links>a:not(.btn):hover{color:var(--accent)}
 /* compare */
 .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:640px){.compare{grid-template-columns:1fr}}
-.cside{border:1px solid var(--hairline);border-radius:14px;padding:22px}
+.cside{border:0;border-left:2px solid var(--hairline);border-radius:0;padding:6px 0 6px 20px}
+.cside.one{border-left-color:var(--accent)}
 .cside .ct{font-size:12px;letter-spacing:0.28px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 .cside .cbig{font-size:15px;font-weight:500;margin-bottom:12px}
 .cchips{display:flex;flex-wrap:wrap;gap:7px}
@@ -290,8 +318,10 @@ footer{padding:40px 0;border-top:1px solid var(--hairline)}
 .foot-links a:hover{color:var(--text)}
 .foot .cr{font-size:14px;color:var(--muted)}
 
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
-.reveal.in{opacity:1;transform:none}
+/* content is always visible; a one-time gentle rise plays on load where JS is active, but never gates visibility (safe on no-JS, print, fast scroll) */
+.reveal{opacity:1;transform:none}
+html.js .reveal{animation:rise .6s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
 @media(min-width:900px){#cloud{left:auto;right:0;width:58%}}
 @media(max-width:900px){#cloud{opacity:0.45}}

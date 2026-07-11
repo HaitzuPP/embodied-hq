@@ -78,6 +78,61 @@
         </div>
       </div>
 
+      <div class="notes-h reveal">Visual summary</div>
+
+      <div class="viz reveal">
+        <span class="vlabel">Visualization · The gap</span>
+        <h3>Language converged. Vision hasn't.</h3>
+        <div class="compare">
+          <div class="cside one">
+            <div class="ct">Language</div>
+            <div class="cbig">One recipe won</div>
+            <div class="cchips"><span class="cchip">Transformers + scale</span></div>
+            <div class="cnote">A single training recipe that everyone builds on. That convergence was the &ldquo;GPT moment.&rdquo;</div>
+          </div>
+          <div class="cside">
+            <div class="ct">Vision</div>
+            <div class="cbig">More than ten approaches, no consensus</div>
+            <div class="cchips">
+              <span class="cchip">Imitation learning</span><span class="cchip">RL</span><span class="cchip">Sim-to-real</span><span class="cchip">Offline RL</span><span class="cchip">Learning from video</span><span class="cchip">VLAs</span><span class="cchip">Model-based RL</span><span class="cchip">Self-supervised</span><span class="cchip">Diffusion policies</span>
+            </div>
+            <div class="cnote">No approach has earned the default, because none has cracked zero-shot competence in an unseen situation.</div>
+          </div>
+        </div>
+        <div class="vcap">Vision is <b>still waiting for its GPT moment.</b> The absence of a consensus recipe is the whole game.</div>
+      </div>
+
+      <div class="viz reveal">
+        <span class="vlabel">Visualization · World models</span>
+        <h3>The two camps: predict vs. generate</h3>
+        <div class="camps">
+          <div class="camp a">
+            <div class="t">Predictive</div>
+            <div class="h">Don't rely on seeing</div>
+            <p>JEPA-style joint embedding prediction. Predict embeddings or latent states rather than pixels. Max leans this way.</p>
+          </div>
+          <div class="camp b">
+            <div class="t">Generative</div>
+            <div class="h">Render the future</div>
+            <p>The best way to predict what comes next is to generate the future frame by frame as you move.</p>
+          </div>
+        </div>
+        <div class="vcap">A world model, in Max's definition, is <b>intelligence that adapts without being trained for the situation.</b> NVIDIA straddles both camps; it sells the GPUs either way.</div>
+      </div>
+
+      <div class="viz reveal">
+        <span class="vlabel">Visualization · Go-to-market</span>
+        <h3>Why data forces the architecture: the on-device flywheel</h3>
+        <div class="flow">
+          <div class="fstep"><div class="n">Step 1</div><div class="s">Deploy on-device</div><div class="d">Tiny 19MB models run on existing cameras, with no cloud firehose.</div></div>
+          <div class="fstep"><div class="n">Step 2</div><div class="s">Solve a real problem</div><div class="d">Earn a place in the enterprise by fixing something concrete.</div></div>
+          <div class="fstep"><div class="n">Step 3</div><div class="s">Gain camera access</div><div class="d">Access is a commercial win, not a technical one.</div></div>
+          <div class="fstep"><div class="n">Step 4</div><div class="s">Update the weights</div><div class="d">Curate true positives at the source; the model improves.</div></div>
+        </div>
+        <div class="floop">The loop repeats, and the data compounds.</div>
+        <div class="vcap">You physically can't stream video 24/7 to the cloud, so <b>the data problem dictates the architecture:</b> tiny, on-device, and curating at the source.</div>
+      </div>
+
       <div class="notes-h reveal">Full episode notes</div>
 
       <details class="note reveal" open>

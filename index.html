@@ -54,6 +54,11 @@
   .brand .dots span:nth-child(3){bottom:0;left:0;background:var(--blue)}
   .brand .dots span:nth-child(4){bottom:0;right:0;background:var(--accent)}
   .nav .btn{color:#fff}
+  .nav-links{display:flex;align-items:center;gap:26px}
+  .nav-links>a:not(.btn){font-size:15px;font-weight:500;color:rgba(255,255,255,0.85);transition:var(--ease)}
+  header.scrolled .nav-links>a:not(.btn){color:var(--text)}
+  .nav-links>a:not(.btn):hover{color:#fff}
+  header.scrolled .nav-links>a:not(.btn):hover{color:var(--accent)}
 
   .hero{position:relative;background:var(--bg-dark);color:#fff;min-height:100vh;display:flex;align-items:center;overflow:hidden}
   #cloud{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
@@ -117,30 +122,19 @@
   .stat b{color:#fff;font-weight:500}
   .stat a{color:var(--blue)}
 
-  .ep{background:var(--panel);color:var(--text);padding:100px 0}
-  .ep .eyebrow{color:var(--accent)}
-  .ep h2{font-size:clamp(28px,3.6vw,44px);line-height:1.14;margin:12px 0 18px;max-width:820px}
-  .ep .guest{display:inline-flex;align-items:center;gap:11px;font-size:15px;color:var(--muted);margin-bottom:24px}
-  .ep .guest a{color:var(--accent);font-weight:500}
-  .ep .guest .g-pic{width:36px;height:36px;border-radius:50%;flex:0 0 36px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:#fff;letter-spacing:0.3px}
-  .ep .lede{font-size:18px;line-height:1.55;color:var(--text);max-width:730px;margin-bottom:46px}
-  .ideas{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:56px}
-  @media(max-width:720px){.ideas{grid-template-columns:1fr}}
-  .idea{background:#fff;border:1px solid var(--hairline);border-radius:14px;padding:24px}
-  .idea .q{font-size:18px;font-weight:500;line-height:1.34;margin-bottom:9px}
-  .idea .a{font-size:14.5px;line-height:1.55;color:var(--muted)}
-  .notes-h{font-size:14px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-  .note{border-top:1px solid var(--hairline)}
-  .note:last-of-type{border-bottom:1px solid var(--hairline)}
-  .note summary{cursor:pointer;list-style:none;padding:19px 0;font-size:17px;font-weight:500;display:flex;justify-content:space-between;align-items:center;gap:16px}
-  .note summary::-webkit-details-marker{display:none}
-  .note summary::after{content:'+';color:var(--accent);font-size:22px;font-weight:400;line-height:1}
-  .note[open] summary::after{content:'\2013'}
-  .note .body{padding:0 0 20px}
-  .note .body ul{margin:0}
-  .note .body li{list-style:none;position:relative;padding:7px 0 7px 22px;font-size:15px;line-height:1.52;color:var(--muted);max-width:820px}
-  .note .body li::before{content:'';position:absolute;left:3px;top:15px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
-  .note .body li b{color:var(--text);font-weight:500}
+  .ep-teaser{background:var(--panel);color:var(--text);padding:90px 0}
+  .ep-teaser .kicker{margin-bottom:26px;max-width:640px}
+  .ep-teaser .kicker h2{font-size:clamp(24px,3vw,34px);line-height:1.16;margin:12px 0 12px}
+  .ep-teaser .kicker p{font-size:16px;color:var(--muted)}
+  .teaser-card{display:block;background:#fff;border:1px solid var(--hairline);border-radius:18px;padding:38px 40px;max-width:860px;transition:var(--ease)}
+  .teaser-card:hover{border-color:var(--accent)}
+  .teaser-card .eyebrow{color:var(--accent);display:block;margin-bottom:12px}
+  .teaser-card h3{font-size:clamp(22px,2.6vw,30px);font-weight:500;line-height:1.18;margin-bottom:16px;max-width:640px}
+  .teaser-card .guest{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);margin-bottom:16px}
+  .teaser-card .guest .g-pic{width:32px;height:32px;border-radius:50%;flex:0 0 32px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff;letter-spacing:0.3px}
+  .teaser-card>p{font-size:16px;line-height:1.55;color:var(--muted);max-width:660px;margin-bottom:24px}
+  .rlink{display:inline-block;font-size:15px;font-weight:500;color:var(--accent);transition:var(--ease)}
+  .rlink:hover{color:#2c2e9c}
 
   footer{padding:40px 0;border-top:1px solid var(--hairline)}
   .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
@@ -162,7 +156,10 @@
       <span class="dots"><span></span><span></span><span></span><span></span></span>
       Embodied HQ
     </a>
-    <a class="btn" href="https://embodiedhq.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+    <nav class="nav-links">
+      <a href="research.html">Research</a>
+      <a class="btn" href="https://embodiedhq.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+    </nav>
   </div>
 </header>
 
@@ -232,94 +229,21 @@
     </div>
   </section>
 
-  <!-- INSIDE EPISODE 1 -->
-  <section class="ep" id="episode">
+  <!-- LATEST EPISODE TEASER -->
+  <section class="ep-teaser" id="episode">
     <div class="wrap">
-      <span class="eyebrow reveal">Episode 01 · Preview</span>
-      <h2 class="reveal">Why vision is still waiting for its GPT moment</h2>
-      <div class="guest reveal">
-        <span class="g-pic">MS</span>
-        <span>With <a href="https://www.linkedin.com/in/maxime-sebti/" target="_blank" rel="noopener">Max Sebti ↗</a> — CEO, Manako Labs</span>
+      <div class="kicker reveal">
+        <span class="eyebrow" style="color:var(--accent)">The show</span>
+        <h2>Every episode becomes a set of field notes</h2>
+        <p>We turn each conversation into durable notes — the arguments, the open problems, and the claims worth stealing.</p>
       </div>
-      <p class="lede reveal">Manako builds vision agents that run entirely on-device — 19MB models that turn existing camera networks into real-time understanding. Max argues computer vision has no consensus training recipe yet, unpacks why that gap defines the field, and makes the case that the data layer — not the learning paradigm — is the durable place to stand while everything is still unsettled.</p>
-
-      <div class="ideas">
-        <div class="idea reveal">
-          <div class="q">&ldquo;Vision is solved&rdquo; is a category error.</div>
-          <div class="a">Generative image quality and VLM captioning aren't physical understanding. Say vision is solved and you erase robotics from the picture — because robotics runs on vision.</div>
-        </div>
-        <div class="idea reveal">
-          <div class="q">There is no playbook — 10+ live approaches.</div>
-          <div class="a">Imitation learning, RL, sim-to-real, VLAs, diffusion policies, learning from video. No consensus, because nobody has cracked zero-shot competence in a situation the robot has never seen.</div>
-        </div>
-        <div class="idea reveal">
-          <div class="q">Data doesn't just train the model — it dictates the architecture.</div>
-          <div class="a">You can't stream video 24/7 to the cloud; there aren't enough data centers. So models go tiny and on-device, and curation moves into the model itself.</div>
-        </div>
-        <div class="idea reveal">
-          <div class="q">&ldquo;Being intelligent isn't what you know — it's what you do when you don't know.&rdquo;</div>
-          <div class="a">Max's working definition of a world model: intelligence that adapts without being trained for the situation in front of it.</div>
-        </div>
-      </div>
-
-      <div class="notes-h reveal">Full episode notes</div>
-
-      <details class="note reveal" open>
-        <summary>The state of the field</summary>
-        <div class="body"><ul>
-          <li>Vision is still waiting for its <b>&ldquo;GPT moment.&rdquo;</b> Transformers unlocked language; nothing equivalent has landed for vision, so there's no consensus training recipe.</li>
-          <li>The <b>&ldquo;vision is solved&rdquo; claim is a category error</b> — it conflates generative image quality and captioning with physical understanding, and implicitly erases robotics.</li>
-          <li><b>No playbook exists.</b> 10+ live approaches (imitation learning, RL, sim-to-real, offline RL, learning from video, VLAs, model-based RL, self-supervised exploration, diffusion policies) — because nobody has cracked zero-shot competence in an unseen situation.</li>
-        </ul></div>
-      </details>
-
-      <details class="note reveal">
-        <summary>The two camps on world models</summary>
-        <div class="body"><ul>
-          <li><b>Predictive (LeCun / JEPA):</b> don't rely on seeing — predict embeddings or latent states. Max leans this way.</li>
-          <li><b>Generative:</b> the best way to predict what's next is to generate the future as you move.</li>
-          <li>NVIDIA straddles both — it sells GPUs either way.</li>
-          <li>Working definition of a world model: <b>intelligence that adapts without being trained for the situation.</b></li>
-        </ul></div>
-      </details>
-
-      <details class="note reveal">
-        <summary>Data is the bottleneck — and it dictates architecture</summary>
-        <div class="body"><ul>
-          <li>Most training techniques bottom out in collecting visual data — hence the capital flooding into training facilities and camera-headset recording rigs.</li>
-          <li>You physically can't stream video 24/7 to the cloud, so models must run <b>on-device: tiny (~19MB, CPU-runnable), low-energy.</b></li>
-          <li>Edge models filter at the source — capturing true positives only. <b>Data curation becomes part of the model,</b> not a post-processing step.</li>
-          <li>Expect a <b>data wall</b> — and labs starting to share datasets as scarcity bites.</li>
-        </ul></div>
-      </details>
-
-      <details class="note reveal">
-        <summary>A training approach for small teams</summary>
-        <div class="body"><ul>
-          <li><b>Distillation is the on-ramp</b> — the &ldquo;Qwen playbook&rdquo;: start from a large teacher (~72B) and distill down. Cheaper and faster than building from scratch.</li>
-          <li><b>Reasoning matters more than assumed:</b> start from a reasoning model and teach it to see, rather than bolting reasoning onto a vision model.</li>
-          <li>Their VLA is a deliberate &ldquo;Frankenstein&rdquo;: a distilled reasoning model + a traditional VLM + a pure detection model, running ~10 bespoke primitives.</li>
-          <li>Their most advanced VLM was distilled from NVIDIA Cosmos (the reasoning model). Synthetic/sim data is still on the exploration list.</li>
-        </ul></div>
-      </details>
-
-      <details class="note reveal">
-        <summary>Real-world constraints researchers underrate</summary>
-        <div class="body"><ul>
-          <li><b>Low-res is fine.</b> Benchmarks run at 640–1088px, so 15-year-old cameras still work at the pixel level. Don't let sensor quality gate data collection — start now.</li>
-          <li><b>The hard cases are the point:</b> occlusion, rain, snow, garbage footage. Football was the proving ground — 22 agents in continuous chaos — and structure that survives that generalises to stores and stations.</li>
-          <li><b>Data access is a commercial problem, not a technical one.</b> Enterprises won't hand over sensors until you solve a real problem first. The flywheel: deploy → gain camera access → keep updating weights from real operations.</li>
-          <li>Enterprise self-serve is economically impossible — on-site reasoning + vision needs A100s (H100s for real time) across tens of thousands of sites. That's the structural case for tiny on-device models.</li>
-        </ul></div>
-      </details>
-
-      <details class="note reveal">
-        <summary>The strategic read for researchers</summary>
-        <div class="body"><ul>
-          <li>Max is explicit that he's <b>&ldquo;upstream&rdquo;</b> — deliberately on the sidelines of the methodology race, collecting data and building models that reason over it while waiting to see which camp cracks it.</li>
-          <li>The takeaway: <b>the data layer is the durable position</b> while the learning paradigm is still unsettled.</li>
-        </ul></div>
-      </details>
+      <a class="teaser-card reveal" href="research.html#ep-01">
+        <span class="eyebrow">Episode 01 · Preview</span>
+        <h3>Why vision is still waiting for its GPT moment</h3>
+        <div class="guest"><span class="g-pic">MS</span><span>With Max Sebti — CEO, Manako Labs</span></div>
+        <p>Computer vision has no consensus training recipe yet — and that gap defines the field. Max on the two camps of world models, why data dictates architecture, and where the durable position sits while everything is unsettled.</p>
+        <span class="rlink">Read the episode notes →</span>
+      </a>
     </div>
   </section>
 
@@ -385,6 +309,7 @@
       Embodied HQ
     </a>
     <div class="foot-links">
+      <a href="research.html">Research</a>
       <a href="https://embodiedhq.substack.com/" target="_blank" rel="noopener">Newsletter ↗</a>
     </div>
     <div class="cr">© 2026 Embodied HQ</div>

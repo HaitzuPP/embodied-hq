@@ -37,6 +37,7 @@
       Embodied HQ
     </a>
     <nav class="nav-links">
+      <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a class="btn" href="research.html">All episodes</a>
     </nav>
@@ -55,22 +56,25 @@
         <span>With <a href="https://www.linkedin.com/in/nilspihl/" target="_blank" rel="noopener">Nils Pihl ↗</a>, Founder and CEO of Auki Labs, and <a href="https://www.linkedin.com/in/michael-chung-yeung-cho/" target="_blank" rel="noopener">Michael Cho ↗</a>, Co-founder of BitRobot (FrodoBots Lab)</span>
       </div>
       <p class="lede">BitRobot's Michael Cho is building global infrastructure to collect in-the-wild robot data at scale. Auki's Nils Pihl thinks the data-collection gold rush is a mistake. Two credible operators with real deployments disagree on the central question, whether embodied intelligence is bottlenecked by data or by architecture, and the disagreement is the signal.</p>
+      <p class="epnote">The audio launches with the show. For now these are the written field notes, free to read.</p>
     </div>
   </section>
 
   <section class="epbody">
     <div class="wrap">
+      <div class="notes-h reveal">Key takeaways</div>
+
       <div class="ideas">
         <div class="idea reveal">
           <div class="q">Evaluation is the real bottleneck. You can't speed up reality.</div>
-          <div class="a">Digital models iterate fast because benchmarks are near-instant. Physical AI is the opposite: a million zero-disengagement FSD miles still wouldn't prove L4 vs L5, because the next mile might crash. Edge cases get rarer at the tail, so confidence gets harder to earn the closer you get.</div>
+          <div class="a">Digital models iterate fast because benchmarks are near-instant. Physical AI is the opposite: a million zero-disengagement FSD (full self-driving) miles still wouldn't prove L4 versus L5 autonomy, because the next mile might crash. Edge cases get rarer at the tail, so confidence gets harder to earn the closer you get.</div>
         </div>
         <div class="idea reveal">
           <div class="q">The subtask math is brutal: 0.99¹⁰⁰ ≈ 37%.</div>
-          <div class="a">Frying an egg is roughly 100 sequential subtasks. Even at a generous 99% each, end-to-end success collapses to about 37%. The frontier is long-horizon reliability and recovery, roughly six nines per subtask, not marginal per-task gains.</div>
+          <div class="a">Frying an egg is roughly 100 sequential subtasks. Even at a generous 99% each, end-to-end success collapses to about 37%. The frontier is long-horizon reliability and recovery, roughly four to six nines per subtask depending on the horizon, not marginal per-task gains.</div>
         </div>
         <div class="idea reveal">
-          <div class="q">Mosquito intelligence: 0.1W, no pretraining.</div>
+          <div class="q">Mosquito intelligence: 0.1 W, no pretraining.</div>
           <div class="a">A mosquito navigates the physical world data-efficiently on a fraction of a watt, never pretrained on millions of hours. Biology is proof a radically more efficient approach exists, a real argument that scaling is not the answer here.</div>
         </div>
         <div class="idea reveal">
@@ -114,7 +118,7 @@
           <span><i style="background:#E0A32E"></i>99.9% (three nines)</span>
           <span><i style="background:#D64545"></i>99% (two nines)</span>
         </div>
-        <div class="vcap">Frying an egg is roughly 100 sequential subtasks. At a strong-looking <b>99% per subtask, end-to-end success is only 37%.</b> Reliable behaviour means pushing each subtask toward six nines, plus recovery when a step fails. That is why the frontier is long-horizon reliability, not marginal gains in per-task success.</div>
+        <div class="vcap">Frying an egg is roughly 100 sequential subtasks. At a strong-looking <b>99% per subtask, end-to-end success is only 37%.</b> Push each subtask to four nines and 100 steps still clear 99%; longer or safety-critical tasks demand more, plus recovery when a step fails. That is why the frontier is long-horizon reliability, not marginal gains in per-task success.</div>
       </div>
 
       <div class="viz reveal">
@@ -138,7 +142,7 @@
 
       <div class="viz reveal">
         <span class="vlabel">Visualization · Efficiency</span>
-        <h3>The mosquito benchmark</h3>
+        <h3>The mosquito benchmark, and where we sit today</h3>
         <div class="statstrip">
           <div class="statcell"><div class="v">~0.1 W</div><div class="l">Mosquito power budget</div><div class="n">Navigates the real world in real time</div></div>
           <div class="statcell"><div class="v">0</div><div class="l">Pretraining hours</div><div class="n">No million-hour corpus, extraordinarily data-efficient</div></div>
@@ -153,14 +157,14 @@
         <summary>The two strongest technical insights</summary>
         <div class="body"><ul>
           <li><b>Evaluation is the rate limiter, and it can't be compressed.</b> Digital models iterate fast because benchmark results are near-instant. Physical AI is the opposite. Even a million zero-disengagement FSD miles wouldn't tell you L4 vs L5, because the next mile might crash. Edge cases get rarer as you approach the tail, so confidence gets harder the closer you are. The bottleneck is eval infrastructure, not model capacity.</li>
-          <li><b>The subtask compounding math is a usability problem, not a safety one.</b> SOTA short-horizon success sits around 70 to 80%. Frying an egg is roughly 100 sequential subtasks. Even at 99% each, 0.99^100 ≈ 37% end-to-end. You need roughly six nines per subtask plus strong recovery. Long-horizon reliability and error recovery deserve far more attention than marginal per-task gains.</li>
+          <li><b>The subtask compounding math is a usability problem, not a safety one.</b> State-of-the-art (SOTA) short-horizon success sits around 70 to 80%. Frying an egg is roughly 100 sequential subtasks. Even at 99% each, 0.99¹⁰⁰ ≈ 37% end-to-end. You need roughly four to six nines per subtask depending on the horizon, plus strong recovery. Long-horizon reliability and error recovery deserve far more attention than marginal per-task gains.</li>
         </ul></div>
       </details>
 
       <details class="note reveal">
         <summary>Where the field's assumptions may be wrong</summary>
         <div class="body"><ul>
-          <li><b>&ldquo;Mosquito intelligence.&rdquo;</b> Roughly 0.1W, extraordinarily data-efficient, never pretrained on millions of hours of flight. Biology proves a fundamentally different, radically more efficient approach to physical intelligence exists, a real argument that scaling is not the answer.</li>
+          <li><b>&ldquo;Mosquito intelligence.&rdquo;</b> Roughly 0.1 W, extraordinarily data-efficient, never pretrained on millions of hours of flight. Biology proves a fundamentally different, radically more efficient approach to physical intelligence exists, a real argument that scaling is not the answer.</li>
           <li><b>Language pretraining doesn't transfer to perception and movement.</b> The entire internet text corpus isn't a meaningful leap toward teaching a robot to see and move. VLAs translate intent (&ldquo;unscrew the bottle cap&rdquo;) but that doesn't mean the model knows what the hands must do. That data doesn't exist yet.</li>
           <li><b>A contrarian shot at the data-collection boom.</b> Nils is openly bearish on VC-funded robot data collection, predicting we'll look back on it as &ldquo;one of the dumbest moments of VC groupthink ever.&rdquo; If the mosquito point holds, the bottleneck is architecture, not more teleop hours.</li>
           <li><b>Embodied models are compressions of their datasets.</b> Train on a handful of Airbnb kitchens and you overfit to them. Every kitchen is similar and every kitchen is unique. That is the honest case for in-the-wild data, in direct tension with the point above. The episode doesn't resolve it, which is itself the signal.</li>
@@ -196,8 +200,7 @@
       <details class="note reveal">
         <summary>The open question</summary>
         <div class="body"><ul>
-          <li>The two guests disagree productively. Michael thinks in-the-wild data at massive scale is the unlock and is building infrastructure for it. Nils thinks the data-collection gold rush is a mistake. Both are credible operators with real deployments.</li>
-          <li>Is embodied intelligence a <b>data problem or an architecture problem?</b> That unresolved tension is arguably the open question in robot learning right now.</li>
+          <li>Is embodied intelligence a <b>data problem or an architecture problem?</b> Both guests are credible operators with real deployments, and they land on opposite answers. That unresolved tension is arguably the open question in robot learning right now. See the debate visualization above.</li>
         </ul></div>
       </details>
 

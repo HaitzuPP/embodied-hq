@@ -176,6 +176,8 @@ header.scrolled .nav-links>a:not(.btn):hover{color:var(--accent)}
 .viz .vcap{font-size:13.5px;line-height:1.55;color:var(--muted);margin-top:16px;max-width:700px}
 .viz .vcap b{color:var(--text);font-weight:500}
 .viz svg{max-width:100%;height:auto;display:block}
+.viz .mermaid{display:flex;justify-content:center;overflow-x:auto;margin:2px 0}
+.viz .mermaid svg{max-width:100%;height:auto}
 .vgrid-line{stroke:var(--hairline);stroke-width:1}
 .vaxis-lbl{fill:var(--muted);font-family:var(--font);font-size:13px;font-weight:500}
 .vlegend{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px}

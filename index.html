@@ -24,6 +24,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"PodcastSeries","name":"Embodied HQ","url":"https://embodiedhq.io/","description":"A podcast on robot learning. Long-form conversations with the researchers and engineers building generalist robots.","inLanguage":"en"}
 </script>
@@ -32,6 +33,11 @@
 function lf(img){
   if(!img.dataset.s){img.dataset.s='1';img.src='https://www.google.com/s2/favicons?domain='+img.dataset.d+'&sz=128';return;}
   img.onerror=null;var p=img.parentNode;p.classList.add('mono');p.textContent=img.dataset.m;
+}
+// logo-strip fallback: clearbit logo, then a clean greyscale wordmark
+function lg(img){
+  img.onerror=null;var p=img.parentNode;var s=document.createElement('span');
+  s.className='logo-txt';s.textContent=img.dataset.w;p.replaceChild(s,img);
 }
 </script>
 </head>
@@ -61,7 +67,7 @@ function lf(img){
       <div class="hero-cta">
         <a class="btn btn-lg" href="research.html">Read the research →</a>
       </div>
-      <p class="fineprint">Field notes from every episode. Free to read, no signup.</p>
+      <p class="fineprint">Field notes from every episode, written for researchers.</p>
       <a class="host" href="https://www.linkedin.com/in/jackpylon/" target="_blank" rel="noopener">
         <div class="pic" id="hostpic">JA</div>
         <div class="who">
@@ -69,6 +75,30 @@ function lf(img){
           <div class="desc">Host · investor in AI and robotics</div>
         </div>
       </a>
+    </div>
+  </section>
+
+  <!-- LOGO STRIPS -->
+  <section class="logos" aria-label="Guests and backers">
+    <div class="wrap">
+      <div class="logo-row">
+        <span class="logo-lbl">Guests from</span>
+        <div class="logo-set">
+          <span class="logo-item"><img data-w="Manako" src="https://logo.clearbit.com/manako.ai" alt="Manako" onerror="lg(this)"></span>
+          <span class="logo-item"><img data-w="Auki Labs" src="https://logo.clearbit.com/aukilabs.com" alt="Auki Labs" onerror="lg(this)"></span>
+          <span class="logo-item"><img data-w="BitRobot" src="https://logo.clearbit.com/bitrobot.ai" alt="BitRobot" onerror="lg(this)"></span>
+          <span class="logo-item"><img data-w="Generative Ventures" src="https://logo.clearbit.com/genventures.xyz" alt="Generative Ventures" onerror="lg(this)"></span>
+        </div>
+      </div>
+      <div class="logo-row">
+        <span class="logo-lbl">Backed by</span>
+        <div class="logo-set">
+          <span class="logo-item"><img data-w="Moonrock Capital" src="https://logo.clearbit.com/moonrockcapital.io" alt="Moonrock Capital" onerror="lg(this)"></span>
+          <span class="logo-item"><img data-w="Generative Ventures" src="https://logo.clearbit.com/genventures.xyz" alt="Generative Ventures" onerror="lg(this)"></span>
+          <span class="logo-item"><img data-w="peaq" src="https://logo.clearbit.com/peaq.network" alt="peaq" onerror="lg(this)"></span>
+          <span class="logo-item"><img data-w="Simarena" src="https://logo.clearbit.com/simarena.ai" alt="Simarena" onerror="lg(this)"></span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -197,7 +227,7 @@ const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 // rotating hero word
 (function(){
   if(RM)return;
-  const words=['real','physical','messy','everyday','unstructured'];
+  const words=['physical','tangible','material','everyday'];
   const el=document.getElementById('rot');let w=0,c=0,del=false;
   function tick(){const word=words[w];el.textContent=del?word.slice(0,c--):word.slice(0,c++);
     let t=del?55:110;if(!del&&c===word.length+1){del=true;t=1400;}
@@ -216,7 +246,7 @@ const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
   let boxes=[],dots=[],scanY=0,scanDir=1;
   const rnd=(a,b)=>a+Math.random()*(b-a);
   function makeBox(fromRight){
-    return {x:fromRight?W+90:rnd(W*0.30,W*0.95),y:rnd(H*0.24,H*0.80),
+    return {x:fromRight?W+90:rnd(W*0.52,W*0.95),y:rnd(H*0.24,H*0.80),
       w:rnd(72,132),h:rnd(58,108),d:rnd(60,118),
       yaw:rnd(0,6.28),yawv:rnd(-0.007,0.007)||0.004,vx:rnd(-0.45,-0.16),phase:rnd(0,6.28),
       col:PAL[(Math.random()*PAL.length)|0],label:LABELS[(Math.random()*LABELS.length)|0],
@@ -273,7 +303,7 @@ const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
   addEventListener('resize',resize);resize();requestAnimationFrame(frame);
 })();
 
-const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12});
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>

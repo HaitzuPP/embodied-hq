@@ -4,24 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Embodied HQ — A podcast on robot learning</title>
-<meta name="description" content="Conversations with the people on the front lines of robotics, taking you behind the scenes of the most important investment trend in history. Launching soon.">
+<meta name="description" content="In-depth conversations with the researchers building generalist robots — the methods, the open problems, and the results that hold up. Launching soon.">
 <meta name="theme-color" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Embodied HQ">
 <meta property="og:url" content="https://embodiedhq.io/">
 <meta property="og:title" content="Embodied HQ — A podcast on robot learning">
-<meta property="og:description" content="Front-line conversations taking you behind the scenes of the most important investment trend in history. Launching soon.">
+<meta property="og:description" content="In-depth conversations with the researchers building generalist robots — the methods, the open problems, and the results that hold up. Launching soon.">
 <meta property="og:image" content="https://embodiedhq.io/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Embodied HQ — A podcast on robot learning">
-<meta name="twitter:description" content="Front-line conversations taking you behind the scenes of the most important investment trend in history. Launching soon.">
+<meta name="twitter:description" content="In-depth conversations with the researchers building generalist robots — the methods, the open problems, and the results that hold up. Launching soon.">
 <meta name="twitter:image" content="https://embodiedhq.io/og-image.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<script>
+// funding-logo fallback: duckduckgo -> google favicons -> styled monogram (defined early so it exists when <img> load fails during parse)
+function lf(img){
+  if(!img.dataset.s){img.dataset.s='1';img.src='https://www.google.com/s2/favicons?domain='+img.dataset.d+'&sz=128';return;}
+  img.onerror=null;var p=img.parentNode;p.classList.add('mono');p.textContent=img.dataset.m;
+}
+</script>
 <style>
   :root{
     --bg:#FFFFFF;--bg-dark:#000000;--text:#101921;--muted:#545860;
@@ -45,7 +52,7 @@
   header{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;transition:var(--ease)}
   header.scrolled{background:rgba(255,255,255,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--hairline)}
   .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-  .brand{display:flex;align-items:center;gap:11px;font-weight:500;font-size:18px;color:#fff;transition:var(--ease)}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:500;font-size:18px;color:#fff;transition:var(--ease);white-space:nowrap;flex:0 0 auto}
   header.scrolled .brand{color:var(--text)}
   .brand .dots{display:inline-block;width:22px;height:22px;position:relative}
   .brand .dots span{position:absolute;width:5px;height:5px;border-radius:50%}
@@ -54,25 +61,27 @@
   .brand .dots span:nth-child(3){bottom:0;left:0;background:var(--blue)}
   .brand .dots span:nth-child(4){bottom:0;right:0;background:var(--accent)}
   .nav .btn{color:#fff}
+  .nav-links{display:flex;align-items:center;gap:26px}
+  .nav-links>a:not(.btn){font-size:15px;font-weight:500;color:rgba(255,255,255,0.85);transition:var(--ease)}
+  header.scrolled .nav-links>a:not(.btn){color:var(--text)}
+  .nav-links>a:not(.btn):hover{color:#fff}
+  header.scrolled .nav-links>a:not(.btn):hover{color:var(--accent)}
 
   .hero{position:relative;background:var(--bg-dark);color:#fff;min-height:100vh;display:flex;align-items:center;overflow:hidden}
   #cloud{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+  @media(min-width:900px){#cloud{left:auto;right:0;width:58%}}
+  @media(max-width:480px){.wrap{padding:0 20px}.nav-links{gap:16px}.brand{font-size:16px}}
   .hero .veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,0.93) 0%,rgba(0,0,0,0.72) 40%,rgba(0,0,0,0.32) 72%,rgba(0,0,0,0.55) 100%)}
   .hero-inner{position:relative;z-index:2;padding:120px 0 80px}
   .badge{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:var(--highlight);border:1px solid rgba(244,214,89,0.4);border-radius:var(--radius-pill);padding:6px 16px;margin-bottom:26px}
   .badge .pulse{width:7px;height:7px;border-radius:50%;background:var(--highlight);animation:pulse 2s infinite}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(244,214,89,0.5)}70%{box-shadow:0 0 0 8px rgba(244,214,89,0)}100%{box-shadow:0 0 0 0 rgba(244,214,89,0)}}
   .hero h1{font-size:clamp(38px,6vw,62px);line-height:1.18;font-weight:500;max-width:900px;margin:0 0 24px}
-  .hero h1 .rot{color:var(--highlight)}
+  .hero h1 .rot{color:var(--highlight);display:inline-block;min-width:1.6ch}
   .hero h1 .cursor{color:var(--highlight);font-weight:400;animation:blink 1s step-end infinite}
   @keyframes blink{50%{opacity:0}}
   .hero p.lede{font-size:19px;line-height:1.5;color:rgba(255,255,255,0.82);max-width:600px;margin-bottom:32px}
-  .form-inline{display:flex;gap:12px;flex-wrap:wrap}
-  .form-inline input{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.22);color:#fff;border-radius:var(--radius-pill);padding:11px 22px;font-family:var(--font);font-size:16px;min-width:250px;outline:none;transition:var(--ease)}
-  .form-inline input::placeholder{color:rgba(255,255,255,0.5)}
-  .form-inline input:focus{border-color:var(--highlight)}
   .fineprint{font-size:13px;color:rgba(255,255,255,0.5);margin-top:12px}
-  .subok{display:inline-block;color:#fff;font-size:17px;background:rgba(244,214,89,0.12);border:1px solid rgba(244,214,89,0.45);border-radius:var(--radius-pill);padding:12px 24px}
 
   .host{display:flex;align-items:center;gap:15px;margin-top:48px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.16);max-width:480px;width:fit-content;transition:var(--ease)}
   .host:hover{opacity:0.82}
@@ -81,7 +90,21 @@
   .host .who .nm .in{font-size:12px;letter-spacing:0.4px;color:var(--cyan);margin-left:6px}
   .host .who .desc{font-size:14px;color:rgba(255,255,255,0.72);margin-top:2px}
 
-  .moment{background:var(--bg-dark);color:#fff;padding:100px 0}
+  .themes{background:var(--bg-dark);color:#fff;padding:100px 0 0}
+  .themes .head-row{margin-bottom:40px;max-width:660px}
+  .themes h2{font-size:clamp(26px,3.2vw,38px);line-height:1.18;margin:12px 0 14px}
+  .themes .head-row p{font-size:17px;color:rgba(255,255,255,0.72)}
+  .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.14)}
+  @media(max-width:900px){.tgrid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.tgrid{grid-template-columns:1fr}}
+  .tcard{background:#000;padding:26px 22px;transition:var(--ease)}
+  .tcard:hover{background:#0b0b0b}
+  .tcard .tn{font-size:12px;letter-spacing:0.28px;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:12px}
+  .tcard:hover .tn{color:var(--cyan)}
+  .tcard .tt{font-size:16px;font-weight:500;color:#fff;margin-bottom:8px}
+  .tcard .td{font-size:13.5px;line-height:1.5;color:rgba(255,255,255,0.62)}
+
+  .moment{background:var(--bg-dark);color:#fff;padding:80px 0 100px}
   .moment .head-row{margin-bottom:46px;max-width:640px}
   .moment h2{font-size:clamp(26px,3.2vw,38px);line-height:1.18;margin:12px 0 14px}
   .moment .head-row p{font-size:17px;color:rgba(255,255,255,0.72)}
@@ -92,6 +115,7 @@
   .head:hover{background:#0b0b0b}
   .head .logo{position:relative;z-index:2;width:40px;height:40px;border-radius:9px;background:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:16px;overflow:hidden}
   .head .logo img{width:28px;height:28px;object-fit:contain}
+  .head .logo.mono{background:var(--accent);color:#fff;font-size:14px;font-weight:500;letter-spacing:0.3px}
   .head .amt{position:relative;z-index:2;font-size:26px;font-weight:500;color:var(--highlight)}
   .head .co{position:relative;z-index:2;font-size:14px;font-weight:500;margin:3px 0 8px;color:#fff}
   .head .desc{position:relative;z-index:2;font-size:12.5px;line-height:1.4;color:rgba(255,255,255,0.6);margin-bottom:14px;min-height:34px}
@@ -103,6 +127,21 @@
   .stat b{color:#fff;font-weight:500}
   .stat a{color:var(--blue)}
 
+  .ep-teaser{background:var(--panel);color:var(--text);padding:90px 0}
+  .ep-teaser .kicker{margin-bottom:26px;max-width:640px}
+  .ep-teaser .kicker h2{font-size:clamp(24px,3vw,34px);line-height:1.16;margin:12px 0 12px}
+  .ep-teaser .kicker p{font-size:16px;color:var(--muted)}
+  .teaser-card{display:block;background:#fff;border:1px solid var(--hairline);border-radius:18px;padding:38px 40px;max-width:860px;transition:var(--ease)}
+  .teaser-card:hover{border-color:var(--accent)}
+  .teaser-card .eyebrow{color:var(--accent);display:block;margin-bottom:12px}
+  .teaser-card h3{font-size:clamp(22px,2.6vw,30px);font-weight:500;line-height:1.18;margin-bottom:16px;max-width:640px}
+  .teaser-card .guest{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);margin-bottom:16px}
+  .teaser-card .guest .g-pic{width:32px;height:32px;border-radius:50%;flex:0 0 32px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:#fff;letter-spacing:0.3px}
+  .teaser-card .guest .g-pic2{margin-left:-20px;box-shadow:0 0 0 2px #fff}
+  .teaser-card>p{font-size:16px;line-height:1.55;color:var(--muted);max-width:660px;margin-bottom:24px}
+  .rlink{display:inline-block;font-size:15px;font-weight:500;color:var(--accent);transition:var(--ease)}
+  .rlink:hover{color:#2c2e9c}
+
   footer{padding:40px 0;border-top:1px solid var(--hairline)}
   .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .foot .brand{color:var(--text)}
@@ -113,6 +152,10 @@
 
   .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
   .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
 </style>
 </head>
 <body>
@@ -123,60 +166,108 @@
       <span class="dots"><span></span><span></span><span></span><span></span></span>
       Embodied HQ
     </a>
-    <a class="btn" href="https://embodiedhq.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+    <nav class="nav-links">
+      <a href="research.html">Research</a>
+      <a class="btn" href="https://embodiedhq.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+    </nav>
   </div>
 </header>
 
 <main id="top">
   <!-- HERO -->
   <section class="hero" id="hero">
-    <canvas id="cloud"></canvas>
+    <canvas id="cloud" aria-hidden="true"></canvas>
     <div class="veil"></div>
     <div class="wrap hero-inner">
       <span class="badge"><span class="pulse"></span>Launching soon</span>
       <h1>A podcast about bringing generalist robots into the <span class="rot" id="rot">real</span><span class="cursor">|</span> world.</h1>
-      <p class="lede">Conversations with the researchers and operators on the front lines, taking you behind the scenes of the most important investment trend in history. Explained plainly, no PhD required.</p>
+      <p class="lede">Long-form conversations with the researchers and engineers teaching machines to act in the physical world — the methods, the open problems, and the results that hold up.</p>
       <div class="hero-cta">
         <a class="btn btn-lg" href="https://embodiedhq.substack.com/subscribe" target="_blank" rel="noopener">Subscribe on Substack →</a>
       </div>
-      <p class="fineprint">Free. New episodes and a weekly note on what actually moved in robotics.</p>
+      <p class="fineprint">Free. New episodes, plus a weekly note on the papers, releases, and results that moved robot learning.</p>
       <a class="host" href="https://www.linkedin.com/in/jackpylon/" target="_blank" rel="noopener">
         <div class="pic" id="hostpic">JA</div>
         <div class="who">
           <div class="nm">Jack Ai-Leung <span class="in">in ↗</span></div>
-          <div class="desc">Tech investor</div>
+          <div class="desc">Host · investor in AI &amp; robotics</div>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- THE MONEY -->
+  <!-- THEMES -->
+  <section class="themes" id="themes">
+    <div class="wrap">
+      <div class="head-row reveal">
+        <span class="eyebrow" style="color:rgba(255,255,255,0.55)">What we get into</span>
+        <h2>The questions the show chases</h2>
+        <p>Each episode goes deep on one part of how machines learn to act — with the people doing the work.</p>
+      </div>
+      <div class="tgrid">
+        <div class="tcard reveal">
+          <span class="tn">Perception</span>
+          <div class="tt">Vision's missing &ldquo;GPT moment&rdquo;</div>
+          <div class="td">Language had transformers. Vision still has no consensus training recipe — and that gap is the whole game.</div>
+        </div>
+        <div class="tcard reveal">
+          <span class="tn">World models</span>
+          <div class="tt">Predict vs. generate</div>
+          <div class="td">The two camps: JEPA-style prediction in latent space, or generating the future frame by frame.</div>
+        </div>
+        <div class="tcard reveal">
+          <span class="tn">Data</span>
+          <div class="tt">The bottleneck that dictates architecture</div>
+          <div class="td">Why the scarcity of real-world video pushes models onto the edge — tiny, on-device, curating at the source.</div>
+        </div>
+        <div class="tcard reveal">
+          <span class="tn">Training</span>
+          <div class="tt">The VLA playbook</div>
+          <div class="td">Distillation, reasoning-first models, and the &ldquo;Frankenstein&rdquo; stacks small teams ship.</div>
+        </div>
+        <div class="tcard reveal">
+          <span class="tn">Evaluation</span>
+          <div class="tt">You can't speed up reality</div>
+          <div class="td">Why physical AI's rate limiter is evaluation and long-horizon reliability — 0.99¹⁰⁰ ≈ 37%, not model capacity.</div>
+        </div>
+        <div class="tcard reveal">
+          <span class="tn">Reality</span>
+          <div class="tt">The messy cases</div>
+          <div class="td">Occlusion, rain, and 22 agents in chaos — the cases generalisation has to survive.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST EPISODE TEASER -->
+  <section class="ep-teaser" id="episode">
+    <div class="wrap">
+      <div class="kicker reveal">
+        <span class="eyebrow" style="color:var(--accent)">The show</span>
+        <h2>Every episode becomes a set of field notes</h2>
+        <p>We turn each conversation into durable notes — the arguments, the open problems, and the claims worth keeping.</p>
+      </div>
+      <a class="teaser-card reveal" href="research.html#ep-02">
+        <span class="eyebrow">Episode 02 · Preview · Latest</span>
+        <h3>Is robot learning a data problem, or an architecture problem?</h3>
+        <div class="guest"><span class="g-pic">NP</span><span class="g-pic g-pic2">MC</span><span>With Nils Pihl (Auki Labs) &amp; Michael Cho (BitRobot)</span></div>
+        <p>Two credible operators take opposite sides of the field's central question — why evaluation is the real bottleneck, the brutal math of long-horizon reliability, and whether scaling is even the right tool.</p>
+        <span class="rlink">Read the episode notes →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- WHY NOW: research inflection, capital as supporting proof -->
   <section class="moment" id="moment">
     <div class="wrap">
       <div class="head-row reveal">
         <span class="eyebrow" style="color:rgba(255,255,255,0.55)">Why now</span>
-        <h2>The money has already decided this matters</h2>
-        <p>Some of the largest rounds in tech are going into robots that learn in the real world.</p>
+        <h2>Robot learning is crossing from the lab into the real world</h2>
+        <p>Foundation models, cheaper data, and better simulation have moved the field from papers to working prototypes. The capital is following the science.</p>
       </div>
       <div class="heads">
-        <a class="head reveal" href="https://www.therobotreport.com/physical-intelligence-raises-600m-advance-robot-foundation-models/" target="_blank" rel="noopener">
-          <div class="logo"><img src="https://icons.duckduckgo.com/ip3/physicalintelligence.company.ico" alt="Physical Intelligence" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=physicalintelligence.company&sz=128'"></div>
-          <div class="amt">$600M</div>
-          <div class="co">Physical Intelligence</div>
-          <div class="desc">Foundation models to control any robot</div>
-          <span class="src">The Robot Report ↗</span>
-          <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="32" cy="13" r="7"/><path d="M32 20v21M18 28h28M32 41l-9 15M32 41l9 15M20 25l-4 12M44 25l4 12"/></svg>
-        </a>
-        <a class="head reveal" href="https://www.cnbc.com/2026/02/11/apptronik-raises-520-million-at-5-billion-valuation-for-apollo-robot.html" target="_blank" rel="noopener">
-          <div class="logo"><img src="https://icons.duckduckgo.com/ip3/apptronik.com.ico" alt="Apptronik" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=apptronik.com&sz=128'"></div>
-          <div class="amt">$520M</div>
-          <div class="co">Apptronik</div>
-          <div class="desc">Apollo humanoid for industrial work</div>
-          <span class="src">CNBC ↗</span>
-          <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="32" cy="13" r="7"/><path d="M32 20v21M18 28h28M32 41l-9 15M32 41l9 15M20 25l-4 12M44 25l4 12"/></svg>
-        </a>
         <a class="head reveal" href="https://www.cnbc.com/2026/06/10/neura-robotics-funding-ai-humanoid-robots.html" target="_blank" rel="noopener">
-          <div class="logo"><img src="https://icons.duckduckgo.com/ip3/neura-robotics.com.ico" alt="Neura Robotics" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=neura-robotics.com&sz=128'"></div>
+          <div class="logo"><img data-d="neura-robotics.com" data-m="Ne" src="https://icons.duckduckgo.com/ip3/neura-robotics.com.ico" alt="Neura Robotics" onerror="lf(this)"></div>
           <div class="amt">$1.4B</div>
           <div class="co">Neura Robotics</div>
           <div class="desc">Cognitive humanoids, backed by Nvidia</div>
@@ -184,15 +275,31 @@
           <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="32" cy="13" r="7"/><path d="M32 20v21M18 28h28M32 41l-9 15M32 41l9 15M20 25l-4 12M44 25l4 12"/></svg>
         </a>
         <a class="head reveal" href="https://forgeglobal.com/insights/figure-ai-robotics-growth-2026/" target="_blank" rel="noopener">
-          <div class="logo"><img src="https://icons.duckduckgo.com/ip3/figure.ai.ico" alt="Figure AI" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=figure.ai&sz=128'"></div>
+          <div class="logo"><img data-d="figure.ai" data-m="Fi" src="https://icons.duckduckgo.com/ip3/figure.ai.ico" alt="Figure AI" onerror="lf(this)"></div>
           <div class="amt">$1B+</div>
           <div class="co">Figure AI</div>
           <div class="desc">Full-stack humanoids, valued near $39B</div>
           <span class="src">Forge Global ↗</span>
           <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="32" cy="13" r="7"/><path d="M32 20v21M18 28h28M32 41l-9 15M32 41l9 15M20 25l-4 12M44 25l4 12"/></svg>
         </a>
+        <a class="head reveal" href="https://www.therobotreport.com/physical-intelligence-raises-600m-advance-robot-foundation-models/" target="_blank" rel="noopener">
+          <div class="logo"><img data-d="physicalintelligence.company" data-m="PI" src="https://icons.duckduckgo.com/ip3/physicalintelligence.company.ico" alt="Physical Intelligence" onerror="lf(this)"></div>
+          <div class="amt">$600M</div>
+          <div class="co">Physical Intelligence</div>
+          <div class="desc">Foundation models to control any robot</div>
+          <span class="src">The Robot Report ↗</span>
+          <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="32" cy="13" r="7"/><path d="M32 20v21M18 28h28M32 41l-9 15M32 41l9 15M20 25l-4 12M44 25l4 12"/></svg>
+        </a>
+        <a class="head reveal" href="https://www.cnbc.com/2026/02/11/apptronik-raises-520-million-at-5-billion-valuation-for-apollo-robot.html" target="_blank" rel="noopener">
+          <div class="logo"><img data-d="apptronik.com" data-m="Ap" src="https://icons.duckduckgo.com/ip3/apptronik.com.ico" alt="Apptronik" onerror="lf(this)"></div>
+          <div class="amt">$520M</div>
+          <div class="co">Apptronik</div>
+          <div class="desc">Apollo humanoid, $5B valuation</div>
+          <span class="src">CNBC ↗</span>
+          <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="32" cy="13" r="7"/><path d="M32 20v21M18 28h28M32 41l-9 15M32 41l9 15M20 25l-4 12M44 25l4 12"/></svg>
+        </a>
         <a class="head reveal" href="https://theaiinsider.tech/2026/05/08/chinas-humanoid-robot-maker-robotera-raises-over-usd-200m-in-new-funding-round/" target="_blank" rel="noopener">
-          <div class="logo"><img src="https://icons.duckduckgo.com/ip3/robotera.com.ico" alt="Robotera" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=robotera.com&sz=128'"></div>
+          <div class="logo"><img data-d="robotera.com" data-m="Ro" src="https://icons.duckduckgo.com/ip3/robotera.com.ico" alt="Robotera" onerror="lf(this)"></div>
           <div class="amt">$200M+</div>
           <div class="co">Robotera</div>
           <div class="desc">Humanoids for logistics and industry</div>
@@ -200,7 +307,7 @@
           <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="32" cy="13" r="7"/><path d="M32 20v21M18 28h28M32 41l-9 15M32 41l9 15M20 25l-4 12M44 25l4 12"/></svg>
         </a>
       </div>
-      <p class="stat reveal"><b>Robotics startups raised roughly $18.8B in 2026</b>, already past all of 2025. <a href="https://www.pymnts.com/news/artificial-intelligence/2026/physical-intelligence-seeks-1-billion-as-robotics-interest-grows/" target="_blank" rel="noopener">Source ↗</a></p>
+      <p class="stat reveal"><b>Robotics startups raised roughly $18.8B in 2026</b> — a record, as of mid-year. <a href="https://news.crunchbase.com/robotics/startup-venture-funding-surges-2026-data/" target="_blank" rel="noopener">Crunchbase ↗</a></p>
     </div>
   </section>
 </main>
@@ -212,6 +319,7 @@
       Embodied HQ
     </a>
     <div class="foot-links">
+      <a href="research.html">Research</a>
       <a href="https://embodiedhq.substack.com/" target="_blank" rel="noopener">Newsletter ↗</a>
     </div>
     <div class="cr">© 2026 Embodied HQ</div>
@@ -221,6 +329,7 @@
 <script>
 const hdr=document.getElementById('hdr');
 addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>40);});
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 // swap monogram for real photo if it loads
 (function(){
@@ -231,6 +340,7 @@ addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>40);});
 
 // rotating hero word
 (function(){
+  if(RM)return;
   const words=['real','physical','messy','human','unstructured'];
   const el=document.getElementById('rot');let w=0,c=0,del=false;
   function tick(){const word=words[w];el.textContent=del?word.slice(0,c--):word.slice(0,c++);
@@ -241,6 +351,7 @@ addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>40);});
 
 // Machine-vision hero: animated 3D detection boxes + scan lock
 (function(){
+  if(RM)return;
   const cv=document.getElementById('cloud');const ctx=cv.getContext('2d');
   let W,H,DPR=Math.min(devicePixelRatio||1,2);
   const PAL=['#00BCE5','#428FEC','#F4D659','#3C3EBC'];

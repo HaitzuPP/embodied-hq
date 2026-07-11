@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research — Embodied HQ</title>
+<meta name="description" content="Field notes from every Embodied HQ episode — the arguments, the open problems, and the claims worth keeping, from the researchers and engineers building generalist robots.">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Embodied HQ">
+<meta property="og:url" content="https://embodiedhq.io/research.html">
+<meta property="og:title" content="Research — Embodied HQ">
+<meta property="og:description" content="Field notes from every episode: the arguments, the open problems, and the claims worth keeping.">
+<meta property="og:image" content="https://embodiedhq.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Research — Embodied HQ">
+<meta name="twitter:description" content="Field notes from every episode: the arguments, the open problems, and the claims worth keeping.">
+<meta name="twitter:image" content="https://embodiedhq.io/og-image.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;--bg-dark:#000000;--text:#101921;--muted:#545860;
+    --hairline:rgba(84,88,96,0.30);--accent:#3C3EBC;--highlight:#F4D659;
+    --blue:#428FEC;--cyan:#00BCE5;--panel:#EFEFEE;
+    --container:1200px;--radius-pill:20px;
+    --font:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;--ease:0.6s ease-in-out;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);font-weight:400;color:var(--text);background:var(--bg);font-size:16px;line-height:1.41;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 32px}
+  a{color:inherit;text-decoration:none}
+  .eyebrow{font-size:14px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:var(--muted)}
+  h1,h2,h3{font-weight:500;letter-spacing:normal}
+
+  .btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:var(--radius-pill);padding:11px 30px;font-family:var(--font);font-size:16px;font-weight:400;cursor:pointer;transition:var(--ease)}
+  .btn:hover{background:#2c2e9c;transform:translateY(-1px)}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(0,0,0,0.55);backdrop-filter:blur(8px);transition:var(--ease)}
+  header.scrolled{background:rgba(255,255,255,0.92);border-bottom:1px solid var(--hairline)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:500;font-size:18px;color:#fff;transition:var(--ease);white-space:nowrap;flex:0 0 auto}
+  header.scrolled .brand{color:var(--text)}
+  .brand .dots{display:inline-block;width:22px;height:22px;position:relative}
+  .brand .dots span{position:absolute;width:5px;height:5px;border-radius:50%}
+  .brand .dots span:nth-child(1){top:0;left:0;background:var(--highlight)}
+  .brand .dots span:nth-child(2){top:0;right:0;background:var(--cyan)}
+  .brand .dots span:nth-child(3){bottom:0;left:0;background:var(--blue)}
+  .brand .dots span:nth-child(4){bottom:0;right:0;background:var(--accent)}
+  .nav-links{display:flex;align-items:center;gap:26px}
+  .nav-links>a:not(.btn){font-size:15px;font-weight:500;color:rgba(255,255,255,0.85);transition:var(--ease)}
+  header.scrolled .nav-links>a:not(.btn){color:var(--text)}
+  .nav-links>a:not(.btn):hover{color:#fff}
+  header.scrolled .nav-links>a:not(.btn):hover{color:var(--accent)}
+
+  .rhero{background:var(--bg-dark);color:#fff;padding:150px 0 70px}
+  .rhero .eyebrow{color:var(--highlight)}
+  .rhero h1{font-size:clamp(34px,5vw,54px);line-height:1.14;font-weight:500;max-width:820px;margin:14px 0 20px}
+  .rhero p{font-size:19px;line-height:1.5;color:rgba(255,255,255,0.78);max-width:640px}
+
+  .rindex{background:var(--bg);padding:64px 0 40px}
+  .rindex .lbl{font-size:13px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+  .ecard{display:block;border:1px solid var(--hairline);border-radius:16px;padding:28px 30px;background:#fff;transition:var(--ease);max-width:900px;margin-bottom:16px}
+  .ecard:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .ecard .top{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  .ecard .num{font-size:12px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:var(--accent)}
+  .ecard .status{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:var(--muted)}
+  .ecard .status .dot{width:6px;height:6px;border-radius:50%;background:var(--highlight)}
+  .ecard .tag{font-size:11.5px;letter-spacing:0.28px;text-transform:uppercase;color:var(--muted);border:1px solid var(--hairline);border-radius:var(--radius-pill);padding:3px 11px}
+  .ecard h3{font-size:clamp(21px,2.5vw,27px);font-weight:500;line-height:1.18;margin-bottom:12px;max-width:640px}
+  .ecard .meta{font-size:14px;color:var(--text);font-weight:500;margin-bottom:10px}
+  .ecard .meta span{color:var(--muted);font-weight:400}
+  .ecard>p{font-size:15.5px;line-height:1.55;color:var(--muted);max-width:660px;margin-bottom:18px}
+  .rlink{display:inline-block;font-size:15px;font-weight:500;color:var(--accent);transition:var(--ease)}
+  .ecard:hover .rlink{color:#2c2e9c}
+
+  .ep{background:var(--panel);color:var(--text);padding:88px 0;scroll-margin-top:80px}
+  .ep+.ep{border-top:1px solid var(--hairline)}
+  .ep .guest .g-pic+.g-pic{margin-left:-21px;box-shadow:0 0 0 2px var(--panel)}
+  .ep .ep-num{font-size:12px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:var(--accent)}
+  .ep h2{font-size:clamp(26px,3.4vw,40px);line-height:1.14;margin:12px 0 18px;max-width:820px}
+  .ep .guest{display:inline-flex;align-items:center;gap:11px;font-size:15px;color:var(--muted);margin-bottom:24px}
+  .ep .guest a{color:var(--accent);font-weight:500}
+  .ep .guest .g-pic{width:36px;height:36px;border-radius:50%;flex:0 0 36px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:#fff;letter-spacing:0.3px}
+  .ep .lede{font-size:18px;line-height:1.55;color:var(--text);max-width:730px;margin-bottom:46px}
+  .ideas{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:56px}
+  @media(max-width:720px){.ideas{grid-template-columns:1fr}}
+  .idea{background:#fff;border:1px solid var(--hairline);border-radius:14px;padding:24px}
+  .idea .q{font-size:18px;font-weight:500;line-height:1.34;margin-bottom:9px}
+  .idea .a{font-size:14.5px;line-height:1.55;color:var(--muted)}
+  .notes-h{font-size:14px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .note{border-top:1px solid var(--hairline)}
+  .note:last-of-type{border-bottom:1px solid var(--hairline)}
+  .note summary{cursor:pointer;list-style:none;padding:19px 0;font-size:17px;font-weight:500;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .note summary::-webkit-details-marker{display:none}
+  .note summary::after{content:'+';color:var(--accent);font-size:22px;font-weight:400;line-height:1}
+  .note[open] summary::after{content:'\2013'}
+  .note .body{padding:0 0 20px}
+  .note .body ul{margin:0}
+  .note .body li{list-style:none;position:relative;padding:7px 0 7px 22px;font-size:15px;line-height:1.52;color:var(--muted);max-width:820px}
+  .note .body li::before{content:'';position:absolute;left:3px;top:15px;width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .note .body li b{color:var(--text);font-weight:500}
+  .backlink{padding:26px 0 0}
+  .backlink a{font-size:14px;color:var(--muted);transition:var(--ease)}
+  .backlink a:hover{color:var(--accent)}
+
+  footer{padding:40px 0;border-top:1px solid var(--hairline)}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .foot .brand{color:var(--text)}
+  .foot-links{display:flex;gap:22px;font-size:14px;color:var(--muted)}
+  .foot-links a{transition:var(--ease)}
+  .foot-links a:hover{color:var(--text)}
+  .foot .cr{font-size:14px;color:var(--muted)}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(max-width:480px){.wrap{padding:0 20px}.nav-links{gap:16px}.brand{font-size:16px}}
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <span class="dots"><span></span><span></span><span></span><span></span></span>
+      Embodied HQ
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a class="btn" href="https://embodiedhq.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- RESEARCH HERO -->
+  <section class="rhero">
+    <div class="wrap">
+      <span class="eyebrow">Research</span>
+      <h1>Field notes from every episode</h1>
+      <p>We turn each conversation into durable notes — the arguments, the open problems, and the claims worth keeping. Start with the latest below.</p>
+    </div>
+  </section>
+
+  <!-- EPISODE INDEX -->
+  <section class="rindex">
+    <div class="wrap">
+      <h2 class="lbl reveal">Episodes</h2>
+      <a class="ecard reveal" href="#ep-02">
+        <div class="top">
+          <span class="num">Episode 02</span>
+          <span class="status"><span class="dot"></span>Preview</span>
+          <span class="tag">Evaluation</span>
+          <span class="tag">Reliability</span>
+          <span class="tag">Data vs. architecture</span>
+        </div>
+        <h3>Is robot learning a data problem, or an architecture problem?</h3>
+        <div class="meta">Nils Pihl <span>— Auki Labs</span> · Michael Cho <span>— BitRobot (FrodoBots Lab)</span></div>
+        <p>Two credible operators take opposite sides of the field's central question. Michael is building global infrastructure to collect in-the-wild robot data; Nils calls the data-collection gold rush a mistake. On why evaluation is the real bottleneck, the brutal math of long-horizon reliability, and whether scaling is even the right tool.</p>
+        <span class="rlink">Read the notes ↓</span>
+      </a>
+      <a class="ecard reveal" href="#ep-01">
+        <div class="top">
+          <span class="num">Episode 01</span>
+          <span class="status"><span class="dot"></span>Preview</span>
+          <span class="tag">Perception</span>
+          <span class="tag">World models</span>
+          <span class="tag">Data</span>
+        </div>
+        <h3>Why vision is still waiting for its GPT moment</h3>
+        <div class="meta">Max Sebti <span>— CEO, Manako Labs</span></div>
+        <p>Computer vision has no consensus training recipe yet, and that gap defines the field. The two camps on world models, why data dictates architecture, and where the durable position sits while everything is still unsettled.</p>
+        <span class="rlink">Read the notes ↓</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- EPISODE 02 NOTES -->
+  <section class="ep" id="ep-02">
+    <div class="wrap">
+      <span class="ep-num reveal">Episode 02 · Preview</span>
+      <h2 class="reveal">Is robot learning a data problem, or an architecture problem?</h2>
+      <div class="guest reveal">
+        <span class="g-pic">NP</span>
+        <span class="g-pic">MC</span>
+        <span>With <a href="https://www.linkedin.com/in/nilspihl/" target="_blank" rel="noopener">Nils Pihl ↗</a> — Founder &amp; CEO, Auki Labs · and <a href="https://www.linkedin.com/in/michael-chung-yeung-cho/" target="_blank" rel="noopener">Michael Cho ↗</a> — Co-founder, BitRobot (FrodoBots Lab)</span>
+      </div>
+      <p class="lede reveal">BitRobot's Michael Cho is building global infrastructure to collect in-the-wild robot data at scale; Auki's Nils Pihl thinks the data-collection gold rush is a mistake. Two credible operators with real deployments disagree on the central question — is embodied intelligence bottlenecked by data or by architecture — and the disagreement is the signal.</p>
+
+      <div class="ideas">
+        <div class="idea reveal">
+          <div class="q">Evaluation is the real bottleneck — you can't speed up reality.</div>
+          <div class="a">Digital models iterate fast because benchmarks are near-instant. Physical AI is the opposite: a million zero-disengagement FSD miles still wouldn't prove L4 vs L5, because the next mile might crash. Edge cases get rarer at the tail, so confidence gets harder to earn the closer you get.</div>
+        </div>
+        <div class="idea reveal">
+          <div class="q">The subtask math is brutal: 0.99¹⁰⁰ ≈ 37%.</div>
+          <div class="a">Frying an egg is ~100 sequential subtasks. Even at a generous 99% each, end-to-end success collapses to ~37%. The frontier is long-horizon reliability and recovery — roughly six nines per subtask — not marginal per-task gains.</div>
+        </div>
+        <div class="idea reveal">
+          <div class="q">Mosquito intelligence: 0.1W, no pretraining.</div>
+          <div class="a">A mosquito navigates the physical world data-efficiently on a fraction of a watt, never pretrained on millions of hours. Biology is proof a radically more efficient approach exists — a real argument that scaling is not the answer here.</div>
+        </div>
+        <div class="idea reveal">
+          <div class="q">Data problem, or architecture problem?</div>
+          <div class="a">Michael bets on in-the-wild data at massive scale and is building for it. Nils calls the data-collection boom &ldquo;one of the dumbest moments of VC groupthink ever.&rdquo; The unresolved tension is arguably the open question in robot learning.</div>
+        </div>
+      </div>
+
+      <div class="notes-h reveal">Full episode notes</div>
+
+      <details class="note reveal" open>
+        <summary>The two strongest technical insights</summary>
+        <div class="body"><ul>
+          <li><b>Evaluation is the rate limiter, and it can't be compressed.</b> Digital models iterate fast because benchmark results are near-instant. Physical AI is the opposite — even a million zero-disengagement FSD miles wouldn't tell you L4 vs L5, because the next mile might crash. Edge cases get rarer as you approach the tail, so confidence gets harder the closer you are. The bottleneck is eval infrastructure, not model capacity.</li>
+          <li><b>The subtask compounding math is a usability problem, not a safety one.</b> SOTA short-horizon success sits ~70–80%. Frying an egg ≈ 100 sequential subtasks; even at 99% each, 0.99^100 ≈ 37% end-to-end. You need ~six nines per subtask plus strong recovery. Long-horizon reliability and error recovery deserve far more attention than marginal per-task gains.</li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>Where the field's assumptions may be wrong</summary>
+        <div class="body"><ul>
+          <li><b>&ldquo;Mosquito intelligence.&rdquo;</b> ~0.1W, extraordinarily data-efficient, never pretrained on millions of hours of flight. Biology proves a fundamentally different, radically more efficient approach to physical intelligence exists — a real argument that scaling is not the answer.</li>
+          <li><b>Language pretraining doesn't transfer to perception and movement.</b> The entire internet text corpus isn't a meaningful leap toward teaching a robot to see and move. VLAs translate intent (&ldquo;unscrew the bottle cap&rdquo;) but that doesn't mean the model knows what the hands must do — that data doesn't exist yet.</li>
+          <li><b>A contrarian shot at the data-collection boom.</b> Nils is openly bearish on VC-funded robot data collection, predicting we'll look back on it as &ldquo;one of the dumbest moments of VC groupthink ever.&rdquo; If the mosquito point holds, the bottleneck is architecture, not more teleop hours.</li>
+          <li><b>Embodied models are compressions of their datasets.</b> Train on a handful of Airbnb kitchens and you overfit to them — every kitchen is similar and every kitchen is unique. The honest case for in-the-wild data, in direct tension with the point above. The episode doesn't resolve it, which is itself the signal.</li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>Epistemic hygiene for reading the field</summary>
+        <div class="body"><ul>
+          <li><b>Treat a demo as an upper bound, not a capability.</b> Assume the one-minute video is the ceiling and may have taken hours of takes. Uncut, hours-long runs are the only real proof — many impressive humanoid demos are still substantially teleoperated.</li>
+          <li><b>Where we actually are:</b> Michael puts robotics at roughly the <b>GPT-2 moment</b> — qualitatively new versus a year ago, but a large gap before the GPT-3-style wake-up. His timeline: digital AGI within a few years, robotics still unsolved. Physical AI is where the remaining hard research lives.</li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>Practical resources researchers can use</summary>
+        <div class="body"><ul>
+          <li><b>BitRobot's explicit model:</b> do the work &ldquo;researchers wanted done but shouldn't have spent time doing&rdquo; — data collection, compute aggregation, and real-world evaluation of models on physical robots distributed globally.</li>
+          <li><b>Concrete proof:</b> a UC Berkeley lab built a SOTA urban-navigation model on the FrodoBots dataset and evaluated it on robots in Africa and South America — geographic diversity no single lab can obtain. Human-vs-AI competitions drew people from Google DeepMind, Berkeley, NUS, and UT Austin; they're releasing what they claim is the largest urban-navigation dataset of its kind on Hugging Face.</li>
+          <li><b>Data IP default:</b> open-source for non-commercial use, with commercial licensing split between the subnet owner and the foundation — worth knowing if you're evaluating data provenance.</li>
+          <li><b>The cheap-hardware insight:</b> a $10,000 robot is a bad data-collection device. They built a ~$500 teleoperated &ldquo;dumb&rdquo; robot and made data collection a byproduct of a game people wanted to play.</li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>Two constraints researchers systematically underweight</summary>
+        <div class="body"><ul>
+          <li><b>Privacy will shape what data is legally and socially available.</b> Both 1X and Tesla have said openly they intend to build the largest training set in the world by recording inside people's homes. Expect friction — an argument for on-device, federated, and self-hosted architectures over centralized hoarding (Auki deliberately collects no data).</li>
+          <li><b>The environment is a design variable, not a fixed constraint.</b> Cities were reshaped for cars; they'll be reshaped for robots. If SLAM and visual positioning fail on repeating patterns, buildings will adopt non-repeating &ldquo;visual entropy&rdquo; surfaces — minimalism and repeating tiles disappear. Plus battery-swap stations, repair shops, drone pads. You don't always have to solve perception in a hostile environment when co-designing the environment is on the table — which also punctures the &ldquo;humanoids are perfectly suited to our world&rdquo; story.</li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>The open question</summary>
+        <div class="body"><ul>
+          <li>The two guests disagree productively: <b>Michael</b> thinks in-the-wild data at massive scale is the unlock and is building infrastructure for it; <b>Nils</b> thinks the data-collection gold rush is a mistake. Both are credible operators with real deployments.</li>
+          <li>Is embodied intelligence a <b>data problem or an architecture problem?</b> That unresolved tension is arguably the open question in robot learning right now.</li>
+        </ul></div>
+      </details>
+
+      <div class="backlink reveal"><a href="#top">↑ Back to all episodes</a></div>
+    </div>
+  </section>
+
+  <!-- EPISODE 01 NOTES -->
+  <section class="ep" id="ep-01">
+    <div class="wrap">
+      <span class="ep-num reveal">Episode 01 · Preview</span>
+      <h2 class="reveal">Why vision is still waiting for its GPT moment</h2>
+      <div class="guest reveal">
+        <span class="g-pic">MS</span>
+        <span>With <a href="https://www.linkedin.com/in/maxime-sebti/" target="_blank" rel="noopener">Max Sebti ↗</a> — CEO, Manako Labs</span>
+      </div>
+      <p class="lede reveal">Manako builds vision agents that run entirely on-device — 19MB models that turn existing camera networks into real-time understanding. Max argues computer vision has no consensus training recipe yet, unpacks why that gap defines the field, and makes the case that the data layer — not the learning paradigm — is the durable place to stand while everything is still unsettled.</p>
+
+      <div class="ideas">
+        <div class="idea reveal">
+          <div class="q">&ldquo;Vision is solved&rdquo; is a category error.</div>
+          <div class="a">Generative image quality and VLM captioning aren't physical understanding. Say vision is solved and you erase robotics from the picture — because robotics runs on vision.</div>
+        </div>
+        <div class="idea reveal">
+          <div class="q">There is no playbook — 10+ live approaches.</div>
+          <div class="a">Imitation learning, RL, sim-to-real, VLAs, diffusion policies, learning from video. No consensus, because nobody has cracked zero-shot competence in a situation the robot has never seen.</div>
+        </div>
+        <div class="idea reveal">
+          <div class="q">Data doesn't just train the model — it dictates the architecture.</div>
+          <div class="a">You can't stream video 24/7 to the cloud; there aren't enough data centers. So models go tiny and on-device, and curation moves into the model itself.</div>
+        </div>
+        <div class="idea reveal">
+          <div class="q">&ldquo;Being intelligent isn't what you know — it's what you do when you don't know.&rdquo;</div>
+          <div class="a">Max's working definition of a world model: intelligence that adapts without being trained for the situation in front of it.</div>
+        </div>
+      </div>
+
+      <div class="notes-h reveal">Full episode notes</div>
+
+      <details class="note reveal" open>
+        <summary>The state of the field</summary>
+        <div class="body"><ul>
+          <li>Vision is still waiting for its <b>&ldquo;GPT moment.&rdquo;</b> Transformers unlocked language; nothing equivalent has landed for vision, so there's no consensus training recipe.</li>
+          <li>The <b>&ldquo;vision is solved&rdquo; claim is a category error</b> — it conflates generative image quality and captioning with physical understanding, and implicitly erases robotics.</li>
+          <li><b>No playbook exists.</b> 10+ live approaches (imitation learning, RL, sim-to-real, offline RL, learning from video, VLAs, model-based RL, self-supervised exploration, diffusion policies) — because nobody has cracked zero-shot competence in an unseen situation.</li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>The two camps on world models</summary>
+        <div class="body"><ul>
+          <li><b>Predictive (LeCun / JEPA):</b> don't rely on seeing — predict embeddings or latent states. Max leans this way.</li>
+          <li><b>Generative:</b> the best way to predict what's next is to generate the future as you move.</li>
+          <li>NVIDIA straddles both — it sells GPUs either way.</li>
+          <li>Working definition of a world model: <b>intelligence that adapts without being trained for the situation.</b></li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>Data is the bottleneck — and it dictates architecture</summary>
+        <div class="body"><ul>
+          <li>Most training techniques bottom out in collecting visual data — hence the capital flooding into training facilities and camera-headset recording rigs.</li>
+          <li>You physically can't stream video 24/7 to the cloud, so models must run <b>on-device: tiny (~19MB, CPU-runnable), low-energy.</b></li>
+          <li>Edge models filter at the source — capturing true positives only. <b>Data curation becomes part of the model,</b> not a post-processing step.</li>
+          <li>Expect a <b>data wall</b> — and labs starting to share datasets as scarcity bites.</li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>A training approach for small teams</summary>
+        <div class="body"><ul>
+          <li><b>Distillation is the on-ramp</b> — the &ldquo;Qwen playbook&rdquo;: start from a large teacher (~72B) and distill down. Cheaper and faster than building from scratch.</li>
+          <li><b>Reasoning matters more than assumed:</b> start from a reasoning model and teach it to see, rather than bolting reasoning onto a vision model.</li>
+          <li>Their VLA is a deliberate &ldquo;Frankenstein&rdquo;: a distilled reasoning model + a traditional VLM + a pure detection model, running ~10 bespoke primitives.</li>
+          <li>Their most advanced VLM was distilled from NVIDIA Cosmos (the reasoning model). Synthetic/sim data is still on the exploration list.</li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>Real-world constraints researchers underrate</summary>
+        <div class="body"><ul>
+          <li><b>Low-res is fine.</b> Benchmarks run at 640–1088px, so 15-year-old cameras still work at the pixel level. Don't let sensor quality gate data collection — start now.</li>
+          <li><b>The hard cases are the point:</b> occlusion, rain, snow, garbage footage. Football was the proving ground — 22 agents in continuous chaos — and structure that survives that generalises to stores and stations.</li>
+          <li><b>Data access is a commercial problem, not a technical one.</b> Enterprises won't hand over sensors until you solve a real problem first. The flywheel: deploy → gain camera access → keep updating weights from real operations.</li>
+          <li>Enterprise self-serve is economically impossible — on-site reasoning + vision needs A100s (H100s for real time) across tens of thousands of sites. That's the structural case for tiny on-device models.</li>
+        </ul></div>
+      </details>
+
+      <details class="note reveal">
+        <summary>The strategic read for researchers</summary>
+        <div class="body"><ul>
+          <li>Max is explicit that he's <b>&ldquo;upstream&rdquo;</b> — deliberately on the sidelines of the methodology race, collecting data and building models that reason over it while waiting to see which camp cracks it.</li>
+          <li>The takeaway: <b>the data layer is the durable position</b> while the learning paradigm is still unsettled.</li>
+        </ul></div>
+      </details>
+
+      <div class="backlink reveal"><a href="#top">↑ Back to all episodes</a></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="brand" href="index.html">
+      <span class="dots"><span></span><span></span><span></span><span></span></span>
+      Embodied HQ
+    </a>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="https://embodiedhq.substack.com/" target="_blank" rel="noopener">Newsletter ↗</a>
+    </div>
+    <div class="cr">© 2026 Embodied HQ</div>
+  </div>
+</footer>
+
+<script>
+const hdr=document.getElementById('hdr');
+addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>40);});
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

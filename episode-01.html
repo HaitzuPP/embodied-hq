@@ -85,6 +85,26 @@
       <div class="notes-h reveal">Visual summary</div>
 
       <div class="viz reveal">
+        <span class="vlabel">Visualization · Two paths</span>
+        <h3>Why the data problem forces the architecture</h3>
+        <div class="scenario c2">
+          <div class="scol bad">
+            <div class="shead"><div class="st">Send it to the cloud</div><div class="ss">the intuitive path</div></div>
+            <div class="srow"><div class="lab">Where inference runs</div><div class="sub">A cloud data center, far from the camera</div></div>
+            <div class="srow"><div class="lab">Data handling</div><div class="sub">Stream every camera, 24/7, a firehose of video</div></div>
+            <div class="scallout r"><div class="ct">Impossible</div><div class="cd">There aren't enough data centers to stream the world's cameras. It doesn't scale.</div></div>
+          </div>
+          <div class="scol good">
+            <div class="shead"><div class="st">Run on the edge</div><div class="ss">what the data forces</div></div>
+            <div class="srow hl g"><div class="big">19MB</div><div class="sub">model, runs on a CPU at the camera</div></div>
+            <div class="srow"><div class="lab">Data handling</div><div class="sub">Curate true positives at the source</div></div>
+            <div class="scallout g"><div class="ct">Tiny, cheap, private</div><div class="cd">Curation moves into the model itself. The data constraint dictates the whole design.</div></div>
+          </div>
+        </div>
+        <div class="vcap">You physically can't stream 24/7 video to the cloud, so <b>the data problem, not a design preference, pushes models onto tiny on-device form factors.</b></div>
+      </div>
+
+      <div class="viz reveal">
         <span class="vlabel">Visualization · The gap</span>
         <h3>Language converged. Vision hasn't.</h3>
         <div class="compare">

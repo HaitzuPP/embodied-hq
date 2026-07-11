@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Embodied HQ — A podcast on robot learning</title>
-<meta name="description" content="Conversations with the people on the front lines of robotics, taking you behind the scenes of the most important investment trend in history. Launching soon.">
+<meta name="description" content="Long-form conversations with the researchers and engineers building generalist robots — the methods, the open problems, and the results that actually hold up. Launching soon.">
 <meta name="theme-color" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Embodied HQ">
 <meta property="og:url" content="https://embodiedhq.io/">
 <meta property="og:title" content="Embodied HQ — A podcast on robot learning">
-<meta property="og:description" content="Front-line conversations taking you behind the scenes of the most important investment trend in history. Launching soon.">
+<meta property="og:description" content="In-depth conversations with the researchers building generalist robots: the methods, the open problems, and what actually works. Launching soon.">
 <meta property="og:image" content="https://embodiedhq.io/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Embodied HQ — A podcast on robot learning">
-<meta name="twitter:description" content="Front-line conversations taking you behind the scenes of the most important investment trend in history. Launching soon.">
+<meta name="twitter:description" content="In-depth conversations with the researchers building generalist robots: the methods, the open problems, and what actually works. Launching soon.">
 <meta name="twitter:image" content="https://embodiedhq.io/og-image.png">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -81,7 +81,21 @@
   .host .who .nm .in{font-size:12px;letter-spacing:0.4px;color:var(--cyan);margin-left:6px}
   .host .who .desc{font-size:14px;color:rgba(255,255,255,0.72);margin-top:2px}
 
-  .moment{background:var(--bg-dark);color:#fff;padding:100px 0}
+  .themes{background:var(--bg-dark);color:#fff;padding:100px 0 0}
+  .themes .head-row{margin-bottom:40px;max-width:660px}
+  .themes h2{font-size:clamp(26px,3.2vw,38px);line-height:1.18;margin:12px 0 14px}
+  .themes .head-row p{font-size:17px;color:rgba(255,255,255,0.72)}
+  .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.14)}
+  @media(max-width:900px){.tgrid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.tgrid{grid-template-columns:1fr}}
+  .tcard{background:#000;padding:26px 22px;transition:var(--ease)}
+  .tcard:hover{background:#0b0b0b}
+  .tcard .tn{font-size:12px;letter-spacing:0.28px;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:12px}
+  .tcard:hover .tn{color:var(--cyan)}
+  .tcard .tt{font-size:16px;font-weight:500;color:#fff;margin-bottom:8px}
+  .tcard .td{font-size:13.5px;line-height:1.5;color:rgba(255,255,255,0.62)}
+
+  .moment{background:var(--bg-dark);color:#fff;padding:80px 0 100px}
   .moment .head-row{margin-bottom:46px;max-width:640px}
   .moment h2{font-size:clamp(26px,3.2vw,38px);line-height:1.18;margin:12px 0 14px}
   .moment .head-row p{font-size:17px;color:rgba(255,255,255,0.72)}
@@ -135,28 +149,71 @@
     <div class="wrap hero-inner">
       <span class="badge"><span class="pulse"></span>Launching soon</span>
       <h1>A podcast about bringing generalist robots into the <span class="rot" id="rot">real</span><span class="cursor">|</span> world.</h1>
-      <p class="lede">Conversations with the researchers and operators on the front lines, taking you behind the scenes of the most important investment trend in history. Explained plainly, no PhD required.</p>
+      <p class="lede">Long-form conversations with the researchers and engineers teaching machines to act in the physical world — the methods, the open problems, and the results that actually hold up. No hype, no dumbing down.</p>
       <div class="hero-cta">
         <a class="btn btn-lg" href="https://embodiedhq.substack.com/subscribe" target="_blank" rel="noopener">Subscribe on Substack →</a>
       </div>
-      <p class="fineprint">Free. New episodes and a weekly note on what actually moved in robotics.</p>
+      <p class="fineprint">Free. New episodes, plus a weekly note on the papers, releases, and results that actually moved robot learning.</p>
       <a class="host" href="https://www.linkedin.com/in/jackpylon/" target="_blank" rel="noopener">
         <div class="pic" id="hostpic">JA</div>
         <div class="who">
           <div class="nm">Jack Ai-Leung <span class="in">in ↗</span></div>
-          <div class="desc">Tech investor</div>
+          <div class="desc">Host · investor in AI &amp; robotics</div>
         </div>
       </a>
     </div>
   </section>
 
-  <!-- THE MONEY -->
+  <!-- THEMES -->
+  <section class="themes" id="themes">
+    <div class="wrap">
+      <div class="head-row reveal">
+        <span class="eyebrow" style="color:rgba(255,255,255,0.55)">What we get into</span>
+        <h2>The questions the show actually chases</h2>
+        <p>Each episode goes deep on one part of how machines learn to act — with the people doing the work.</p>
+      </div>
+      <div class="tgrid">
+        <div class="tcard reveal">
+          <span class="tn">Methods</span>
+          <div class="tt">Foundation models &amp; VLA</div>
+          <div class="td">Generalist policies that turn perception and language into action — and how far they really generalise.</div>
+        </div>
+        <div class="tcard reveal">
+          <span class="tn">Data</span>
+          <div class="tt">The data bottleneck</div>
+          <div class="td">Teleoperation, imitation learning, and the unglamorous question of where robot data actually comes from.</div>
+        </div>
+        <div class="tcard reveal">
+          <span class="tn">Transfer</span>
+          <div class="tt">Sim-to-real</div>
+          <div class="td">What survives the jump from simulation to hardware, and what falls apart on contact.</div>
+        </div>
+        <div class="tcard reveal">
+          <span class="tn">Control</span>
+          <div class="tt">Dexterous manipulation</div>
+          <div class="td">Hands, contact, and the last few centimetres that are still unsolved.</div>
+        </div>
+        <div class="tcard reveal">
+          <span class="tn">Embodiment</span>
+          <div class="tt">Humanoids &amp; form factor</div>
+          <div class="td">Why the field keeps returning to the human shape, and when a different body wins.</div>
+        </div>
+        <div class="tcard reveal">
+          <span class="tn">Evaluation</span>
+          <div class="tt">Benchmarks vs. reality</div>
+          <div class="td">The messy gap between a benchmark number and &ldquo;it works&rdquo; in the physical world.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY NOW: research inflection, capital as supporting proof -->
   <section class="moment" id="moment">
     <div class="wrap">
       <div class="head-row reveal">
         <span class="eyebrow" style="color:rgba(255,255,255,0.55)">Why now</span>
-        <h2>The money has already decided this matters</h2>
-        <p>Some of the largest rounds in tech are going into robots that learn in the real world.</p>
+        <h2>Robot learning is crossing from the lab into the real world</h2>
+        <p>Foundation models, cheaper data, and better simulation have moved the field from papers to working prototypes. The capital is following the science.</p>
       </div>
       <div class="heads">
         <a class="head reveal" href="https://www.therobotreport.com/physical-intelligence-raises-600m-advance-robot-foundation-models/" target="_blank" rel="noopener">

@@ -55,7 +55,6 @@
         <span class="g-pic">MC</span>
         <span>With <a href="https://www.linkedin.com/in/nilspihl/" target="_blank" rel="noopener">Nils Pihl ↗</a>, Founder and CEO of Auki Labs, and <a href="https://www.linkedin.com/in/michael-chung-yeung-cho/" target="_blank" rel="noopener">Michael Cho ↗</a>, Co-founder of BitRobot (FrodoBots Lab)</span>
       </div>
-      <div class="guest-logos"><img src="logos/auki.svg" alt="Auki Labs"><img src="logos/bitrobot.svg" alt="BitRobot"></div>
       <p class="lede">BitRobot's Michael Cho is building global infrastructure to collect in-the-wild robot data at scale. Auki's Nils Pihl thinks the data-collection gold rush is a mistake. Two credible operators with real deployments disagree on the central question, whether embodied intelligence is bottlenecked by data or by architecture, and the disagreement is the signal.</p>
       <p class="epnote">These are the written field notes from the conversation.</p>
     </div>
@@ -64,13 +63,13 @@
   <section class="epbody">
     <div class="wrap">
       <article class="memo">
-      <p class="dek">Two operators who have both shipped real systems took opposite sides of the field's central question. The disagreement, not either answer, is the useful part.</p>
+      <p class="dek">Two operators who have shipped real systems took opposite sides of the field's central question. The disagreement, not either answer, is the useful part.</p>
 
       <h2>Evaluation is the real bottleneck</h2>
-      <p>Digital models iterate fast because the feedback loop is instant: run the benchmark, read the score, try again. Physical AI breaks that loop, because <mark>you cannot speed up reality</mark>. A million zero-disengagement miles of full self-driving would still not settle L4 versus L5 autonomy, since the next mile might be the one that crashes. Edge cases get rarer exactly as you approach the tail, so confidence gets harder to earn the closer you get. The rate limiter for the field is evaluation infrastructure, not model capacity.</p>
+      <p>Digital models iterate fast: run the benchmark, read the score, try again. Physical AI breaks that loop, because <mark>you cannot speed up reality</mark>. A million zero-disengagement miles of full self-driving still would not settle L4 versus L5 autonomy: the next mile might crash. Edge cases get rarer as you approach the tail, so confidence is harder to earn the closer you get. The field's rate limiter is evaluation infrastructure, not model capacity.</p>
 
       <h2>The brutal math of long-horizon reliability</h2>
-      <p>Here is the number that reframes everything. Frying an egg decomposes into roughly a hundred sequential subtasks, and even at a generous ninety-nine percent on each one, end-to-end success is <mark>0.99 to the hundredth power, about thirty-seven percent</mark>. A robot that looks strong on any single step still fails two attempts in three across a real task. Getting to something usable means pushing each subtask toward four, five, even six nines, plus real recovery when a step fails.</p>
+      <p>Frying an egg decomposes into roughly a hundred sequential subtasks. Even at a generous ninety-nine percent on each, end-to-end success is <mark>0.99 to the hundredth power, about thirty-seven percent</mark>. A robot that looks strong on any single step still fails two attempts in three across a real task. Usable means pushing each subtask toward four, five, even six nines, plus real recovery when a step fails.</p>
 
       <div class="viz reveal">
         <div class="scenario c3">
@@ -124,11 +123,11 @@
           <span><i style="background:#E0A32E"></i>99.9% (three nines)</span>
           <span><i style="background:#D64545"></i>99% (two nines)</span>
         </div>
-        <div class="vcap">Frying an egg is roughly 100 sequential subtasks. At a strong-looking <b>99% per subtask, end-to-end success is only 37%.</b> Push each subtask to four nines and 100 steps still clear 99%; longer or safety-critical tasks demand more, plus recovery when a step fails. That is why the frontier is long-horizon reliability, not marginal gains in per-task success.</div>
+        <div class="vcap">Frying an egg is roughly 100 sequential subtasks. At a strong-looking <b>99% per subtask, end-to-end success is only 37%.</b> Push each to four nines and 100 steps still clear 99%; longer or safety-critical tasks demand more, plus recovery when a step fails. The frontier is long-horizon reliability, not marginal gains in per-task success.</div>
       </div>
 
       <h2>Data problem, or architecture problem?</h2>
-      <p>This is where the two guests split. Michael is building global infrastructure to collect in-the-wild robot data at scale, and bets that data is the unlock. Nils calls the data-collection boom <mark>&ldquo;one of the dumbest moments of VC groupthink ever&rdquo;</mark>, and argues the bottleneck is architecture. Both are credible, both have real deployments, and the episode does not resolve it.</p>
+      <p>Here the guests split. Michael is building global infrastructure to collect in-the-wild robot data at scale, and bets data is the unlock. Nils calls the data-collection boom <mark>&ldquo;one of the dumbest moments of VC groupthink ever&rdquo;</mark>, and argues the bottleneck is architecture. Both are credible, both have real deployments, and the episode does not resolve it.</p>
 
       <div class="viz reveal">
         <div class="spectrum">
@@ -148,7 +147,7 @@
       </div>
 
       <h2>A radically more efficient path may exist</h2>
-      <p>A mosquito navigates the physical world on roughly a tenth of a watt, with almost no pretraining and extraordinary data efficiency. <mark>Biology is proof that a fundamentally more efficient approach to physical intelligence exists</mark>, a real argument that scaling, the strategy that worked for language, is not the answer here. Michael puts robotics at its GPT-2 moment: new versus a year ago, but a long way from the wake-up.</p>
+      <p>A mosquito navigates the physical world on roughly a tenth of a watt, with almost no pretraining and extraordinary data efficiency. <mark>Biology is proof that a fundamentally more efficient approach to physical intelligence exists</mark>, a real argument that scaling, the strategy that worked for language, is not the answer here. Michael puts robotics at its GPT-2 moment: new versus a year ago, but far from the wake-up.</p>
 
       <div class="viz reveal">
         <div class="statstrip">
@@ -160,7 +159,7 @@
       </div>
 
       <h2>How the market actually works</h2>
-      <p>Underneath the debate, BitRobot runs as a two-sided market: a global fleet of cheap teleoperated robots supplies the data, labs consume it, and real-world evaluation on distributed robots is the benchmark. The moat is not the model. <mark>Data access is a commercial and relationship problem, not a technical one</mark>, a theme that runs through all three episodes.</p>
+      <p>BitRobot runs as a two-sided market: a global fleet of cheap teleoperated robots supplies the data, labs consume it, and real-world evaluation on distributed robots is the benchmark. The moat is not the model. <mark>Data access is a commercial and relationship problem, not a technical one</mark>, a theme across all three episodes.</p>
 
       <div class="viz reveal">
         <div class="mermaid mermaid-wide">

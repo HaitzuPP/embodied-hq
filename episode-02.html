@@ -153,56 +153,56 @@
 
       <div class="notes-h reveal">Full episode notes</div>
 
-      <details class="note reveal" open>
-        <summary>The two strongest technical insights</summary>
+      <div class="note reveal">
+        <div class="nhead">The two strongest technical insights</div>
         <div class="body"><ul>
           <li><b>Evaluation is the rate limiter, and it can't be compressed.</b> Digital models iterate fast because benchmark results are near-instant. Physical AI is the opposite. Even a million zero-disengagement FSD miles wouldn't tell you L4 vs L5, because the next mile might crash. Edge cases get rarer as you approach the tail, so confidence gets harder the closer you are. The bottleneck is eval infrastructure, not model capacity.</li>
           <li><b>The subtask compounding math is a usability problem, not a safety one.</b> State-of-the-art (SOTA) short-horizon success sits around 70 to 80%. Frying an egg is roughly 100 sequential subtasks. Even at 99% each, 0.99¹⁰⁰ ≈ 37% end-to-end. You need roughly four to six nines per subtask depending on the horizon, plus strong recovery. Long-horizon reliability and error recovery deserve far more attention than marginal per-task gains.</li>
         </ul></div>
-      </details>
+      </div>
 
-      <details class="note reveal">
-        <summary>Where the field's assumptions may be wrong</summary>
+      <div class="note reveal">
+        <div class="nhead">Where the field's assumptions may be wrong</div>
         <div class="body"><ul>
           <li><b>&ldquo;Mosquito intelligence.&rdquo;</b> Roughly 0.1 W, extraordinarily data-efficient, never pretrained on millions of hours of flight. Biology proves a fundamentally different, radically more efficient approach to physical intelligence exists, a real argument that scaling is not the answer.</li>
           <li><b>Language pretraining doesn't transfer to perception and movement.</b> The entire internet text corpus isn't a meaningful leap toward teaching a robot to see and move. VLAs translate intent (&ldquo;unscrew the bottle cap&rdquo;) but that doesn't mean the model knows what the hands must do. That data doesn't exist yet.</li>
           <li><b>A contrarian shot at the data-collection boom.</b> Nils is openly bearish on VC-funded robot data collection, predicting we'll look back on it as &ldquo;one of the dumbest moments of VC groupthink ever.&rdquo; If the mosquito point holds, the bottleneck is architecture, not more teleop hours.</li>
           <li><b>Embodied models are compressions of their datasets.</b> Train on a handful of Airbnb kitchens and you overfit to them. Every kitchen is similar and every kitchen is unique. That is the honest case for in-the-wild data, in direct tension with the point above. The episode doesn't resolve it, which is itself the signal.</li>
         </ul></div>
-      </details>
+      </div>
 
-      <details class="note reveal">
-        <summary>Epistemic hygiene for reading the field</summary>
+      <div class="note reveal">
+        <div class="nhead">Epistemic hygiene for reading the field</div>
         <div class="body"><ul>
           <li><b>Treat a demo as an upper bound, not a capability.</b> Assume the one-minute video is the ceiling and may have taken hours of takes. Uncut, hours-long runs are the only real proof. Many impressive humanoid demos are still substantially teleoperated.</li>
           <li><b>Where we actually are:</b> Michael puts robotics at roughly the GPT-2 moment. Something qualitatively new versus a year ago, but a large gap before the GPT-3-style wake-up. His timeline is digital AGI within a few years, robotics still unsolved. Physical AI is where the remaining hard research lives.</li>
         </ul></div>
-      </details>
+      </div>
 
-      <details class="note reveal">
-        <summary>Practical resources researchers can use</summary>
+      <div class="note reveal">
+        <div class="nhead">Practical resources researchers can use</div>
         <div class="body"><ul>
           <li><b>BitRobot's explicit model</b> is to do the work &ldquo;researchers wanted done but shouldn't have spent time doing.&rdquo; That means data collection, compute aggregation, and real-world evaluation of models on physical robots distributed globally.</li>
           <li><b>Concrete proof:</b> a UC Berkeley lab built a SOTA urban-navigation model on the FrodoBots dataset and evaluated it on robots in Africa and South America, geographic diversity no single lab can obtain. Human-versus-AI competitions drew people from Google DeepMind, Berkeley, NUS, and UT Austin. They are releasing what they claim is the largest urban-navigation dataset of its kind on Hugging Face.</li>
           <li><b>Data IP default:</b> open-source for non-commercial use, with commercial licensing split between the subnet owner and the foundation. Worth knowing if you're evaluating data provenance.</li>
           <li><b>The cheap-hardware insight:</b> a $10,000 robot is a bad data-collection device. They built a roughly $500 teleoperated &ldquo;dumb&rdquo; robot and made data collection a byproduct of a game people wanted to play.</li>
         </ul></div>
-      </details>
+      </div>
 
-      <details class="note reveal">
-        <summary>Two constraints researchers systematically underweight</summary>
+      <div class="note reveal">
+        <div class="nhead">Two constraints researchers systematically underweight</div>
         <div class="body"><ul>
           <li><b>Privacy will shape what data is legally and socially available.</b> Both 1X and Tesla have said openly they intend to build the largest training set in the world by recording inside people's homes. Expect friction. That is an argument for on-device, federated, and self-hosted architectures over centralized hoarding. Auki deliberately collects no data.</li>
           <li><b>The environment is a design variable, not a fixed constraint.</b> Cities were reshaped for cars. They will be reshaped for robots. If SLAM and visual positioning fail on repeating patterns, buildings will adopt non-repeating &ldquo;visual entropy&rdquo; surfaces, and minimalism and repeating tiles disappear. Expect battery-swap stations, repair shops, and drone pads too. You don't always have to solve perception in a hostile environment when co-designing the environment is on the table, which also punctures the &ldquo;humanoids are perfectly suited to our world&rdquo; story.</li>
         </ul></div>
-      </details>
+      </div>
 
-      <details class="note reveal">
-        <summary>The open question</summary>
+      <div class="note reveal">
+        <div class="nhead">The open question</div>
         <div class="body"><ul>
           <li>Is embodied intelligence a <b>data problem or an architecture problem?</b> Both guests are credible operators with real deployments, and they land on opposite answers. That unresolved tension is arguably the open question in robot learning right now. See the debate visualization above.</li>
         </ul></div>
-      </details>
+      </div>
 
       <div class="backlink reveal"><a href="research.html">← All episodes</a></div>
     </div>

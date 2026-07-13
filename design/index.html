@@ -218,7 +218,8 @@
     <h3 style="font-size:16px;margin-bottom:14px">Structure</h3>
     <div class="grid g4">
       <div class="sw"><div class="chip" style="background:#EFEFEE"></div><div class="meta"><div class="nm">Panel</div><div class="hex">#EFEFEE</div><div class="use">Occasional light section fill to break up white.</div></div></div>
-      <div class="sw"><div class="chip" style="background:rgba(84,88,96,0.30)"></div><div class="meta"><div class="nm">Hairline</div><div class="hex">rgba(84,88,96,0.30)</div><div class="use">1px rules. The only divider we use. Never a border-box.</div></div></div>
+      <div class="sw"><div class="chip" style="background:rgba(84,88,96,0.30)"></div><div class="meta"><div class="nm">Hairline</div><div class="hex">rgba(84,88,96,0.30)</div><div class="use">1px rules on light surfaces. The only divider we use. Never a border-box.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#000"><div style="height:100%;background:rgba(255,255,255,0.14)"></div></div><div class="meta"><div class="nm">Hairline (dark)</div><div class="hex">rgba(255,255,255,0.14)</div><div class="use">1px rules and grid gaps on black surfaces.</div></div></div>
     </div>
 
     <p style="margin-top:28px;color:var(--muted);font-size:15px;max-width:720px"><strong style="font-weight:500;color:var(--text)">Hard rule:</strong> no gradients anywhere. Depth comes from the point-cloud imagery on black, never from a gradient fill.</p>
@@ -495,7 +496,8 @@
   <span class="k">--bg-dark</span>:   #000000;
   <span class="k">--text</span>:      #101921;
   <span class="k">--muted</span>:     #545860;
-  <span class="k">--hairline</span>:  rgba(84,88,96,0.30);
+  <span class="k">--hairline</span>:  rgba(84,88,96,0.30);   <span class="c">/* rules on light */</span>
+  <span class="k">--line-dk</span>:   rgba(255,255,255,0.14); <span class="c">/* rules + grid gaps on black */</span>
   <span class="k">--panel</span>:     #EFEFEE;
 
   <span class="c">/* signal */</span>

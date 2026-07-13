@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Embodied HQ — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;--bg-dark:#000000;--text:#101921;--muted:#545860;
+    --hairline:rgba(84,88,96,0.30);--accent:#3C3EBC;--highlight:#F4D659;
+    --blue:#428FEC;--cyan:#00BCE5;--panel:#EFEFEE;
+    --container:1200px;--radius-pill:20px;
+    --font:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;--ease:0.6s ease-in-out;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--font);font-weight:400;color:var(--text);background:var(--bg);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 32px}
+  a{color:var(--accent);text-decoration:none}
+  h1,h2,h3,h4{font-weight:500;letter-spacing:normal}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;background:var(--panel);padding:2px 6px;border-radius:4px;color:var(--text)}
+  .eyebrow{font-size:14px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:var(--muted)}
+
+  /* doc chrome */
+  header{border-bottom:1px solid var(--hairline);padding:26px 0;position:sticky;top:0;background:rgba(255,255,255,0.94);backdrop-filter:blur(8px);z-index:10}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:500;font-size:18px;color:var(--text)}
+  .brand .dots{display:inline-block;width:22px;height:22px;position:relative}
+  .brand .dots span{position:absolute;width:5px;height:5px;border-radius:50%}
+  .brand .dots span:nth-child(1){top:0;left:0;background:var(--highlight)}
+  .brand .dots span:nth-child(2){top:0;right:0;background:var(--cyan)}
+  .brand .dots span:nth-child(3){bottom:0;left:0;background:var(--blue)}
+  .brand .dots span:nth-child(4){bottom:0;right:0;background:var(--accent)}
+  .toc{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+  .toc a{color:var(--muted)}
+  .toc a:hover{color:var(--text)}
+
+  section{padding:72px 0;border-bottom:1px solid var(--hairline)}
+  .sec-head{max-width:720px;margin-bottom:36px}
+  .sec-head h2{font-size:32px;line-height:1.2;margin:10px 0 12px}
+  .sec-head p{color:var(--muted)}
+  .lead{font-size:19px;color:var(--muted);max-width:720px}
+
+  .grid{display:grid;gap:20px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
+  @media(max-width:560px){.g3,.g4{grid-template-columns:1fr}}
+
+  /* swatches */
+  .sw{border:1px solid var(--hairline)}
+  .sw .chip{height:96px}
+  .sw .meta{padding:12px 14px}
+  .sw .nm{font-weight:500;font-size:14px}
+  .sw .hex{font-size:13px;color:var(--muted);font-family:ui-monospace,Menlo,monospace;margin-top:2px}
+  .sw .use{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+
+  /* type specimen */
+  .spec{border-top:1px solid var(--hairline);padding:20px 0;display:grid;grid-template-columns:190px 1fr;gap:24px;align-items:baseline}
+  @media(max-width:700px){.spec{grid-template-columns:1fr}}
+  .spec .lbl{font-size:13px;color:var(--muted);font-family:ui-monospace,Menlo,monospace;line-height:1.5}
+
+  /* principles */
+  .rule{border-top:1px solid var(--hairline);padding:22px 0}
+  .rule h3{font-size:18px;margin-bottom:6px}
+  .rule p{color:var(--muted);font-size:15px}
+
+  /* component demos */
+  .demo{border:1px solid var(--hairline);padding:32px;background:var(--bg)}
+  .demo.dark{background:#000;border-color:rgba(255,255,255,0.16);color:#fff}
+  .demo .cap{font-size:12.5px;color:var(--muted);margin-top:16px;font-family:ui-monospace,Menlo,monospace}
+  .demo.dark .cap{color:rgba(255,255,255,0.5)}
+
+  .btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:var(--radius-pill);padding:11px 30px;font-family:var(--font);font-size:16px;font-weight:400;cursor:pointer;transition:var(--ease)}
+  .btn:hover{background:#2c2e9c;transform:translateY(-1px)}
+  .btn-lg{padding:14px 34px;font-size:17px}
+
+  .badge{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:500;letter-spacing:0.28px;text-transform:uppercase;color:var(--highlight);border:1px solid rgba(244,214,89,0.4);border-radius:var(--radius-pill);padding:6px 16px}
+  .badge .pulse{width:7px;height:7px;border-radius:50%;background:var(--highlight);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(244,214,89,0.5)}70%{box-shadow:0 0 0 8px rgba(244,214,89,0)}100%{box-shadow:0 0 0 0 rgba(244,214,89,0)}}
+
+  /* funding card demo */
+  .heads{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.14)}
+  @media(max-width:700px){.heads{grid-template-columns:1fr}}
+  .head{position:relative;overflow:hidden;background:#000;padding:26px 22px}
+  .head .logo{width:40px;height:40px;border-radius:9px;background:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:11px;font-weight:500;color:#101921}
+  .head .amt{font-size:26px;font-weight:500;color:var(--highlight)}
+  .head .co{font-size:14px;font-weight:500;margin:3px 0 8px;color:#fff}
+  .head .desc{font-size:12.5px;line-height:1.4;color:rgba(255,255,255,0.6);margin-bottom:14px}
+  .head .src{font-size:12px;letter-spacing:0.28px;text-transform:uppercase;color:var(--blue)}
+  .head .glyph{position:absolute;right:-14px;bottom:-14px;width:92px;height:92px;color:var(--blue);opacity:0.12}
+
+  /* host block */
+  .host{display:flex;align-items:center;gap:15px;padding-top:26px;border-top:1px solid rgba(255,255,255,0.16);max-width:420px}
+  .host .pic{width:56px;height:56px;border-radius:50%;flex:0 0 56px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:500;color:#fff}
+  .host .nm{font-size:16px;font-weight:500;color:#fff}
+  .host .role{font-size:14px;color:rgba(255,255,255,0.72);margin-top:2px}
+
+  /* motif canvas */
+  .motif{position:relative;height:340px;background:#000;border:1px solid var(--hairline)}
+  #cv{position:absolute;inset:0;width:100%;height:100%}
+
+  /* do / dont */
+  .dd{border:1px solid var(--hairline);padding:22px}
+  .dd h4{font-size:15px;margin-bottom:12px}
+  .dd.yes h4{color:#1f7a44}
+  .dd.no h4{color:#b3261e}
+  .dd ul{list-style:none}
+  .dd li{font-size:14.5px;color:var(--muted);padding:7px 0;border-top:1px solid var(--hairline);line-height:1.5}
+  .dd li:first-child{border-top:0}
+
+  pre{background:#000;color:#e6e8ea;padding:22px;overflow:auto;font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.65}
+  pre .c{color:#545860}
+  pre .k{color:var(--cyan)}
+
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  th,td{text-align:left;padding:12px 10px;border-top:1px solid var(--hairline)}
+  th{font-weight:500;font-size:13px;text-transform:uppercase;letter-spacing:0.28px;color:var(--muted)}
+  td.mono{font-family:ui-monospace,Menlo,monospace;font-size:13px;color:var(--muted)}
+  footer{padding:44px 0;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="dots"><span></span><span></span><span></span><span></span></span>
+      Embodied HQ
+    </div>
+    <nav class="toc">
+      <a href="#principles">Principles</a>
+      <a href="#colour">Colour</a>
+      <a href="#type">Type</a>
+      <a href="#layout">Layout</a>
+      <a href="#components">Components</a>
+      <a href="#motif">Motif</a>
+      <a href="#motion">Motion</a>
+      <a href="#logo">Logo</a>
+      <a href="#voice">Voice</a>
+      <a href="#tokens">Tokens</a>
+    </nav>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Design system v1</span>
+    <h1 style="font-size:44px;line-height:1.15;margin:14px 0 18px;max-width:840px">A restrained, technical system. Black canvas, machine vision, and almost no ornament.</h1>
+    <p class="lead">Embodied HQ is a podcast about bringing generalist robots into the real world. The design system is built to feel like the instrument panel of a perception system: precise, calm, and confident, with exactly one moment of colour per view. This document is the source of truth. Everything here is live on <a href="https://embodiedhq.io">embodiedhq.io</a>.</p>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section id="principles">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">01</span>
+      <h2>Principles</h2>
+      <p>If a decision isn't covered below, these six rules decide it.</p>
+    </div>
+
+    <div class="rule">
+      <h3>Restraint is the brand</h3>
+      <p>Two font weights, one accent colour, no bold, no shadows, no gradients. Confidence is communicated by how little we use, not how much.</p>
+    </div>
+    <div class="rule">
+      <h3>Whitespace does the structuring</h3>
+      <p>Content blocks are flat and borderless. Hairline rules and generous vertical space create hierarchy. We do not use cards, rounded containers, or drop shadows for content.</p>
+    </div>
+    <div class="rule">
+      <h3>One highlight per view</h3>
+      <p>Yellow is reserved for a single focal moment (the rotating hero word, a funding figure, a launch badge). If yellow appears twice on a screen, one of them is wrong.</p>
+    </div>
+    <div class="rule">
+      <h3>Black is where the data lives</h3>
+      <p>Light surfaces carry reading. Black, full-bleed surfaces carry the machine-vision imagery and the proof (funding, data, signal). The contrast between the two is the core rhythm of the brand.</p>
+    </div>
+    <div class="rule">
+      <h3>Motion is slow and deliberate</h3>
+      <p>Every transition is 0.6s ease-in-out. Nothing snaps. The system should feel like a sensor sweeping, not an app responding.</p>
+    </div>
+    <div class="rule">
+      <h3>Left-aligned, always</h3>
+      <p>Headings, body, and eyebrows all align left. Centred text is reserved for standalone graphics and covers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COLOUR -->
+<section id="colour">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">02</span>
+      <h2>Colour</h2>
+      <p>A near-monochrome base with four signal colours borrowed from LiDAR point-cloud imagery. The signal colours are for data and imagery, never for backgrounds or body text.</p>
+    </div>
+
+    <h3 style="font-size:16px;margin-bottom:14px">Base</h3>
+    <div class="grid g4" style="margin-bottom:40px">
+      <div class="sw"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid var(--hairline)"></div><div class="meta"><div class="nm">White</div><div class="hex">#FFFFFF</div><div class="use">Primary page background. Reading surface.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#000000"></div><div class="meta"><div class="nm">Black</div><div class="hex">#000000</div><div class="use">Hero, data panels, imagery. Where the machine-vision motif lives.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#101921"></div><div class="meta"><div class="nm">Text</div><div class="hex">#101921</div><div class="use">All body and heading text on light. Near-black, slightly blue.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#545860"></div><div class="meta"><div class="nm">Muted</div><div class="hex">#545860</div><div class="use">Secondary copy, eyebrows, captions.</div></div></div>
+    </div>
+
+    <h3 style="font-size:16px;margin-bottom:14px">Signal</h3>
+    <div class="grid g4" style="margin-bottom:40px">
+      <div class="sw"><div class="chip" style="background:#3C3EBC"></div><div class="meta"><div class="nm">Indigo (Accent)</div><div class="hex">#3C3EBC</div><div class="use">The only saturated UI chrome. Buttons and links. Nothing else.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#F4D659"></div><div class="meta"><div class="nm">Yellow (Highlight)</div><div class="hex">#F4D659</div><div class="use">One focal moment per view. Rotating word, key figures, launch badge.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#00BCE5"></div><div class="meta"><div class="nm">Cyan</div><div class="hex">#00BCE5</div><div class="use">Machine-vision imagery, scan lines, tracking brackets, hover states.</div></div></div>
+      <div class="sw"><div class="chip" style="background:#428FEC"></div><div class="meta"><div class="nm">Blue</div><div class="hex">#428FEC</div><div class="use">Imagery, connective lines, source links, icon strokes.</div></div></div>
+    </div>
+
+    <h3 style="font-size:16px;margin-bottom:14px">Structure</h3>
+    <div class="grid g4">
+      <div class="sw"><div class="chip" style="background:#EFEFEE"></div><div class="meta"><div class="nm">Panel</div><div class="hex">#EFEFEE</div><div class="use">Occasional light section fill to break up white.</div></div></div>
+      <div class="sw"><div class="chip" style="background:rgba(84,88,96,0.30)"></div><div class="meta"><div class="nm">Hairline</div><div class="hex">rgba(84,88,96,0.30)</div><div class="use">1px rules. The only divider we use. Never a border-box.</div></div></div>
+    </div>
+
+    <p style="margin-top:28px;color:var(--muted);font-size:15px;max-width:720px"><strong style="font-weight:500;color:var(--text)">Hard rule:</strong> no gradients anywhere. Depth comes from the point-cloud imagery on black, never from a gradient fill.</p>
+  </div>
+</section>
+
+<!-- TYPE -->
+<section id="type">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">03</span>
+      <h2>Typography</h2>
+      <p><strong style="font-weight:500;color:var(--text)">Inter, weights 400 and 500 only.</strong> There is no bold in this system. Do not load 600, 700, or above. If something needs emphasis, use size, colour, or space, not weight.</p>
+    </div>
+
+    <div class="spec"><div class="lbl">Hero H1<br>clamp(38px, 6vw, 62px)<br>500 / 1.18</div><div style="font-size:clamp(32px,5vw,52px);font-weight:500;line-height:1.18">Bringing generalist robots into the real world.</div></div>
+    <div class="spec"><div class="lbl">H2 Section<br>clamp(26px, 3.2vw, 38px)<br>500 / 1.18</div><div style="font-size:32px;font-weight:500;line-height:1.18">The money has already decided this matters</div></div>
+    <div class="spec"><div class="lbl">H3<br>20px / 500 / 1.25</div><div style="font-size:20px;font-weight:500">Learning in context</div></div>
+    <div class="spec"><div class="lbl">Lede<br>19px / 400 / 1.5<br>colour: muted or 82% white</div><div style="font-size:19px;line-height:1.5;color:var(--muted);max-width:600px">Conversations with the researchers and operators on the front lines, taking you behind the scenes of the most important investment trend in history.</div></div>
+    <div class="spec"><div class="lbl">Body<br>16px / 400 / 1.41</div><div style="max-width:600px">Every conversation comes back to the same question: what will it actually take to build robots that are useful in the real world?</div></div>
+    <div class="spec"><div class="lbl">Eyebrow<br>14px / 500 / uppercase<br>letter-spacing 0.28px</div><div><span class="eyebrow">Why now</span></div></div>
+    <div class="spec"><div class="lbl">Caption / fineprint<br>13px / 400</div><div style="font-size:13px;color:var(--muted)">Free. New episodes and a weekly note on what actually moved in robotics.</div></div>
+    <div class="spec"><div class="lbl">Data label<br>12px / 500 / uppercase<br>letter-spacing 0.28px</div><div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.28px;color:var(--blue)">The Robot Report ↗</div></div>
+
+    <p style="margin-top:28px;color:var(--muted);font-size:15px;max-width:720px">Uppercase and letter-spacing appear in exactly two places: <strong style="font-weight:500;color:var(--text)">eyebrows</strong> and <strong style="font-weight:500;color:var(--text)">data labels</strong>. Headings are sentence case with no tracking.</p>
+  </div>
+</section>
+
+<!-- LAYOUT -->
+<section id="layout">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">04</span>
+      <h2>Layout &amp; spacing</h2>
+    </div>
+    <table>
+      <tr><th>Token</th><th>Value</th><th>Use</th></tr>
+      <tr><td>Container</td><td class="mono">1200px max, 32px side padding</td><td>All content. Centred, never full-bleed except black imagery panels.</td></tr>
+      <tr><td>Section padding</td><td class="mono">100–110px vertical</td><td>Between major sections. Generous, never cramped.</td></tr>
+      <tr><td>Text column</td><td class="mono">600–720px max</td><td>Paragraphs never run the full container width.</td></tr>
+      <tr><td>Grid gap</td><td class="mono">1px (data grids) / 20–48px (content)</td><td>Data grids use 1px hairline gaps to form a single table-like block.</td></tr>
+      <tr><td>Radius</td><td class="mono">20px (pill) / 9–10px (logo chips) / 0 elsewhere</td><td>Content blocks have no radius. Only pills and logo chips are rounded.</td></tr>
+      <tr><td>Border</td><td class="mono">1px hairline only</td><td>No 2px borders, no boxes around content.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- COMPONENTS -->
+<section id="components">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">05</span>
+      <h2>Components</h2>
+      <p>Everything shipped today. Build new components from these, don't invent parallel patterns.</p>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:20px">
+      <div class="demo">
+        <button class="btn">Subscribe</button>
+        &nbsp;
+        <button class="btn btn-lg">Subscribe on Substack →</button>
+        <div class="cap">Button · #3C3EBC · pill 20px · 11px 30px (lg: 14px 34px) · weight 400 · no uppercase · hover: darken + 1px lift · 0.6s ease-in-out</div>
+      </div>
+      <div class="demo dark">
+        <span class="badge"><span class="pulse"></span>Launching soon</span>
+        <div class="cap">Status badge · yellow 40% border · pulsing dot · uppercase 13px · pill</div>
+      </div>
+    </div>
+
+    <div class="demo dark" style="margin-bottom:20px">
+      <div class="heads">
+        <div class="head">
+          <div class="logo">LOGO</div>
+          <div class="amt">$600M</div>
+          <div class="co">Physical Intelligence</div>
+          <div class="desc">Foundation models to control any robot</div>
+          <div class="src">The Robot Report ↗</div>
+          <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="32" cy="13" r="7"/><path d="M32 20v21M18 28h28M32 41l-9 15M32 41l9 15M20 25l-4 12M44 25l4 12"/></svg>
+        </div>
+        <div class="head">
+          <div class="logo">LOGO</div>
+          <div class="amt">$520M</div>
+          <div class="co">Apptronik</div>
+          <div class="desc">Apollo humanoid for industrial work</div>
+          <div class="src">CNBC ↗</div>
+          <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="32" cy="13" r="7"/><path d="M32 20v21M18 28h28M32 41l-9 15M32 41l9 15M20 25l-4 12M44 25l4 12"/></svg>
+        </div>
+        <div class="head">
+          <div class="logo">LOGO</div>
+          <div class="amt">$1.4B</div>
+          <div class="co">Neura Robotics</div>
+          <div class="desc">Cognitive humanoids, backed by Nvidia</div>
+          <div class="src">CNBC ↗</div>
+          <svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="32" cy="13" r="7"/><path d="M32 20v21M18 28h28M32 41l-9 15M32 41l9 15M20 25l-4 12M44 25l4 12"/></svg>
+        </div>
+      </div>
+      <div class="cap">Data grid · black cells, 1px hairline gaps forming one block · white logo chip (40px, r9) · figure in yellow 26px · descriptor 12.5px at 60% white · source label uppercase blue → cyan on hover · robot glyph watermark at 12% opacity, 20% on hover</div>
+    </div>
+
+    <div class="grid g2">
+      <div class="demo dark">
+        <div class="host">
+          <div class="pic">JA</div>
+          <div>
+            <div class="nm">Jack Ai-Leung</div>
+            <div class="role">Tech investor</div>
+          </div>
+        </div>
+        <div class="cap">Host block · 56px circular avatar · hairline rule above · name 16/500 · role 14px at 72% white · whole block is a link</div>
+      </div>
+      <div class="demo">
+        <span class="eyebrow">Why now</span>
+        <h3 style="font-size:26px;margin:12px 0 12px">Section heading goes here</h3>
+        <div style="height:1px;background:var(--hairline);margin-bottom:14px"></div>
+        <p style="color:var(--muted);font-size:15px">Eyebrow, heading, hairline, body. This is the standard content block. No card, no border, no shadow.</p>
+        <div class="cap">Content block · the default structure for any section</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOTIF -->
+<section id="motif">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">06</span>
+      <h2>The signature motif: machine vision</h2>
+      <p>This is the most important asset in the brand and the thing that makes us recognisable. It is a live perception system rendered as art: a black field, animated 3D wireframe detection boxes drifting and rotating in perspective, corner-bracket trackers, confidence labels, and a scan line sweeping the frame and locking onto objects as it passes.</p>
+    </div>
+
+    <div class="motif"><canvas id="cv"></canvas></div>
+
+    <div class="grid g2" style="margin-top:24px">
+      <div>
+        <h3 style="font-size:16px;margin-bottom:10px">Rules for using it</h3>
+        <p style="color:var(--muted);font-size:15px">Always on pure black. Always in the four signal colours. Objects are always labelled with a plausible class and a confidence score (<code>ROBOT ARM · 0.98</code>). Never place it behind long-form reading copy without a gradient veil to protect legibility. It should feel calm, not frantic: slow drift, slow rotation, one scan pass every few seconds.</p>
+      </div>
+      <div>
+        <h3 style="font-size:16px;margin-bottom:10px">Where it appears</h3>
+        <p style="color:var(--muted);font-size:15px">The site hero, the social share image, the Substack cover, episode thumbnails, and any key art. It is the visual shorthand for "a machine perceiving the world," which is the entire subject of the show. Designers should extend this system rather than introduce a new one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOTION -->
+<section id="motion">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">07</span>
+      <h2>Motion</h2>
+    </div>
+    <table>
+      <tr><th>Behaviour</th><th>Spec</th><th>Notes</th></tr>
+      <tr><td>Global transition</td><td class="mono">0.6s ease-in-out</td><td>Every hover, colour change, and state change. Deliberately slow.</td></tr>
+      <tr><td>Scroll reveal</td><td class="mono">opacity 0→1, translateY 16px→0, 0.7s ease</td><td>Fires once at 12% visibility. Never re-animates.</td></tr>
+      <tr><td>Button hover</td><td class="mono">darken to #2C2E9C, translateY(-1px)</td><td>A lift, not a bounce.</td></tr>
+      <tr><td>Rotating word</td><td class="mono">typewriter, ~110ms/char, 1.4s hold</td><td>Hero only. Yellow. Blinking cursor.</td></tr>
+      <tr><td>Status pulse</td><td class="mono">2s infinite, expanding ring</td><td>Launch badge dot only.</td></tr>
+      <tr><td>Header on scroll</td><td class="mono">transparent → white 92% + blur(8px) + hairline</td><td>Triggers past 40px.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- LOGO -->
+<section id="logo">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">08</span>
+      <h2>Logo &amp; assets</h2>
+      <p>The mark is a four-dot cluster in the signal colours, arranged like a sensor array. Clockwise from top-left: yellow, cyan, indigo, blue.</p>
+    </div>
+
+    <div class="grid g2" style="margin-bottom:24px">
+      <div class="demo">
+        <div class="brand" style="font-size:28px"><span class="dots" style="width:34px;height:34px"><span style="width:8px;height:8px"></span><span style="width:8px;height:8px"></span><span style="width:8px;height:8px"></span><span style="width:8px;height:8px"></span></span>Embodied HQ</div>
+        <div class="cap">Primary lockup on light · Inter 500 · mark height ≈ cap height of the wordmark</div>
+      </div>
+      <div class="demo dark">
+        <div class="brand" style="font-size:28px;color:#fff"><span class="dots" style="width:34px;height:34px"><span style="width:8px;height:8px"></span><span style="width:8px;height:8px"></span><span style="width:8px;height:8px"></span><span style="width:8px;height:8px"></span></span>Embodied HQ</div>
+        <div class="cap">Primary lockup on dark · white wordmark, mark colours unchanged</div>
+      </div>
+    </div>
+
+    <table>
+      <tr><th>Asset</th><th>File</th><th>Use</th></tr>
+      <tr><td>Wordmark lockup</td><td class="mono">wordmark-embodiedhq-dark / -white.png</td><td>Headers, Substack, partner decks. Max aspect ratio 21:4.</td></tr>
+      <tr><td>Mark tile</td><td class="mono">embodied-hq-mark.png (512×512)</td><td>Avatars, app icons, social profile pictures.</td></tr>
+      <tr><td>Favicon</td><td class="mono">favicon.svg</td><td>Browser tab. Mark on rounded black tile.</td></tr>
+      <tr><td>Social share</td><td class="mono">og-image.png (1200×630)</td><td>Open Graph / Twitter cards.</td></tr>
+      <tr><td>Cover</td><td class="mono">embodiedhq-substack-cover.png (1200×1200)</td><td>Substack logo/cover, square placements.</td></tr>
+    </table>
+
+    <p style="margin-top:24px;color:var(--muted);font-size:15px;max-width:720px">Clear space around the lockup is at least the height of one dot on every side. Never recolour the mark, never reorder the dots, never place the lockup on a mid-tone or busy photo without a black or white plate behind it.</p>
+  </div>
+</section>
+
+<!-- VOICE -->
+<section id="voice">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">09</span>
+      <h2>Voice (for anyone writing UI copy)</h2>
+      <p>Grounded, clear, excited. First person, plain speech. We translate, we don't dumb down. No hype, no doom.</p>
+    </div>
+    <div class="grid g2">
+      <div class="dd yes">
+        <h4>We sound like</h4>
+        <ul>
+          <li>"Conversations with the researchers and operators on the front lines."</li>
+          <li>"The money has already decided this matters"</li>
+          <li>"Explained plainly, no PhD required."</li>
+          <li>"Free. No spam, unsubscribe anytime."</li>
+        </ul>
+      </div>
+      <div class="dd no">
+        <h4>We never sound like</h4>
+        <ul>
+          <li>"Revolutionary breakthrough unleashes the future of AI."</li>
+          <li>Punchy sentence fragments stacked for drama.</li>
+          <li>Unexplained jargon used to signal intelligence.</li>
+          <li>Em dashes. We don't use them, anywhere.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DO / DONT -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">10</span>
+      <h2>Do &amp; don't</h2>
+    </div>
+    <div class="grid g2">
+      <div class="dd yes">
+        <h4>Do</h4>
+        <ul>
+          <li>Use hairlines and whitespace to create hierarchy.</li>
+          <li>Keep every transition at 0.6s ease-in-out.</li>
+          <li>Reserve yellow for exactly one focal moment per view.</li>
+          <li>Put data and imagery on black, reading on white.</li>
+          <li>Extend the machine-vision motif for new key art.</li>
+          <li>Label detected objects with a class and a confidence score.</li>
+        </ul>
+      </div>
+      <div class="dd no">
+        <h4>Don't</h4>
+        <ul>
+          <li>Add bold weight, ever. 400 and 500 only.</li>
+          <li>Use gradients, drop shadows, or glow effects.</li>
+          <li>Put content in rounded cards with borders.</li>
+          <li>Introduce a second accent colour or a new palette.</li>
+          <li>Centre body copy or headings.</li>
+          <li>Use stock robot photography. It kills the brand instantly.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOKENS -->
+<section id="tokens">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">11</span>
+      <h2>Tokens (copy into any build)</h2>
+      <p>These are the exact variables running on embodiedhq.io today.</p>
+    </div>
+<pre>:root{
+  <span class="c">/* base */</span>
+  <span class="k">--bg</span>:        #FFFFFF;
+  <span class="k">--bg-dark</span>:   #000000;
+  <span class="k">--text</span>:      #101921;
+  <span class="k">--muted</span>:     #545860;
+  <span class="k">--hairline</span>:  rgba(84,88,96,0.30);
+  <span class="k">--panel</span>:     #EFEFEE;
+
+  <span class="c">/* signal */</span>
+  <span class="k">--accent</span>:    #3C3EBC;  <span class="c">/* buttons, links — the only saturated chrome */</span>
+  <span class="k">--highlight</span>: #F4D659;  <span class="c">/* one focal moment per view */</span>
+  <span class="k">--cyan</span>:      #00BCE5;  <span class="c">/* machine vision, scan line, hover */</span>
+  <span class="k">--blue</span>:      #428FEC;  <span class="c">/* imagery, source links, icon strokes */</span>
+
+  <span class="c">/* structure */</span>
+  <span class="k">--container</span>:   1200px;
+  <span class="k">--radius-pill</span>: 20px;
+  <span class="k">--font</span>:        "Inter", -apple-system, sans-serif;  <span class="c">/* weights 400, 500 ONLY */</span>
+  <span class="k">--ease</span>:        0.6s ease-in-out;
+}</pre>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Embodied HQ · Design system v1 · Source of truth: <a href="https://embodiedhq.io">embodiedhq.io</a>
+  </div>
+</footer>
+
+<script>
+// Machine-vision motif (same system as the live hero)
+(function(){
+  const cv=document.getElementById('cv');const ctx=cv.getContext('2d');
+  let W,H,DPR=Math.min(devicePixelRatio||1,2);
+  const PAL=['#00BCE5','#428FEC','#F4D659','#3C3EBC'];
+  const LABELS=['ROBOT ARM','GRIPPER','CONVEYOR','BIN','PALLET','OBJECT','ACTUATOR'];
+  const F=520,PITCH=0.32,EDGES=[[0,1],[2,3],[4,5],[6,7],[0,2],[1,3],[4,6],[5,7],[0,4],[1,5],[2,6],[3,7]];
+  let boxes=[],dots=[],scanY=0,scanDir=1;
+  const rnd=(a,b)=>a+Math.random()*(b-a);
+  function makeBox(fromRight){
+    return {x:fromRight?W+90:rnd(W*0.12,W*0.92),y:rnd(H*0.26,H*0.74),
+      w:rnd(58,104),h:rnd(48,86),d:rnd(50,92),
+      yaw:rnd(0,6.28),yawv:rnd(-0.007,0.007)||0.004,vx:rnd(-0.40,-0.14),phase:rnd(0,6.28),
+      col:PAL[(Math.random()*PAL.length)|0],label:LABELS[(Math.random()*LABELS.length)|0],
+      conf:rnd(0.82,0.99),flash:0};
+  }
+  function build(){
+    boxes=[];const n=W<720?2:4;for(let i=0;i<n;i++)boxes.push(makeBox(false));
+    dots=[];const dn=Math.min(50,(W*H/13000)|0);
+    for(let i=0;i<dn;i++)dots.push({x:Math.random()*W,y:Math.random()*H,vx:rnd(-0.12,-0.02)});
+  }
+  function verts(b,cy){
+    const hw=b.w/2,hh=b.h/2,hd=b.d/2,ca=Math.cos(b.yaw),sa=Math.sin(b.yaw),cp=Math.cos(PITCH),sp=Math.sin(PITCH),o=[];
+    for(const sx of[-1,1])for(const sy of[-1,1])for(const sz of[-1,1]){
+      const x=sx*hw,y=sy*hh,z=sz*hd,x1=x*ca-z*sa,z1=x*sa+z*ca,y2=y*cp-z1*sp,z2=y*sp+z1*cp,s=F/(F+z2);
+      o.push({X:b.x+x1*s,Y:cy+y2*s});
+    }
+    return o;
+  }
+  function frame(ts){
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#428FEC';
+    for(const d of dots){d.x+=d.vx;if(d.x<0)d.x=W;ctx.globalAlpha=0.15;ctx.beginPath();ctx.arc(d.x,d.y,1.3,0,6.28);ctx.fill();}
+    scanY+=1.5*scanDir;if(scanY>H){scanY=H;scanDir=-1;}if(scanY<0){scanY=0;scanDir=1;}
+    ctx.globalAlpha=0.45;ctx.strokeStyle='#00BCE5';ctx.lineWidth=1.3;
+    ctx.beginPath();ctx.moveTo(0,scanY);ctx.lineTo(W,scanY);ctx.stroke();
+    ctx.globalAlpha=0.05;ctx.fillStyle='#00BCE5';ctx.fillRect(0,scanDir>0?scanY-20:scanY,W,20);
+    for(const b of boxes){
+      b.yaw+=b.yawv;b.x+=b.vx;
+      const cy=b.y+Math.sin(ts*0.0012+b.phase)*5;
+      const vs=verts(b,cy);
+      let minX=1e9,minY=1e9,maxX=-1e9,maxY=-1e9;
+      for(const v of vs){if(v.X<minX)minX=v.X;if(v.Y<minY)minY=v.Y;if(v.X>maxX)maxX=v.X;if(v.Y>maxY)maxY=v.Y;}
+      if(maxX<-30){Object.assign(b,makeBox(true));continue;}
+      if(Math.abs((minY+maxY)/2-scanY)<24)b.flash=1;b.flash*=0.93;
+      ctx.globalAlpha=0.05+b.flash*0.12;ctx.fillStyle=b.col;
+      ctx.beginPath();ctx.moveTo(vs[1].X,vs[1].Y);ctx.lineTo(vs[3].X,vs[3].Y);ctx.lineTo(vs[7].X,vs[7].Y);ctx.lineTo(vs[5].X,vs[5].Y);ctx.closePath();ctx.fill();
+      ctx.strokeStyle=b.col;ctx.lineWidth=1.3;
+      for(const e of EDGES){ctx.globalAlpha=0.5+b.flash*0.4;ctx.beginPath();ctx.moveTo(vs[e[0]].X,vs[e[0]].Y);ctx.lineTo(vs[e[1]].X,vs[e[1]].Y);ctx.stroke();}
+      ctx.globalAlpha=0.9;ctx.fillStyle=b.col;
+      for(const v of vs){ctx.beginPath();ctx.arc(v.X,v.Y,1.5,0,6.28);ctx.fill();}
+      const L=13;ctx.globalAlpha=0.5+b.flash*0.5;ctx.lineWidth=1.6;ctx.beginPath();
+      ctx.moveTo(minX,minY+L);ctx.lineTo(minX,minY);ctx.lineTo(minX+L,minY);
+      ctx.moveTo(maxX-L,minY);ctx.lineTo(maxX,minY);ctx.lineTo(maxX,minY+L);
+      ctx.moveTo(maxX,maxY-L);ctx.lineTo(maxX,maxY);ctx.lineTo(maxX-L,maxY);
+      ctx.moveTo(minX+L,maxY);ctx.lineTo(minX,maxY);ctx.lineTo(minX,maxY-L);ctx.stroke();
+      const txt=b.label+' · '+(b.conf+Math.sin(ts*0.002+b.phase)*0.008).toFixed(2);
+      ctx.font='500 10px Inter, sans-serif';const tw=ctx.measureText(txt).width;
+      ctx.globalAlpha=0.92;ctx.fillStyle=b.col;ctx.fillRect(minX,minY-17,tw+12,14);
+      ctx.globalAlpha=1;ctx.fillStyle='#000';ctx.fillText(txt,minX+6,minY-6.5);
+    }
+    ctx.globalAlpha=1;requestAnimationFrame(frame);
+  }
+  function resize(){W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);build();}
+  addEventListener('resize',resize);resize();requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
